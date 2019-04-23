@@ -108,7 +108,7 @@ public class UserRC {
             Client client = Client.create();
 
             WebResource webResource = client
-               .resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/customers/");
+               .resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/users/change-password");
 
             ClientResponse response = webResource.type("application/json")
                .post(ClientResponse.class, data);

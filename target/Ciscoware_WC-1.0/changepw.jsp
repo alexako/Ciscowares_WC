@@ -39,7 +39,7 @@
             <img src="img/profile_icon.png" class="ciscoware-logo" />
         </div>
         <div class="form-banner"></div>
-        <form class="marg-b-80" action="" name="changePasswordForm" id="changePasswordForm" method="POST" onsubmit="return validateNullFields()">
+        <form class="marg-b-80" action="process-changepw.jsp" name="changePasswordForm" id="changePasswordForm" method="POST" onsubmit="return validateNullFields()">
             <h1 class="form-title">Change Password</h1>
             <input class="col-md-12 form-input marg-b-16" type="text" name="email" placeholder="Email"/>
             <input class="col-md-12 form-input marg-b-16" type="password" name="password" placeholder="Current Password" id="password"/>
