@@ -69,5 +69,32 @@ public class CustomerRC {
 
         return customers;
     }
-    
+
+    public String createCustomer(String data) {
+
+        try {
+            Client client = Client.create();
+
+            WebResource webResource = client
+               .resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/customers/");
+
+            ClientResponse response = webResource.type("application/json")
+               .post(ClientResponse.class, data);
+
+            if (response.getStatus() != 201) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                     + response.getStatus());
+            }
+
+            System.out.println("Output from Server .... \n");
+            String output = response.getEntity(String.class);
+            System.out.println(output);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
 }

@@ -78,7 +78,7 @@
             <img src="img/profile_icon.png" class="ciscoware-logo" />
         </div>
         <div class="form-banner"></div>
-        <form class="marg-b-80" action="" name="registerForm" id="registerForm" method="POST" onsubmit="return validateNullFields()">
+        <form class="marg-b-80" action="process-register.jsp" name="registerForm" id="registerForm" method="POST" onsubmit="return validateNullFields()">
             <h1 class="form-title">Registration Form</h1>
             <input class="col-md-12 form-input marg-b-16" type="text" name="email" placeholder="Email"/>
             <input class="col-md-12 form-input marg-b-16" type="text" name="fname" placeholder="First Name" />
@@ -94,7 +94,7 @@
             </div>
             <input class="col-md-12 form-input marg-b-16" type="text" name="province" placeholder="State/Province/Region" />
             <input class="col-md-12 form-input marg-b-16" type="text" name="zip" placeholder="Zip Code" />
-            <input class="col-md-12 form-input marg-b-16" type="text" name="mobileno" placeholder="Mobile No." />
+            <input class="col-md-12 form-input marg-b-16" type="text" name="phone_number" placeholder="Mobile No." />
             <input class="col-md-12 form-input marg-b-16" type="password" name="password" placeholder="Password" id="password" oninput="passwordValidate(this);"/>
             <input class="col-md-12 form-input" type="password" name="cpassword" placeholder="Confirm Password" id="cpassword" oninput="passwordValidate(this);"/>
             <button type="submit" class="submit-btn marg-b-16 marg-t-48" id="submit">SUBMIT</button>
