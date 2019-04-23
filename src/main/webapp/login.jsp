@@ -53,7 +53,7 @@
             </div>
             <div class="form-banner"></div>
             
-        <form class="marg-b-80" action="" id="loginForm" name="loginForm" method="POST" onsubmit="return validateNullFields()">
+        <form class="marg-b-80" action="process-login.jsp" id="loginForm" name="loginForm" method="POST" onsubmit="return validateNullFields()">
             <h1 class="form-title">Sign In</h1>
             <input class="col-md-12 form-input marg-b-16" type="text" name="email" placeholder="Email"/>
             <input class="col-md-12 form-input" type="password" name="password" placeholder="Password" />
