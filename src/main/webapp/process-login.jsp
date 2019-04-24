@@ -4,6 +4,7 @@
     Author     : alex
 --%>
 
+<%@page import="com.dlr.restclient.OrderRC"%>
 <%@page import="java.util.List"%>
 <%@page import="com.dlr.ciscoware_wc.Customer"%>
 <%@page import="com.dlr.restclient.CustomerRC"%>
@@ -35,15 +36,40 @@
                 }
             }
 
-            Cookie loginState = new Cookie("loginState",
-                (loggedIn) ? "active" : "inactive"); 
+            Cookie[] cookies = null;
+            String orderId = "";
+            String customerId = currentUser.getId().toString();
+             
+            cookies = request.getCookies();
 
-            Cookie userId = new Cookie("userId", currentUser.getUserId().getId().toString());
-            Cookie customerId = new Cookie("customerId", currentUser.getId().toString());
+            if (cookies != null) {
+                for (Cookie cookie: cookies) {
+                   if (cookie.getName().equals("orderId")) {
+                       orderId = cookie.getValue();
+                   }
+                }
+            }
+
+            if ((orderId.isEmpty()
+                    || orderId == null
+                    || request.getParameter("orderId") == null)
+                    && customerId != null) {
+                JSONObject oObj = new JSONObject();
+                oObj.put("customerId", customerId);
+                oObj.put("branchId", 1);
+                oObj.put("totalCost", 0.0);
+
+                OrderRC orc = new OrderRC();
+                orderId = orc.createOrder(oObj.toString());
+                orderId = new JSONObject(orderId).getString("id");
+                Cookie orderCookie = new Cookie("orderId", orderId);
+                response.addCookie(orderCookie);
+            }
+
+            Cookie customerCookie = new Cookie("customerId", currentUser.getId().toString());
             
-            response.addCookie(loginState);
-            response.addCookie(userId);
-            response.addCookie(customerId);
+            response.addCookie(customerCookie);
+            response.sendRedirect("wireless/wireless-overhead.jsp");
         %>
     </body>
 </html>

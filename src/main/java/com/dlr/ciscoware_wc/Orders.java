@@ -8,6 +8,7 @@ package com.dlr.ciscoware_wc;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -77,6 +78,7 @@ public class Orders implements Serializable {
     private Customer customerId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
     private Collection<ProductOrder> productOrderCollection;
+    private List<ProductOrder> productOrders;
 
     public Orders() {
     }
@@ -152,6 +154,14 @@ public class Orders implements Serializable {
 
     public void setCustomerId(Customer customerId) {
         this.customerId = customerId;
+    }
+
+    public List<ProductOrder> getProductOrders() {
+        return this.productOrders;
+    }
+
+    public void setProductOrders(List<ProductOrder> productOrders) {
+        this.productOrders = productOrders;
     }
 
     @XmlTransient

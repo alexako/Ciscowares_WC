@@ -6,10 +6,11 @@ import com.dlr.ciscoware_wc.ProductOrder;
 import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.CollectionAttribute;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-04-24T23:14:58")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-04-25T05:06:58")
 @StaticMetamodel(Orders.class)
 public class Orders_ { 
 
@@ -21,6 +22,7 @@ public class Orders_ {
     public static volatile SingularAttribute<Orders, String> deliveryDate;
     public static volatile SingularAttribute<Orders, String> orderDate;
     public static volatile SingularAttribute<Orders, Double> totalCost;
+    public static volatile ListAttribute<Orders, ProductOrder> productOrders;
     public static volatile SingularAttribute<Orders, String> status;
 
 }

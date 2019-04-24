@@ -25,7 +25,7 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                            <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
@@ -38,7 +38,7 @@
         <div class="shop-menu">
             <button class="inactive-shop-btn" onclick="location.href = '../router-overhead.jsp';">Routers</button>
             <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
-            <button class="active-shop-btn" onclick="location.href = 'wireless/wireless-overhead.jsp';">Wireless</button>
+            <button class="active-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
             <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
@@ -46,6 +46,7 @@
         <p class="shop-title">Wireless Integrated Switches and Routers</p>
         <img src="../img/shop/wireless-switch-router.png" class="shop-picture marg-b-80" alt=""/>
     </div>
+        <jsp:include page="../shopping-cart.jsp"></jsp:include>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
@@ -58,9 +59,10 @@
                 <p class="item-price">Price: ₱25,219.84</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="series890" placeholder="" />
+                    <input class="item-input" type="number" name="series890" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('series890')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">880 Series</p>
@@ -73,7 +75,8 @@
                     <p class="item-input-label">Quantity:</p>
                     <input class="item-input" type="number" name="series880" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('series880')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">860 Series</p>
@@ -87,7 +90,8 @@
                     <p class="item-input-label">Quantity:</p>
                     <input class="item-input" type="number" name="series860" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('series860')">Add Item</button>
             </div>
         </div>
     </div>
@@ -107,7 +111,8 @@
                     <p class="item-input-label">Quantity:</p>
                     <input class="item-input" type="number" name="series810" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('series810')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">800M Series</p>
@@ -121,7 +126,8 @@
                     <p class="item-input-label">Quantity:</p> 
                     <input class="item-input" type="number" name="series800m" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('series800m')">Add Item</button>
             </div>
         </div>
     </div>
@@ -166,6 +172,7 @@
         </div>
     </footer>
 
+    <script src="../shoppingCart.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -4,6 +4,10 @@
     Author     : Lawrence
 --%>
 
+<%@page import="com.dlr.ciscoware_wc.FormatMoney"%>
+<%@page import="com.dlr.ciscoware_wc.ProductOrder"%>
+<%@page import="com.dlr.ciscoware_wc.Orders"%>
+<%@page import="com.dlr.restclient.OrderRC"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="com.dlr.restclient.ProductRC"%>
@@ -45,24 +49,39 @@
             <div class="container col-md-12" style="padding-left: 2rem;">
                 <div class="row">
                     <%
-                        ProductRC prc = new ProductRC();
-                        List<Product> products = prc.getProducts();
-                        for (Product p: products) {
-                            String price = "0.0";
-                            try {
-                                price = Double.toString(p.getPrice());
-                            } catch (Exception e) {
 
+                        Cookie[] cookies = null;
+                        String orderId = "";
+                         
+                        cookies = request.getCookies();
+
+                        if (cookies != null) {
+                            for (Cookie cookie: cookies) {
+                               if (cookie.getName().equals("orderId")) {
+                                   orderId = cookie.getValue();
+                               }
                             }
+                        }
 
-                        out.println("<div style=\"width: 100%;display: inline-flex;\">");
-                        out.println("<div class=\"marg-b-32 marg-r-16 col-md-4\" name=\"item\">");
-                        out.println(p.getName() + ": " + p.getDescription() + "</div>");
-                        out.println("<div class=\"checkout-label marg-l-32\">Price:" + price + " </div>");
-                        out.println("<div class=\"checkout-label marg-l-32\">Quantity:</div>");
-                        out.println("<input class=\"form-input marg-b-32 col-md-1\" type=\"number\""
-                            + " name=\"" + p.getId().toString() + "_quantity\" value=\"0\" />");
-                        out.println("</div>");
+                        OrderRC orc = new OrderRC();
+                        Orders order = orc.getOrderById(Integer.parseInt(orderId));
+
+                        if (order.getStatus() != null) {
+                            List<ProductOrder> prodOrders = order.getProductOrders();
+                            for (ProductOrder po: prodOrders) {
+                                Product p = po.getProductId();
+
+                            out.println("<div style=\"width: 100%;display: inline-flex;\">");
+                            out.println("<div class=\"marg-b-32 marg-r-16 col-md-4\" name=\"item\">");
+                            out.println(p.getName() + ": " + p.getDescription() + "</div>");
+                            out.println("<div class=\"checkout-label marg-l-32\">Price:" + FormatMoney.getString(p.getPrice())+ " </div>");
+                            out.println("<div class=\"checkout-label marg-l-32\">Quantity:</div>");
+                            out.println("<input class=\"form-input marg-b-32 col-md-1\" type=\"number\""
+                                + " name=\"" + p.getId().toString() + "_quantity\" value=\"" + po.getQuantity() + "\" />");
+                            out.println("</div>");
+                            }
+                        } else {
+                            out.println("Cart is empty... probably");
                         }
 
                     %>

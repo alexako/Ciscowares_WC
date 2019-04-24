@@ -30,6 +30,7 @@
             obj.put("role", "customer");
 
             crc.createCustomer(obj.toString());
+            response.sendRedirect("process-login.jsp");
         %>
         <h1>Hello World!</h1>
     </body>

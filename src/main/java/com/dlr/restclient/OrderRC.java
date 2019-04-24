@@ -9,6 +9,7 @@ import com.dlr.ciscoware_wc.Branch;
 import com.dlr.ciscoware_wc.Customer;
 import com.dlr.ciscoware_wc.Orders;
 import com.dlr.ciscoware_wc.Product;
+import com.dlr.ciscoware_wc.ProductOrder;
 import com.dlr.ciscoware_wc.User;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -110,6 +111,24 @@ public class OrderRC {
             JSONObject cObj = obj.getJSONObject("customerId");
             JSONObject uObj = cObj.getJSONObject("userId");
 
+            JSONArray poObjArr = obj.getJSONArray("productOrders");
+            List<ProductOrder> productOrders = new ArrayList<>();
+            if (poObjArr != null) {
+                int len = poObjArr.length();
+                for (int i=0; i<len; i++) {
+                    Product p = new Product();
+                    p.setName(poObjArr.getJSONObject(i).getJSONObject("productId").getString("name"));
+                    p.setDescription(poObjArr.getJSONObject(i).getJSONObject("productId").getString("description"));
+                    p.setPrice(poObjArr.getJSONObject(i).getJSONObject("productId").getDouble("price"));
+
+                    ProductOrder po = new ProductOrder();
+                    po.setProductId(p);
+                    po.setQuantity(poObjArr.getJSONObject(i).getInt("quantity"));
+                    productOrders.add(po);
+                    System.out.println("po added: " + po.getId().toString());
+                }
+            }
+
             Branch b = new Branch();
             b.setId(bObj.getInt("id"));
             b.setName(bObj.getString("name"));
@@ -131,6 +150,7 @@ public class OrderRC {
             o.setTotalCost(obj.getDouble("totalCost"));
             o.setOrderDate(obj.getString("orderDate"));
             o.setDeliveryDate(obj.getString("deliveryDate"));
+            o.setProductOrders(productOrders);
 
 		} catch (Exception e) {
 			e.printStackTrace();

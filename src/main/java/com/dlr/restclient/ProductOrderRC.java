@@ -76,6 +76,7 @@ public class ProductOrderRC {
 
     public String createProductOrder(String data) {
 
+        String output = "";
         try {
             Client client = Client.create();
 
@@ -91,14 +92,14 @@ public class ProductOrderRC {
             }
 
             System.out.println("Output from Server .... \n");
-            String output = response.getEntity(String.class);
+            output = response.getEntity(String.class);
             System.out.println(output);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return data;
+        return output;
     }
     
 }
