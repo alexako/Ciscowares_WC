@@ -67,7 +67,8 @@
                         Orders order = orc.getOrderById(Integer.parseInt(orderId));
 
                         if (order.getStatus() != null) {
-                            List<ProductOrder> prodOrders = order.getProductOrders();
+                            List<ProductOrder> prodOrders = new ArrayList<ProductOrder>();
+                            order.getProductOrders();
                             for (ProductOrder po: prodOrders) {
                                 Product p = po.getProductId();
 

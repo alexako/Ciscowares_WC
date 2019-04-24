@@ -122,11 +122,12 @@ public class OrderRC {
                     p.setPrice(poObjArr.getJSONObject(i).getJSONObject("productId").getDouble("price"));
 
                     ProductOrder po = new ProductOrder();
-                    po.setProductId(p);
+                    po.setId(poObjArr.getJSONObject(i).getInt("id"));
                     po.setQuantity(poObjArr.getJSONObject(i).getInt("quantity"));
+                    po.setProductId(p);
                     productOrders.add(po);
-                    System.out.println("po added: " + po.getId().toString());
                 }
+
             }
 
             Branch b = new Branch();
@@ -151,6 +152,8 @@ public class OrderRC {
             o.setOrderDate(obj.getString("orderDate"));
             o.setDeliveryDate(obj.getString("deliveryDate"));
             o.setProductOrders(productOrders);
+            System.out.println("o added: ");
+            System.out.println(o.getProductOrders());
 
 		} catch (Exception e) {
 			e.printStackTrace();
