@@ -14,8 +14,7 @@
         <link href="css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script>
-            function passwordValidate(elem) {
-                console.log("elem:", elem);
+            function passwordValidate() {
                 var password = document.forms["registerForm"]["password"].value;
                 var cpassword = document.forms["registerForm"]["cpassword"].value;
 
@@ -95,8 +94,8 @@
             <input class="col-md-12 form-input marg-b-16" type="text" name="province" placeholder="State/Province/Region" />
             <input class="col-md-12 form-input marg-b-16" type="text" name="zip" placeholder="Zip Code" />
             <input class="col-md-12 form-input marg-b-16" type="text" name="phone_number" placeholder="Mobile No." />
-            <input class="col-md-12 form-input marg-b-16" type="password" name="password" placeholder="Password" id="password" oninput="passwordValidate(this);"/>
-            <input class="col-md-12 form-input" type="password" name="cpassword" placeholder="Confirm Password" id="cpassword" oninput="passwordValidate(this);"/>
+            <input class="col-md-12 form-input marg-b-16" type="password" name="password" placeholder="Password" id="password" oninput="passwordValidate();"/>
+            <input class="col-md-12 form-input" type="password" name="cpassword" placeholder="Confirm Password" id="cpassword" oninput="passwordValidate();"/>
             <button type="submit" class="submit-btn marg-b-16 marg-t-48" id="submit">SUBMIT</button>
             <p class="form-redirect">Already have an Account? <a class="form-redirect-link" href="login.jsp">Sign in</a></p>
         </form>

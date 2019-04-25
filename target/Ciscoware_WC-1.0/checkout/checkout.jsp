@@ -50,6 +50,7 @@
                 <div class="row">
                     <%
 
+                        // Get cookies to see if there is an existing order
                         Cookie[] cookies = null;
                         String orderId = "";
                          
@@ -63,6 +64,7 @@
                             }
                         }
 
+                        // Print Product Orders 
                         OrderRC orc = new OrderRC();
                         Orders order = orc.getOrderById(Integer.parseInt(orderId));
 
