@@ -12,6 +12,6 @@ package com.dlr.ciscoware_wc;
 public class FormatMoney {
     
     public static String getString(Double amount) {
-        return String.format("%.2f", amount);
+        return String.format("₱%.2f", amount);
     }
 }

@@ -69,19 +69,20 @@
                         Orders order = orc.getOrderById(Integer.parseInt(orderId));
 
                         if (order.getStatus() != null) {
-                            List<ProductOrder> prodOrders = new ArrayList<ProductOrder>();
-                            order.getProductOrders();
-                            for (ProductOrder po: prodOrders) {
+                            List<ProductOrder> a = order.getProductOrders();
+
+                            for (ProductOrder po: a) {
                                 Product p = po.getProductId();
 
-                            out.println("<div style=\"width: 100%;display: inline-flex;\">");
-                            out.println("<div class=\"marg-b-32 marg-r-16 col-md-4\" name=\"item\">");
-                            out.println(p.getName() + ": " + p.getDescription() + "</div>");
-                            out.println("<div class=\"checkout-label marg-l-32\">Price:" + FormatMoney.getString(p.getPrice())+ " </div>");
-                            out.println("<div class=\"checkout-label marg-l-32\">Quantity:</div>");
-                            out.println("<input class=\"form-input marg-b-32 col-md-1\" type=\"number\""
-                                + " name=\"" + p.getId().toString() + "_quantity\" value=\"" + po.getQuantity() + "\" />");
-                            out.println("</div>");
+                                out.println("<div class=\"product-container\">");
+                                out.println("<div class=\"product-name\">");
+                                out.println(p.getName() + "</div>");
+                                out.println("<div class=\"product-description\">" + p.getDescription() + "</div>");
+                                out.println("<div class=\"product-price\">" +
+                                    FormatMoney.getString(p.getPrice())+ " </div>");
+                                out.println("<div class=\"product-quantity\">Quantity: " +
+                                    po.getQuantity() + "</div>");
+                                out.println("</div>");
                             }
                         } else {
                             out.println("Cart is empty... probably");

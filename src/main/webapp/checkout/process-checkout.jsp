@@ -4,6 +4,7 @@
     Author     : alex
 --%>
 
+<%@page import="com.dlr.ciscoware_wc.CustomerAddress"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.dlr.ciscoware_wc.FormatMoney"%>
 <%@page import="com.dlr.ciscoware_wc.Orders"%>
@@ -26,8 +27,8 @@
     </head>
     <body>
         <%
-            ProcessCheckout process = new ProcessCheckout();
 
+            String orderId = "";
             Cookie[] cookies = request.getCookies();
             String customerId = "";
             if (cookies != null) {
@@ -35,76 +36,90 @@
                     if (cookie.getName().equals("customerId")) {
                         customerId = cookie.getValue();
                     }
+                    if (cookie.getName().equals("orderId")) {
+                        orderId = cookie.getValue();
+                        cookie.setMaxAge(0);
+                    }
                 }
             }
-            
-            Random r = new Random();
-            String branchId = Integer.toString(r.nextInt((3 - 1) + 1) + 1);
-
-            JSONObject orderObj = new JSONObject();
-            orderObj.put("customerId", customerId);
-            orderObj.put("branchId", branchId);
-            orderObj.put("totalCost", "0.0");
             
             OrderRC orc = new OrderRC();
-            String oResp = orc.createOrder(orderObj.toString());
-            JSONObject oObj = new JSONObject(oResp);
-            
-            Orders order = new Orders();
-            order.setId(oObj.getInt("id"));
-
-            ProductRC prc = new ProductRC();
-            List<Product> products = prc.getProducts();
-
-            List<ProductOrder> shoppingCart = new ArrayList<ProductOrder>();
-            Double totalCost = 0.0;
-            
-            for (Product p: products) {
-                ProductOrder selection = new ProductOrder();
-                String prodParam = request.getParameter(p.getId().toString() + "_quantity");
-                Integer quantity = Integer.parseInt(prodParam);
-                if (quantity > 0) {
-                    totalCost = totalCost + (p.getPrice() * quantity);
-                    selection.setProductId(p);
-                    selection.setQuantity(quantity);
-                    selection.setOrderId(order);
-                    shoppingCart.add(selection);
-                }
-            }
-             
-            process.process(shoppingCart,
-                request.getCookies());
-
-            Orders success = orc.getOrderById(order.getId());
-            out.println(success.getId().toString());
-            out.println(success.getOrderDate());
-            out.println(FormatMoney.getString(success.getTotalCost()));
-            request.setAttribute("order", success);
-            request.setAttribute("productOrders", new ArrayList(success.getProductOrderCollection()));
+            Orders order = orc.getOrderById(Integer.parseInt(orderId));
+            request.setAttribute("order", order);
         %>
 
         <div class="order">
             Order has been placed!
             <div class="customer">
                 <div class="customer-name">
-                    <% out.println(success.getCustomerId().getUserId().getLastName() +
-                        ", " + success.getCustomerId().getUserId().getLastName()); %>
+                    <% out.print(order.getCustomerId().getUserId().getLastName() +
+                        ", " + order.getCustomerId().getUserId().getFirstName()); %>
                 </div>
                 <div class="customer-email">
-                    <% out.println(success.getCustomerId().getUserId().getEmail()); %>
+                    <% out.print(order.getCustomerId().getUserId().getEmail()); %>
+                </div>
+                <div class="customer-phone">
+                    <% out.print(order.getCustomerId().getPhoneNumber()); %>
+                </div>
+
+                <div class="customer-address">
+                    <%
+                        if (order.getCustomerId() != null
+                                && order.getCustomerId().getCustomerAddressCollection() != null) {
+                            for (CustomerAddress ca: order.getCustomerId().getCustomerAddressCollection()) {
+                                out.print(ca.getStreet());
+                                out.print(ca.getCity());
+                                out.print(ca.getProvince());
+                                out.print(ca.getCountry());
+                                out.print(ca.getZipCode());
+                            }
+                        }
+                    %>
+
                 </div>
             </div>
-            <div class="details"></div>
-            <div class="products">
-                <c:forEach items="${productOrders}" var="productOrder">
-                    <div class="product">
-                        <div class="product-name">
-                            <c:out value="productOrder.getProductId().getName()"/>
-                        </div>
-                        <div class="product-description"></div>
-                    </div>
-                </c:forEach>
+            <div class="order-delivery-date">
+                Status: 
+                <% out.print(order.getDeliveryDate()); %>
             </div>
+            <div class="order-status">
+                Status: 
+                <% out.print(order.getStatus()); %>
+            </div>
+            <div class="details"></div>
+            <table class="order-table">
+                <thead>
+                    <th>Product</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </thead>
+                <tbody>
+                <%
+                    List<ProductOrder> a = order.getProductOrders();
+                        for (int i = 0; i < a.size(); i++) {
+                            ProductOrder po = a.get(i);
+                            Product p = po.getProductId();
+
+                            out.println("<tr>");
+
+                            out.println("<td>" + p.getName() + "</td>");
+                            out.println("<td>" + p.getDescription() + "</td>");
+                            out.println("<td>" + FormatMoney.getString(p.getPrice()) + "</td>");
+                            out.println("<td>" + po.getQuantity() + "</td>");
+
+                            out.println("</tr>");
+                        }
+                %>
+                </tbody>
+            </table>
+
+                <div class="total-cost">
+                    <span class="total-cost-label">Total: </span>
+                    <%
+                        FormatMoney.getString(order.getTotalCost());
+                    %>
+                </div>
         </div>
 
     </body>

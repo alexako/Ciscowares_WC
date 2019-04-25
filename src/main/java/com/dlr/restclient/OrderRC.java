@@ -111,23 +111,39 @@ public class OrderRC {
             JSONObject cObj = obj.getJSONObject("customerId");
             JSONObject uObj = cObj.getJSONObject("userId");
 
-            JSONArray poObjArr = obj.getJSONArray("productOrders");
+            JSONArray poObjArr = new JSONArray();
+            JSONObject poObj = new JSONObject();
             List<ProductOrder> productOrders = new ArrayList<>();
-            if (poObjArr != null) {
-                int len = poObjArr.length();
-                for (int i=0; i<len; i++) {
-                    Product p = new Product();
-                    p.setName(poObjArr.getJSONObject(i).getJSONObject("productId").getString("name"));
-                    p.setDescription(poObjArr.getJSONObject(i).getJSONObject("productId").getString("description"));
-                    p.setPrice(poObjArr.getJSONObject(i).getJSONObject("productId").getDouble("price"));
+            try {
+                poObjArr = obj.getJSONArray("productOrders");
+                if (poObjArr != null) {
+                    int len = poObjArr.length();
+                    for (int i=0; i<len; i++) {
+                        Product p = new Product();
+                        p.setName(poObjArr.getJSONObject(i).getJSONObject("productId").getString("name"));
+                        p.setDescription(poObjArr.getJSONObject(i).getJSONObject("productId").getString("description"));
+                        p.setPrice(poObjArr.getJSONObject(i).getJSONObject("productId").getDouble("price"));
 
-                    ProductOrder po = new ProductOrder();
-                    po.setId(poObjArr.getJSONObject(i).getInt("id"));
-                    po.setQuantity(poObjArr.getJSONObject(i).getInt("quantity"));
-                    po.setProductId(p);
-                    productOrders.add(po);
+                        ProductOrder po = new ProductOrder();
+                        po.setId(poObjArr.getJSONObject(i).getInt("id"));
+                        po.setQuantity(poObjArr.getJSONObject(i).getInt("quantity"));
+                        po.setProductId(p);
+                        productOrders.add(po);
+                    }
+
                 }
+            } catch (Exception e) {
+                poObj = obj.getJSONObject("productOrders");
+                Product p = new Product();
+                p.setName(poObj.getJSONObject("productId").getString("name"));
+                p.setDescription(poObj.getJSONObject("productId").getString("description"));
+                p.setPrice(poObj.getJSONObject("productId").getDouble("price"));
 
+                ProductOrder po = new ProductOrder();
+                po.setId(poObj.getInt("id"));
+                po.setQuantity(poObj.getInt("quantity"));
+                po.setProductId(p);
+                productOrders.add(po);
             }
 
             Branch b = new Branch();
@@ -152,8 +168,8 @@ public class OrderRC {
             o.setOrderDate(obj.getString("orderDate"));
             o.setDeliveryDate(obj.getString("deliveryDate"));
             o.setProductOrders(productOrders);
-            System.out.println("o added: ");
-            System.out.println(o.getProductOrders());
+            System.out.print("o added: ");
+            System.out.println(o.getProductOrders().get(0).getId());
 
 		} catch (Exception e) {
 			e.printStackTrace();
