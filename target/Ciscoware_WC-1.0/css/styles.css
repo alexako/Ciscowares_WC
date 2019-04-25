@@ -18,7 +18,7 @@ and open the template in the editor.
 }
 
 .navbar-store {
-    background: #4B5767 !important;
+    background: #060f52 !important;
 }
 
 .nav-link-store {
@@ -47,6 +47,10 @@ and open the template in the editor.
     padding-top: 30rem;
 }
 
+.banner-first-row {
+    margin-top: 8rem;
+}
+
 .home-banner-title {
     font-size: 32px;
     font-family: "Lato";
@@ -71,13 +75,35 @@ and open the template in the editor.
     margin-bottom: 80px;
 }
 
+.home-headers {
+    margin-top: 317px !important;
+}
+
 .home-item {
     margin-bottom: 40px !important;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
+
     .home-headers {
-        margin-top: 380px !important;
+        margin-top: 397px !important;
+    }
+
+    .item-description {
+        max-width: 50%;
+    }
+
+    .container > .row > .col-sm-12 {
+        left: 25%;
+        margin-bottom: 80px;
+    }
+
+    .container > .footer-container > .footer-logo, 
+    .container > .footer-container > .footer-nav-container, 
+    .container > .footer-container > .social-icon-container,
+    .container > .footer-container > .col-md-3,
+    .container > .row > .home-item{
+        left: auto !Important;
     }
 
     .sell-headers {
@@ -96,6 +122,14 @@ and open the template in the editor.
         margin: 0 auto;
         margin-bottom: 32px;
         padding-left: 2rem;
+    }
+
+    form {
+        max-width: 28rem !important;
+    }
+
+    footer {
+        max-width: 85%;
     }
 
     .footer-nav {
@@ -299,6 +333,8 @@ footer {
 form {
     background: #fff;
     box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);
+    border-top: 4px solid #00f741;
+    border-radius: 2px;
     left: 0;
     margin: 0 auto;
     padding: 64px 56px 48px;
@@ -327,7 +363,7 @@ form {
 }
 
 .form-background {
-    background: #63738A;
+    background: #060f52;
     height: 100vh;
 }
 
@@ -507,6 +543,7 @@ form {
     width: 300px;
     padding-bottom: 32px;
     display: block;
+    margin-bottom: 80px !important;
     margin: 0 auto;
 }
 
@@ -575,5 +612,9 @@ form {
 .delete-icon {
     height: 40px;
     padding-right: 2rem;
+}
+
+.table-title {
+    background: #13446F !important;
 }
 
