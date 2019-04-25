@@ -93,7 +93,7 @@ public class UserRC {
             String output = response.getEntity(String.class);
             System.out.println(output);
             resp = new JSONObject(output);
-            return resp.getString("code").equals("200");
+            return resp.getString("code").contains("200");
 
         } catch (Exception e) {
             e.printStackTrace();

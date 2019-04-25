@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Logging in...</title>
     </head>
     <body>
         <%
@@ -69,7 +69,8 @@
             Cookie customerCookie = new Cookie("customerId", currentUser.getId().toString());
             
             response.addCookie(customerCookie);
-            response.sendRedirect("wireless/wireless-overhead.jsp");
+            if (loggedIn) { response.sendRedirect("wireless/wireless-overhead.jsp"); }
+            else { response.sendRedirect("login.jsp"); }
         %>
     </body>
 </html>
