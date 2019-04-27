@@ -2,6 +2,7 @@ com/dlr/ciscoware_wc/User.class
 com/dlr/ciscoware_wc/Inventory.class
 com/dlr/ciscoware_wc/Password.class
 com/dlr/ciscoware_wc/Inventory_.class
+com/dlr/ciscoware_wc/Login.class
 com/dlr/ciscoware_wc/Admin_.class
 com/dlr/ciscoware_wc/ProcessCheckout.class
 com/dlr/ciscoware_wc/User_.class
@@ -16,6 +17,7 @@ com/dlr/ciscoware_wc/FormatMoney.class
 com/dlr/restclient/UserRC.class
 com/dlr/ciscoware_wc/ProductOrder_.class
 com/dlr/restclient/OrderRC.class
+com/dlr/restclient/AdminRC.class
 com/dlr/ciscoware_wc/BranchAddress.class
 com/dlr/ciscoware_wc/Orders.class
 com/dlr/restclient/ProductRC.class

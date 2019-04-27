@@ -71,9 +71,7 @@ public class UserRC {
         return users;
     }
 
-    public boolean login(String data) {
-
-        JSONObject resp;
+    public String login(String data) {
 
         try {
             Client client = Client.create();
@@ -92,14 +90,13 @@ public class UserRC {
             System.out.println("Output from Server .... \n");
             String output = response.getEntity(String.class);
             System.out.println(output);
-            resp = new JSONObject(output);
-            return resp.getString("code").contains("200");
+            return new JSONObject(output).toString();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return false;
+        return "";
     }
 
     public String changePassword(String data) {

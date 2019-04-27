@@ -3,6 +3,7 @@
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/restclient/UserRC.java
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/ciscoware_wc/ProductOrder.java
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/ciscoware_wc/User.java
+/Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/restclient/AdminRC.java
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/restclient/OrderRC.java
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/restclient/ProductOrderRC.java
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/ciscoware_wc/Password.java
@@ -15,5 +16,6 @@
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/restclient/BranchRC.java
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/ciscoware_wc/Inventory.java
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/ciscoware_wc/Branch.java
+/Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/ciscoware_wc/Login.java
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/ciscoware_wc/Customer.java
 /Users/alex/Code/java/Ciscoware_WC/src/main/java/com/dlr/ciscoware_wc/CustomerAddress.java

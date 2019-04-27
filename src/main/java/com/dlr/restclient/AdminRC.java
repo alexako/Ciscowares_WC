@@ -5,7 +5,7 @@
  */
 package com.dlr.restclient;
 
-import com.dlr.ciscoware_wc.Customer;
+import com.dlr.ciscoware_wc.Admin;
 import com.dlr.ciscoware_wc.User;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -19,17 +19,17 @@ import org.json.JSONObject;
  *
  * @author alex
  */
-public class CustomerRC {
+public class AdminRC {
 
-    public List<Customer> getCustomers() {
-        List<Customer> customers = new ArrayList<>();
+    public List<Admin> getAdmins() {
+        List<Admin> admins = new ArrayList<>();
 
 		try {
 
 			Client client = Client.create();
 
 			WebResource webResource = client
-					.resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/customers");
+					.resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/admins");
 
 			ClientResponse response = webResource.accept("application/json")
 					.get(ClientResponse.class);
@@ -41,7 +41,7 @@ public class CustomerRC {
 
 			String resp = response.getEntity(String.class);
             JSONObject obj = new JSONObject(resp);
-            JSONArray prods = obj.getJSONArray("customer");
+            JSONArray prods = obj.getJSONArray("admin");
 
             for (int i=0; i<prods.length(); i++) {
                 JSONObject o = prods.getJSONObject(i);
@@ -54,11 +54,10 @@ public class CustomerRC {
                 u.setEmail(uo.getString("email"));
                 u.setRole(uo.getString("role"));
 
-                Customer c = new Customer();
-                c.setId(o.getInt("id"));
-                c.setPhoneNumber(o.getString("phoneNumber"));
-                c.setUserId(u);
-                customers.add(c);
+                Admin a = new Admin();
+                a.setId(o.getInt("id"));
+                a.setUserId(u);
+                admins.add(a);
             }
 
 		} catch (Exception e) {
@@ -67,19 +66,19 @@ public class CustomerRC {
 
 		}
 
-        return customers;
+        return admins;
     }
 
-    public Customer getCustomerById(String id) {
+    public Admin getAdminById(String id) {
 
-        Customer c = new Customer();
+        Admin a = new Admin();
 
 		try {
 
 			Client client = Client.create();
 
 			WebResource webResource = client
-					.resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/customers/" + id);
+					.resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/admins/" + id);
 
 			ClientResponse response = webResource.accept("application/json")
 					.get(ClientResponse.class);
@@ -104,9 +103,8 @@ public class CustomerRC {
                 u.setEmail(uo.getString("email"));
                 u.setRole(uo.getString("role"));
 
-                c.setId(o.getInt("id"));
-                c.setPhoneNumber(o.getString("phoneNumber"));
-                c.setUserId(u);
+                a.setId(o.getInt("id"));
+                a.setUserId(u);
             }
 
 		} catch (Exception e) {
@@ -115,7 +113,7 @@ public class CustomerRC {
 
 		}
 
-        return c;
+        return a;
     }
 
     public String createCustomer(String data) {
