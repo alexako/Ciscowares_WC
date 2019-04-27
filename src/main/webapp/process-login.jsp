@@ -4,6 +4,7 @@
     Author     : alex
 --%>
 
+<%@page import="com.dlr.ciscoware_wc.User"%>
 <%@page import="com.dlr.ciscoware_wc.Admin"%>
 <%@page import="com.dlr.restclient.AdminRC"%>
 <%@page import="com.dlr.ciscoware_wc.Login"%>
@@ -30,7 +31,15 @@
 
             if (loggedIn) {
 
-                out.println("Login successful");
+                User u = login.getCurrentUser();
+                JSONObject uObj = new JSONObject();
+                uObj.put("id", u.getId());
+                uObj.put("email", u.getEmail());
+                uObj.put("firstName", u.getFirstName());
+                uObj.put("lastName", u.getLastName());
+                uObj.put("role", u.getRole());
+
+                request.setAttribute("user", uObj);
 
                 Cookie[] cookies = null;
                 String orderId = "";
