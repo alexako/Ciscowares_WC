@@ -70,6 +70,54 @@ public class CustomerRC {
         return customers;
     }
 
+    public Customer getCustomerById(String id) {
+
+        Customer c = new Customer();
+
+		try {
+
+			Client client = Client.create();
+
+			WebResource webResource = client
+					.resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/customers/" + id);
+
+			ClientResponse response = webResource.accept("application/json")
+					.get(ClientResponse.class);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+			String resp = response.getEntity(String.class);
+            JSONObject obj = new JSONObject(resp);
+            JSONArray prods = obj.getJSONArray("customer");
+
+            for (int i=0; i<prods.length(); i++) {
+                JSONObject o = prods.getJSONObject(i);
+                JSONObject uo = o.getJSONObject("userId");
+
+                User u = new User();
+                u.setId(uo.getInt("id"));
+                u.setFirstName(uo.getString("firstName"));
+                u.setLastName(uo.getString("lastName"));
+                u.setEmail(uo.getString("email"));
+                u.setRole(uo.getString("role"));
+
+                c.setId(o.getInt("id"));
+                c.setPhoneNumber(o.getString("phoneNumber"));
+                c.setUserId(u);
+            }
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+        return c;
+    }
+
     public String createCustomer(String data) {
 
         try {

@@ -60,5 +60,40 @@ public class ProductRC {
 
         return products;
     }
+
+    public Product getProductByName(String name) {
+
+        Product p = new Product();
+		try {
+
+			Client client = Client.create();
+
+			WebResource webResource = client
+					.resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/products/name/" + name);
+
+			ClientResponse response = webResource.accept("application/json")
+					.get(ClientResponse.class);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+			String resp = response.getEntity(String.class);
+            JSONObject o = new JSONObject(resp);
+
+            p.setId(o.getInt("id"));
+            p.setName(o.getString("name"));
+            p.setDescription(o.getString("description"));
+            p.setPrice(o.getDouble("price"));
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+        return p;
+    }
     
 }

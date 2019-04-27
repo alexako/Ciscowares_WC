@@ -37,7 +37,7 @@
         </nav>
         <div class="form-banner"></div>
         <h1 class="form-title marg-t-88">Checkout</h1>
-        <form class="marg-b-80 col-md-10 checkout-box padd-rl-2rem" action="" name="checkoutForm" id="checkoutForm" method="POST">
+        <form class="marg-b-80 col-md-10 checkout-box padd-rl-2rem" action="process-checkout.jsp" name="checkoutForm" id="checkoutForm" method="POST">
             <p class="marg-b-32 marg-t-48"><strong>Customer Information</strong></p>
             <input class="col-md-12 form-input marg-b-16" type="text" name="email" placeholder="Email"/>
             <input class="col-md-12 form-input marg-b-16" type="text" name="fname" placeholder="First Name" />

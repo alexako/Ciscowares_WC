@@ -4,6 +4,14 @@
     Author     : alex
 --%>
 
+<%@page import="com.dlr.ciscoware_wc.User"%>
+<%@page import="com.dlr.ciscoware_wc.Admin"%>
+<%@page import="com.dlr.restclient.AdminRC"%>
+<%@page import="com.dlr.ciscoware_wc.Login"%>
+<%@page import="com.dlr.restclient.OrderRC"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dlr.ciscoware_wc.Customer"%>
+<%@page import="com.dlr.restclient.CustomerRC"%>
 <%@page import="org.json.JSONObject"%>
 <%@page import="com.dlr.restclient.UserRC"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,17 +19,93 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Logging in...</title>
     </head>
     <body>
         <%
-            JSONObject obj = new JSONObject();
-            obj.put("email", request.getParameter("email"));
-            obj.put("password", request.getParameter("password"));
-            UserRC urc = new UserRC();
-            boolean state = urc.login(obj.toString());
-            out.println(state);
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+
+            Login login = new Login(email, password);
+            boolean loggedIn = login.login();
+
+            if (loggedIn) {
+
+                User u = login.getCurrentUser();
+                JSONObject uObj = new JSONObject();
+                uObj.put("id", u.getId());
+                uObj.put("email", u.getEmail());
+                uObj.put("firstName", u.getFirstName());
+                uObj.put("lastName", u.getLastName());
+                uObj.put("role", u.getRole());
+
+                request.setAttribute("user", uObj);
+
+                Cookie[] cookies = null;
+                String orderId = "";
+                 
+                cookies = request.getCookies();
+
+                if (cookies != null) {
+                    for (Cookie cookie: cookies) {
+                       if (cookie.getName().equals("orderId")) {
+                           orderId = cookie.getValue();
+                       }
+                    }
+                }
+
+//                if (orderId.isEmpty() || orderId == null
+//                        || request.getParameter("orderid") == null) {
+//                    JSONObject oObj = new JSONObject();
+//                    oObj.put("customerId", customerId);
+//                    oObj.put("branchId", 1);
+//                    oObj.put("totalCost", 0.0);
+
+//                    OrderRC orc = new OrderRC();
+//                    orderId = orc.createOrder(oobj.toString());
+//                    orderId = new JSONObject(orderId).getString("id");
+//                    Cookie orderCookie = new Cookie("orderid", orderId);
+//                    response.addCookie(orderCookie);
+//                }
+
+                if (login.getCurrentUserRole().equals("customer")) {
+                    CustomerRC crc = new CustomerRC();
+                    List<Customer> customers = crc.getCustomers();
+                    Customer currentUser = new Customer();
+                    for (Customer c: customers) {
+                        if (c.getUserId().getEmail()
+                                .equals(login.getCurrentUser().getEmail())) {
+                            currentUser = c;
+                        }
+                    }
+
+                    String customerId = currentUser.getId() != null
+                        ? currentUser.getId().toString()
+                        : "";
+                    Cookie customerCookie = new Cookie("customerId", customerId);
+                    response.addCookie(customerCookie);
+                    response.sendRedirect("wireless/wireless-overhead.jsp"); 
+                } else if (login.getCurrentUserRole().equals("admin")) {
+                    AdminRC arc = new AdminRC();
+                    List<Admin> admins = arc.getAdmins();
+                    Admin currentUser = new Admin();
+                    for (Admin a: admins) {
+                        if (a.getUserId().getEmail()
+                                .equals(login.getCurrentUser().getEmail())) {
+                            currentUser = a;
+                        }
+                    }
+
+                    String adminId = currentUser.getId() != null 
+                        ? currentUser.getId().toString()
+                        : "";
+                    Cookie adminCookie = new Cookie("adminId", adminId);
+                    response.addCookie(adminCookie);
+                    response.sendRedirect("manager/admin.jsp"); 
+                }
+            }
+
+            else { response.sendRedirect("login.jsp"); }
         %>
-        <h1>Hello World!</h1>
     </body>
 </html>

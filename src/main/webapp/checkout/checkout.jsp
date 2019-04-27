@@ -4,6 +4,14 @@
     Author     : Lawrence
 --%>
 
+<%@page import="com.dlr.ciscoware_wc.FormatMoney"%>
+<%@page import="com.dlr.ciscoware_wc.ProductOrder"%>
+<%@page import="com.dlr.ciscoware_wc.Orders"%>
+<%@page import="com.dlr.restclient.OrderRC"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dlr.restclient.ProductRC"%>
+<%@page import="com.dlr.ciscoware_wc.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,18 +45,50 @@
         </nav>
         <div class="form-banner"></div>
         <h1 class="form-title marg-t-88">Checkout</h1>
-        <form class="marg-b-80 col-md-10 checkout-box marg-l-2rem" action="checkout-proceed.jsp" method="POST" name="checkoutForm" id="checkoutForm">
+        <form class="marg-b-80 col-md-10 checkout-box marg-l-2rem" action="process-checkout.jsp" method="POST" name="checkoutForm" id="checkoutForm">
             <div class="container col-md-12" style="padding-left: 2rem;">
                 <div class="row">
-                    <p class="checkout-label">Item: </p>
-                    <input class="form-input marg-b-32 marg-r-16 col-md-4" type="text" name="item" placeholder="" />  
-                    <p class="checkout-label marg-l-32">Price:</p>
-                    <input class="form-input marg-b-32 marg-r-16 col-md-2" type="text" name="price" placeholder="" /> 
-                    <p class="checkout-label marg-l-32">Quantity:</p>
-                    <input class="form-input marg-b-32 col-md-1" type="number" name="quantity" placeholder="" /> 
-                    <a class="ml-auto" href="#">
-                        <img src="../img/delete.svg" class="delete-icon" alt="">
-                    </a>
+                    <%
+
+                        // Get cookies to see if there is an existing order
+                        Cookie[] cookies = null;
+                        String orderId = "";
+                         
+                        cookies = request.getCookies();
+
+                        if (cookies != null) {
+                            for (Cookie cookie: cookies) {
+                               if (cookie.getName().equals("orderId")) {
+                                   orderId = cookie.getValue();
+                               }
+                            }
+                        }
+
+                        // Print Product Orders 
+                        OrderRC orc = new OrderRC();
+                        Orders order = orc.getOrderById(Integer.parseInt(orderId));
+
+                        if (order.getStatus() != null) {
+                            List<ProductOrder> a = order.getProductOrders();
+
+                            for (ProductOrder po: a) {
+                                Product p = po.getProductId();
+
+                                out.println("<div class=\"product-container\">");
+                                out.println("<div class=\"product-name\">");
+                                out.println(p.getName() + "</div>");
+                                out.println("<div class=\"product-description\">" + p.getDescription() + "</div>");
+                                out.println("<div class=\"product-price\">" +
+                                    FormatMoney.getString(p.getPrice())+ " </div>");
+                                out.println("<div class=\"product-quantity\">Quantity: " +
+                                    po.getQuantity() + "</div>");
+                                out.println("</div>");
+                            }
+                        } else {
+                            out.println("Cart is empty... probably");
+                        }
+
+                    %>
                 </div>
             </div>
             <button type="submit" class="submit-btn marg-b-16 marg-t-48 marg-l-2rem " id="submit">CHECK OUT</button>
@@ -93,6 +133,9 @@
                 </div>
             </footer>
         </div>
+        <script>
+
+        </script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

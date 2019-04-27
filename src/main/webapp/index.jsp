@@ -52,49 +52,6 @@
                 </nav>
        
         <div class="home-banner">
-            <%
-                ProductRC prc = new ProductRC();
-                List<Product> products = prc.getProducts();
-
-                for (Product p: products) {
-                    out.println(p.getName());
-                }
-
-                BranchRC brc = new BranchRC();
-                List<Branch> branches = brc.getBranches();
-
-                for (Branch b: branches) {
-                    Collection addr = b.getBranchAddressCollection();
-                    List<BranchAddress> ba = new ArrayList(addr);
-                    out.println(b.getName());
-                    out.println(ba.get(0).getStreet());
-                }
-
-                CustomerRC crc = new CustomerRC();
-                List<Customer> customers = crc.getCustomers();
-
-                for (Customer c: customers) {
-                    out.println(c.getUserId().getEmail());
-                    out.println(c.getPhoneNumber());
-                }
-
-                OrderRC orc = new OrderRC();
-                List<Orders> orders = orc.getOrders();
-
-                for (Orders o: orders) {
-                    out.println(o.getTotalCost());
-                    out.println(o.getOrderDate());
-                }
-
-                ProductOrderRC porc = new ProductOrderRC();
-                List<ProductOrder> pos = porc.getProductOrders();
-
-                for (ProductOrder po: pos) {
-                    out.println(po.getProductId().getName());
-                    out.println(po.getQuantity());
-                }
-        
-            %>
             <div class="home-banner-content container">
                 <h1 class="home-banner-title"><strong>Reliable</strong> and <strong>Quality</strong></h1>
                 <h1 class="home-banner-title" style="padding-left: 4rem;">Networking technologies</h1>
