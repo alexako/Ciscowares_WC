@@ -12,6 +12,7 @@
         <title>Ciscoware Mobile Services</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-light navbar-store">
@@ -38,7 +39,7 @@
         <div class="shop-menu">
             <button class="inactive-shop-btn" onclick="location.href = '../router-overhead.jsp';">Routers</button>
             <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
-            <button class="active-shop-btn" onclick="location.href = 'wireless/wireless-overhead.jsp';">Wireless</button>
+            <button class="active-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
             <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
@@ -58,9 +59,10 @@
                 <p class="item-price">Price: ₱67,494.08</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="aironet1562i" placeholder="" />
+                    <input id="aironet1562i" class="item-input" type="number" name="aironet1562i" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet1562i')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">Aironet 1562E</p>
@@ -73,9 +75,10 @@
                 <p class="item-price">Price: ₱95,349.60</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="aironet1562e" placeholder="" />
+                    <input id="aironet1562e" class="item-input" type="number" name="aironet1562e" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet1562e')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">Aironet 1562D</p>
@@ -87,9 +90,10 @@
                 <p class="item-price">Price: ₱42,119.20</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="aironet1562d" placeholder="" />
+                    <input id="aironet1562d" class="item-input" type="number" name="aironet1562d" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet1562d')">Add Item</button>
             </div>
         </div>
     </div>
@@ -105,9 +109,10 @@
                 <p class="item-price">Price: ₱33,802.85</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="aironet1542i" placeholder="" />
+                    <input id="aironet1542i" class="item-input" type="number" name="aironet1542i" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet1542i')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">Aironet 1542D</p>
@@ -119,9 +124,10 @@
                 <p class="item-price">Price: ₱30,747.02</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="aironet1542d" placeholder="" />
+                    <input id="aironet1542d" class="item-input" type="number" name="aironet1542d" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aiornet1542d')">Add Item</button>
             </div>
         </div>
     </div>
@@ -165,10 +171,6 @@
             </div>
         </div>
     </footer>
-
-    <script src="../shoppingCart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <%@include file="../scripts.jsp" %>
 </body>
 </html>
