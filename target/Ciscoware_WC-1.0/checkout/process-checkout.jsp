@@ -4,6 +4,10 @@
     Author     : alex
 --%>
 
+<%@page import="com.dlr.ciscoware_wc.User"%>
+<%@page import="org.json.JSONArray"%>
+<%@page import="com.dlr.ciscoware_wc.Customer"%>
+<%@page import="com.dlr.ciscoware_wc.Branch"%>
 <%@page import="com.dlr.ciscoware_wc.CustomerAddress"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.dlr.ciscoware_wc.FormatMoney"%>
@@ -28,9 +32,11 @@
     <body>
         <%
 
+            Orders order = new Orders();
+            String customerId = new String();
+            String orderId = new String();
             JSONObject shoppingCart = new JSONObject();
             Cookie[] cookies = request.getCookies();
-            String customerId = "";
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("customerId")) {
@@ -39,13 +45,78 @@
                     if (cookie.getName().equals("cart")) {
                         shoppingCart = new JSONObject(cookie.getValue());
                     }
+                   if (cookie.getName().equals("orderId")) {
+                       orderId = cookie.getValue();
+                   }
                 }
             }
+
+            Random r = new Random();
+            int branchId = r.nextInt((3 - 1) + 1) + 1;
+
+            if (orderId.isEmpty() || orderId == null
+                    || request.getParameter("orderid") == null) {
+                JSONObject oObj = new JSONObject();
+                oObj.put("customerId", customerId);
+                oObj.put("branchId", branchId);
+                oObj.put("totalCost", 0.0);
+
+                OrderRC orc = new OrderRC();
+                JSONObject orderObj = new JSONObject(orc.createOrder(oObj.toString()));
+                Branch b = new Branch();
+                b.setId(orderObj.getJSONObject("branchId").getInt("id"));
+
+                JSONObject userObj = orderObj.getJSONObject("customerId").getJSONObject("userId");
+                User u = new User();
+                u.setId(userObj.getInt("id"));
+                u.setEmail(userObj.getString("email"));
+                u.setFirstName(userObj.getString("firstName"));
+                u.setLastName(userObj.getString("lastName"));
+
+                Customer c = new Customer();
+                c.setId(orderObj.getJSONObject("customerId").getInt("id"));
+                c.setPhoneNumber(orderObj.getJSONObject("customerId").getString("phoneNumber"));
+                c.setUserId(u);
+
+//                List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
+//                JSONArray poList = orderObj.getJSONArray("productOrders");
+//                for (int i = 0; i < poList.length(); i++) {
+//                    JSONObject poObj = poList.getJSONObject(i);
+//                    JSONObject pObj = poObj.getJSONObject("productId");
+
+//                    Product p = new Product();
+//                    p.setId(pObj.getInt("id"));
+//                    p.setName(pObj.getString("name"));
+//                    p.setDescription(pObj.getString("description"));
+//                    p.setPrice(pObj.getDouble("price"));
+
+//                    ProductOrder po = new ProductOrder();
+//                    po.setId(poObj.getInt("id"));
+//                    po.setQuantity(poObj.getInt("quantity"));
+//                    po.setProductId(p);
+
+//                    productOrders.add(po);
+//                }
+
+
+                order.setId(orderObj.getInt("id"));
+                order.setBranchId(b);
+                order.setCustomerId(c);
+                order.setDeliveryDate(orderObj.getString("deliveryDate"));
+                order.setOrderDate(orderObj.getString("orderDate"));
+                order.setStatus(orderObj.getString("status"));
+                order.setTotalCost(orderObj.getDouble("totalCost"));
+
+                orderId = orc.createOrder(oObj.toString());
+                orderId = new JSONObject(orderId).getString("id");
+                Cookie orderCookie = new Cookie("orderid", orderId);
+                response.addCookie(orderCookie);
+
+                // Store product orders here from shoppingCart
+
+                request.setAttribute("order", order);
+            }
             
-            OrderRC orc = new OrderRC();
-//            orc.createOrder(data);
-//            Orders order = orc.getOrderById(Integer.parseInt(orderId));
-//            request.setAttribute("order", order);
         %>
 
         <div class="order">
@@ -64,16 +135,16 @@
 
                 <div class="customer-address">
                     <%
-                        if (order.getCustomerId() != null
-                                && order.getCustomerId().getCustomerAddressCollection() != null) {
-                            for (CustomerAddress ca: order.getCustomerId().getCustomerAddressCollection()) {
-                                out.print(ca.getStreet());
-                                out.print(ca.getCity());
-                                out.print(ca.getProvince());
-                                out.print(ca.getCountry());
-                                out.print(ca.getZipCode());
-                            }
-                        }
+//                        if (order.getCustomerId() != null
+//                                && order.getCustomerId().getCustomerAddressCollection() != null) {
+//                            for (CustomerAddress ca: order.getCustomerId().getCustomerAddressCollection()) {
+//                                out.print(ca.getStreet());
+//                                out.print(ca.getCity());
+//                                out.print(ca.getProvince());
+//                                out.print(ca.getCountry());
+//                                out.print(ca.getZipCode());
+//                            }
+//                        }
                     %>
 
                 </div>
@@ -96,20 +167,20 @@
                 </thead>
                 <tbody>
                 <%
-                    List<ProductOrder> a = order.getProductOrders();
-                        for (int i = 0; i < a.size(); i++) {
-                            ProductOrder po = a.get(i);
-                            Product p = po.getProductId();
+//                    List<ProductOrder> a = order.getProductOrders();
+//                        for (int i = 0; i < a.size(); i++) {
+//                            ProductOrder po = a.get(i);
+//                            Product p = po.getProductId();
 
-                            out.println("<tr>");
+//                            out.println("<tr>");
 
-                            out.println("<td>" + p.getName() + "</td>");
-                            out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + FormatMoney.getString(p.getPrice()) + "</td>");
-                            out.println("<td>" + po.getQuantity() + "</td>");
+//                            out.println("<td>" + p.getName() + "</td>");
+//                            out.println("<td>" + p.getDescription() + "</td>");
+//                            out.println("<td>" + FormatMoney.getString(p.getPrice()) + "</td>");
+//                            out.println("<td>" + po.getQuantity() + "</td>");
 
-                            out.println("</tr>");
-                        }
+//                            out.println("</tr>");
+//                        }
                 %>
                 </tbody>
             </table>
