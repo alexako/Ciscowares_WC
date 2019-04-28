@@ -21,6 +21,14 @@ function addToCart(productName) {
     console.log("added: ", Cookies.getJSON("cart"));
 }
 
+function removeFromCart(productName) {
+    if (Cookies.get("cart")) {
+        let cart = Cookies.getJSON("cart");
+        cart.items = cart.items.filter(i => i.name !== productName);
+        Cookies.set("cart", cart);
+    }
+}
+
 function getQuantity(productName) {
     return document.getElementById(productName).value;
 }
