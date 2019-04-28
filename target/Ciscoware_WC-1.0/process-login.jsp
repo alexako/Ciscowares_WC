@@ -42,33 +42,6 @@
                 Cookie userCookie = new Cookie("user", uObj.toString());
                 response.addCookie(userCookie);
 
-//                Cookie[] cookies = null;
-//                String orderId = "";
-                 
-//                cookies = request.getCookies();
-
-//                if (cookies != null) {
-//                    for (Cookie cookie: cookies) {
-//                       if (cookie.getName().equals("orderId")) {
-//                           orderId = cookie.getValue();
-//                       }
-//                    }
-//                }
-
-//                if (orderId.isEmpty() || orderId == null
-//                        || request.getParameter("orderid") == null) {
-//                    JSONObject oObj = new JSONObject();
-//                    oObj.put("customerId", customerId);
-//                    oObj.put("branchId", 1);
-//                    oObj.put("totalCost", 0.0);
-
-//                    OrderRC orc = new OrderRC();
-//                    orderId = orc.createOrder(oobj.toString());
-//                    orderId = new JSONObject(orderId).getString("id");
-//                    Cookie orderCookie = new Cookie("orderid", orderId);
-//                    response.addCookie(orderCookie);
-//                }
-
                 if (login.getCurrentUserRole().equals("customer")) {
                     CustomerRC crc = new CustomerRC();
                     List<Customer> customers = crc.getCustomers();

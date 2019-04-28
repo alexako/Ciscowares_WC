@@ -4,6 +4,9 @@
     Author     : Lawrence
 --%>
 
+<%@page import="org.json.JSONArray"%>
+<%@page import="java.util.Random"%>
+<%@page import="org.json.JSONObject"%>
 <%@page import="com.dlr.ciscoware_wc.FormatMoney"%>
 <%@page import="com.dlr.ciscoware_wc.ProductOrder"%>
 <%@page import="com.dlr.ciscoware_wc.Orders"%>
@@ -50,42 +53,31 @@
                 <div class="row">
                     <%
 
+
                         // Get cookies to see if there is an existing order
                         Cookie[] cookies = null;
-                        String orderId = "";
+                        String shoppingCart = new String();
                          
                         cookies = request.getCookies();
 
                         if (cookies != null) {
                             for (Cookie cookie: cookies) {
-                               if (cookie.getName().equals("orderId")) {
-                                   orderId = cookie.getValue();
+                               if (cookie.getName().equals("cart")) {
+                                   TextUtils.htmlEncode("");
+                                   shoppingCart = cookie.getValue();
                                }
                             }
                         }
 
-                        // Print Product Orders 
-                        OrderRC orc = new OrderRC();
-                        Orders order = orc.getOrderById(Integer.parseInt(orderId));
+                        // Display shopping cart here
+                        if (shoppingCart != "" && shoppingCart != null) {
+                            JSONObject cart = new JSONObject(shoppingCart);
+                            JSONArray items = cart.getJSONArray("items");
 
-                        if (order.getStatus() != null) {
-                            List<ProductOrder> a = order.getProductOrders();
-
-                            for (ProductOrder po: a) {
-                                Product p = po.getProductId();
-
-                                out.println("<div class=\"product-container\">");
-                                out.println("<div class=\"product-name\">");
-                                out.println(p.getName() + "</div>");
-                                out.println("<div class=\"product-description\">" + p.getDescription() + "</div>");
-                                out.println("<div class=\"product-price\">" +
-                                    FormatMoney.getString(p.getPrice())+ " </div>");
-                                out.println("<div class=\"product-quantity\">Quantity: " +
-                                    po.getQuantity() + "</div>");
-                                out.println("</div>");
+                            for (int i = 0; i < items.length(); i++) {
+                                JSONObject item = items.getJSONObject(i);
+                                out.println(item.toString());
                             }
-                        } else {
-                            out.println("Cart is empty... probably");
                         }
 
                     %>
