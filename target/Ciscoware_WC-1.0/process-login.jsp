@@ -39,20 +39,21 @@
                 uObj.put("lastName", u.getLastName());
                 uObj.put("role", u.getRole());
 
-                request.setAttribute("user", uObj);
+                Cookie userCookie = new Cookie("user", uObj.toString());
+                response.addCookie(userCookie);
 
-                Cookie[] cookies = null;
-                String orderId = "";
+//                Cookie[] cookies = null;
+//                String orderId = "";
                  
-                cookies = request.getCookies();
+//                cookies = request.getCookies();
 
-                if (cookies != null) {
-                    for (Cookie cookie: cookies) {
-                       if (cookie.getName().equals("orderId")) {
-                           orderId = cookie.getValue();
-                       }
-                    }
-                }
+//                if (cookies != null) {
+//                    for (Cookie cookie: cookies) {
+//                       if (cookie.getName().equals("orderId")) {
+//                           orderId = cookie.getValue();
+//                       }
+//                    }
+//                }
 
 //                if (orderId.isEmpty() || orderId == null
 //                        || request.getParameter("orderid") == null) {

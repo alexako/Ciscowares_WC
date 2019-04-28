@@ -28,7 +28,7 @@
     <body>
         <%
 
-            String orderId = "";
+            JSONObject shoppingCart = new JSONObject();
             Cookie[] cookies = request.getCookies();
             String customerId = "";
             if (cookies != null) {
@@ -36,16 +36,16 @@
                     if (cookie.getName().equals("customerId")) {
                         customerId = cookie.getValue();
                     }
-                    if (cookie.getName().equals("orderId")) {
-                        orderId = cookie.getValue();
-                        cookie.setMaxAge(0);
+                    if (cookie.getName().equals("cart")) {
+                        shoppingCart = new JSONObject(cookie.getValue());
                     }
                 }
             }
             
             OrderRC orc = new OrderRC();
-            Orders order = orc.getOrderById(Integer.parseInt(orderId));
-            request.setAttribute("order", order);
+//            orc.createOrder(data);
+//            Orders order = orc.getOrderById(Integer.parseInt(orderId));
+//            request.setAttribute("order", order);
         %>
 
         <div class="order">
