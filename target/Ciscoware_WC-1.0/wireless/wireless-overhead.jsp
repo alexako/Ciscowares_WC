@@ -4,7 +4,20 @@
     Author     : Lawrence
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.dlr.ciscoware_wc.FormatMoney"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dlr.ciscoware_wc.Product"%>
+<%@page import="com.dlr.restclient.ProductRC"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    ProductRC prc = new ProductRC();
+    List<Product> products = prc.getProductsByCategory("wireless");
+
+    request.setAttribute("products", products);
+
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,6 +64,35 @@
         <a href="wireless-switch-router.jsp" class="shop-link">Wireless Integrated Switches and Routers</a>
         <a href="wireless-lan.jsp" class="shop-link marg-b-88">Wireless LAN Controller</a>
     </div>
+
+    <div class="container">
+
+        <div class="row marg-b-88">
+            <c:forEach items="${products}" var="p">
+            <div class="col-md-4 col-sm-12">
+                <p class="item-title"><c:out value="${p.getTitle()}"/></p>
+                <p class="item-description">
+                    <c:out value="${p.getDescription()}"/>
+                </p>
+                <div class="row item-input-container">
+                    <p class="item-input-label">Quantity:</p>
+                    <input id="<c:out value="${p.getName()}"/>"
+                           class="item-input"
+                           type="number"
+                           min="0"
+                           oninput="addToCart('<c:out value="${p.getName()}"/>')"
+                           name="<c:out value="${p.getName()}"/>"/>
+                </div>
+                <p class="item-price">
+                   <c:out value="${FormatMoney.getString(p.getPrice())}"/>
+                </p>
+                <button class="add-item-btn"
+                        onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
+            </div>
+            </c:forEach>
+        </div>
+    </div>
+
     <div style="background: white;">
         <footer class="container padd-b-88 padd-lr-0">
             <div class="footer-container padd-t-64 col-md-12 row">
@@ -60,7 +102,7 @@
                 <div class="footer-nav-container col-md-6">
                     <ul class="footer-nav">
                         <li class="nav-item">
-                            <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
+                            <a class="nav-link nav-inactive nav-seperator" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>

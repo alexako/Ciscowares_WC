@@ -4,7 +4,20 @@
     Author     : Lawrence
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.dlr.ciscoware_wc.FormatMoney"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dlr.ciscoware_wc.Product"%>
+<%@page import="com.dlr.restclient.ProductRC"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    ProductRC prc = new ProductRC();
+    List<Product> products = prc.getProductsByCategory("routers");
+
+    request.setAttribute("products", products);
+
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +25,7 @@
         <title>Ciscoware Router Overhead</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-light navbar-store">
@@ -51,6 +65,36 @@
         <a href="router-meraki.jsp" class="shop-link">Meraki MX Security Appliances</a>
         <a href="router-business.jsp" class="shop-link marg-b-88">Small Business RV Series</a>
     </div>
+
+    <div class="container">
+
+        <div class="row marg-b-88">
+            <c:forEach items="${products}" var="p">
+            <div class="col-md-4 col-sm-12">
+                <p class="item-title"><c:out value="${p.getTitle()}"/></p>
+                <p class="item-description">
+                    <c:out value="${p.getDescription()}"/>
+                </p>
+                <div class="row item-input-container">
+                    <p class="item-input-label">Quantity:</p>
+                    <input id="<c:out value="${p.getName()}"/>"
+                           class="item-input"
+                           type="number"
+                           min="0"
+                           oninput="addToCart('<c:out value="${p.getName()}"/>')"
+                           name="<c:out value="${p.getName()}"/>"/>
+                </div>
+                <p class="item-price">
+                   <c:out value="${FormatMoney.getString(p.getPrice())}"/>
+                </p>
+                <button class="add-item-btn"
+                        onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
+            </div>
+            </c:forEach>
+        </div>
+    </div>
+
+
     <div style="background: white;">
         <footer class="container padd-b-88 padd-lr-0">
             <div class="footer-container padd-t-64 col-md-12 row">
@@ -91,8 +135,6 @@
             </div>
         </footer>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <%@include file="../scripts.jsp" %>
     </body>
 </html>

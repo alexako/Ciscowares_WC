@@ -4,7 +4,11 @@
     Author     : Lawrence
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.dlr.ciscoware_wc.Product"%>
+<%@page import="com.dlr.restclient.ProductRC"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
