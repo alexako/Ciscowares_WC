@@ -30,7 +30,6 @@
                 for (int i = 0; i < cookies.length; i++) {
                    Cookie cookie = cookie = cookies[i];
                    cookie.setValue("");
-                   cookie.setDomain("/");
                    cookie.setMaxAge(0);
                    response.addCookie(cookie);
                 }

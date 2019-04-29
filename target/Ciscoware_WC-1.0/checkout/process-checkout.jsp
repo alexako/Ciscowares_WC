@@ -33,20 +33,20 @@
         <%
 
             Orders order = new Orders();
+            String shoppingCart = new String();
             String customerId = new String();
             String orderId = new String();
-            JSONObject shoppingCart = new JSONObject();
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("customerId")) {
                         customerId = cookie.getValue();
                     }
-                    if (cookie.getName().equals("cart")) {
-                        shoppingCart = new JSONObject(cookie.getValue());
-                    }
                    if (cookie.getName().equals("orderId")) {
                        orderId = cookie.getValue();
+                   }
+                   if (cookie.getName().equals("cart")) {
+                       shoppingCart = new String(cookie.getValue());
                    }
                 }
             }
@@ -109,10 +109,38 @@
 
                 orderId = orc.createOrder(oObj.toString());
                 orderId = new JSONObject(orderId).getString("id");
-                Cookie orderCookie = new Cookie("orderid", orderId);
-                response.addCookie(orderCookie);
 
-                // Store product orders here from shoppingCart
+                double total = 0.0;
+                List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
+
+                // Create product orders here from shoppingCart
+                if (shoppingCart != "" && shoppingCart != null) {
+                    JSONObject cart = new JSONObject(shoppingCart);
+                    JSONArray items = cart.getJSONArray("items");
+
+                    for (int i = 0; i < items.length(); i++) {
+                        JSONObject item = items.getJSONObject(i);
+                        ProductRC prc = new ProductRC();
+                        Product p = prc.getProductByName(item.getString("name"));
+                        total += p.getPrice() * item.getInt("quantity");
+
+                        ProductOrderRC porc = new ProductOrderRC();
+                        ProductOrder po = new ProductOrder();
+                        po.setProductId(p);
+                        po.setQuantity(item.getInt("quantity"));
+                        po.setOrderId(order);
+                        productOrders.add(po);
+
+                        JSONObject poObj = new JSONObject();
+                        poObj.put("orderId", po.getOrderId().getId().toString());
+                        poObj.put("productId", po.getProductId().getId().toString());
+                        poObj.put("quantity", po.getQuantity());
+                        porc.createProductOrder(poObj.toString());
+                    }
+
+                    request.setAttribute("total", FormatMoney.getString(total));
+                    request.setAttribute("productOrders", productOrders);
+                }
 
                 request.setAttribute("order", order);
             }
