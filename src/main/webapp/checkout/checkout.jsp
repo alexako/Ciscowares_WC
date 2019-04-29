@@ -22,7 +22,6 @@
 
 <%
 
-
     // Get cookies to see if there is an existing order
     Cookie[] cookies = null;
     String shoppingCart = new String();
@@ -55,9 +54,11 @@
             productOrders.add(po);
         }
 
-
+        request.setAttribute("isEmpty", total == 0.00);
         request.setAttribute("total", FormatMoney.getString(total));
-        request.setAttribute("productOrders", productOrders);
+//        request.setAttribute("productOrders", productOrders);
+
+        session.setAttribute("productOrders", productOrders);
     }
 
 %>
@@ -123,7 +124,7 @@
                            <c:out value="${po.getQuantity()}"/> @
                            <c:out value="₱${po.getProductId().getPrice()}"/>
                         </div>
-                        <div class="sub-total">
+                        <div id="sub-total" class="sub-total">
                            <c:out value="₱${po.getProductId().getPrice() * po.getQuantity()}"/>
                         </div>
                     </div>
@@ -132,13 +133,16 @@
             </div>
             <div class="total-cost-container">
                 Total: 
-                <span class="total-cost">
+                <span id="total-cost" class="total-cost">
                     <c:out value="${total}"/>
                 </span>
             </div>
 
             <div class="submit-button-container">
                 <button type="submit"
+                        <c:if test="${isEmpty}">
+                        disabled
+                        </c:if>
                         class="submit-btn"
                         id="checkout-submit">
                     CHECK OUT

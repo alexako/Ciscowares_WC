@@ -79,7 +79,9 @@
                 }
             }
 
-            else { response.sendRedirect("login.jsp"); }
+            else { response.sendRedirect("error-login.jsp"); }
         %>
+
+        <input type="hidden" name="login-error" value="<% out.println(loggedIn); %>"/>
     </body>
 </html>

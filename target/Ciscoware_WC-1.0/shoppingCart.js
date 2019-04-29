@@ -33,6 +33,28 @@ function removeFromCart(productName) {
     const cartDOM = document.getElementById("shopping-cart");
     const item = document.getElementById(productName);
     cartDOM.removeChild(item);
+
+    updateCart(cartDOM);
+
+    if (cartDOM.children.length === 0) {
+        const submitBtn = document.getElementById("checkout-submit");
+        submitBtn.disabled = true;
+    }
+}
+
+function updateCart(cart) {
+    cart = cart.children;
+    const totalEl = document.getElementById("total-cost");
+    let total = 0;
+    for (var i=0; i < cart.length; i++) {
+        item = cart[i];
+        subtotal = item.children[3].children[1].innerText;
+        subtotal = parseFloat(subtotal.substr(1));
+        console.log("subTotal: ", subtotal);
+        total += subtotal;
+    }
+
+    totalEl.innerText = "₱" + total;
 }
 
 function getQuantity(productName) {

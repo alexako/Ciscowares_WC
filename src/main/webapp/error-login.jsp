@@ -54,6 +54,22 @@
             </div>
             <div class="form-banner"></div>
 
+        <%
+            Cookie[] cookies = request.getCookies();
+            boolean loginError = true;
+            if (cookies != null) {
+                for (Cookie c: cookies) {
+                    if (c.getName().equals("customerId")) {
+                        loginError = false;
+                    }
+                }
+            }
+            
+            if (loginError) {
+                out.println("<div class=\"login-error\">Invalid email/password</div>");
+            }
+        %>
+            
         <form class="marg-b-80" action="process-login.jsp" id="loginForm" name="loginForm" method="POST" onsubmit="return validateNullFields()">
             <h1 class="form-title">Sign In</h1>
             <input class="col-md-12 form-input marg-b-16" type="text" name="email" placeholder="Email"/>
