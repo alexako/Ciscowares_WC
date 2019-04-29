@@ -4,6 +4,9 @@
     Author     : Lawrence
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.lang.reflect.Array"%>
+<%@page import="com.dlr.ciscoware_wc.HtmlEntity"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="java.util.Random"%>
 <%@page import="org.json.JSONObject"%>
@@ -16,6 +19,49 @@
 <%@page import="com.dlr.restclient.ProductRC"%>
 <%@page import="com.dlr.ciscoware_wc.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+
+
+    // Get cookies to see if there is an existing order
+    Cookie[] cookies = null;
+    String shoppingCart = new String();
+     
+    cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie cookie: cookies) {
+           if (cookie.getName().equals("cart")) {
+               shoppingCart = new String(cookie.getValue());
+           }
+        }
+    }
+
+    // Display shopping cart here
+    if (shoppingCart != "" && shoppingCart != null) {
+        JSONObject cart = new JSONObject(shoppingCart);
+        JSONArray items = cart.getJSONArray("items");
+
+        double total = 0.0;
+        List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject item = items.getJSONObject(i);
+            ProductRC prc = new ProductRC();
+            ProductOrder po = new ProductOrder();
+            Product p = prc.getProductByName(item.getString("name"));
+            total += p.getPrice() * item.getInt("quantity");
+            po.setProductId(p);
+            po.setQuantity(item.getInt("quantity"));
+            productOrders.add(po);
+        }
+
+
+        request.setAttribute("total", FormatMoney.getString(total));
+        request.setAttribute("productOrders", productOrders);
+    }
+
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,41 +95,61 @@
         <div class="form-banner"></div>
         <h1 class="form-title marg-t-88">Checkout</h1>
         <form class="marg-b-80 col-md-10 checkout-box marg-l-2rem" action="process-checkout.jsp" method="POST" name="checkoutForm" id="checkoutForm">
-            <div class="container col-md-12" style="padding-left: 2rem;">
-                <div class="row">
-                    <%
 
+            <div id="shopping-cart" class="shopping-cart">
 
-                        // Get cookies to see if there is an existing order
-                        Cookie[] cookies = null;
-                        String shoppingCart = new String();
-                         
-                        cookies = request.getCookies();
+                <c:forEach items="${productOrders}" var="po">
+                <div id="${po.getProductId().getName()}" class="shopping-cart-item row">
 
-                        if (cookies != null) {
-                            for (Cookie cookie: cookies) {
-                               if (cookie.getName().equals("cart")) {
-                                   TextUtils.htmlEncode("");
-                                   shoppingCart = cookie.getValue();
-                               }
-                            }
-                        }
+                    <span class="remove-item"
+                          onclick="removeFromCart('${po.getProductId().getName()}')">
+                        Remove
+                    </span>
 
-                        // Display shopping cart here
-                        if (shoppingCart != "" && shoppingCart != null) {
-                            JSONObject cart = new JSONObject(shoppingCart);
-                            JSONArray items = cart.getJSONArray("items");
+                    <div class="col-md-3 col-sm-12">
+                        <p class="item-title">
+                            <c:out value="${po.getProductId().getTitle()}"/>
+                        </p>
+                    </div>
 
-                            for (int i = 0; i < items.length(); i++) {
-                                JSONObject item = items.getJSONObject(i);
-                                out.println(item.toString());
-                            }
-                        }
+                    <div class="col-md-5 col-sm-12">
+                        <p class="item-description">
+                            <c:out value="${po.getProductId().getDescription()}"/>
+                        </p>
+                    </div>
 
-                    %>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="item-price">
+                           <c:out value="${po.getQuantity()}"/> @
+                           <c:out value="₱${po.getProductId().getPrice()}"/>
+                        </div>
+                        <div class="sub-total">
+                           <c:out value="₱${po.getProductId().getPrice() * po.getQuantity()}"/>
+                        </div>
+                    </div>
+                </div>
+                </c:forEach>
+            </div>
+            <div class="total-cost-container">
+                Total: 
+                <span class="total-cost">
+                    <c:out value="${total}"/>
+                </span>
+            </div>
+
+            <div class="submit-button-container">
+                <button type="submit"
+                        class="submit-btn"
+                        id="checkout-submit">
+                    CHECK OUT
+                </button>
+                <div class="or">OR</div>
+                <div class="back-to-store-btn">
+                    <a href="../wireless/wireless-overhead.jsp">
+                        Continue shopping
+                    </a>
                 </div>
             </div>
-            <button type="submit" class="submit-btn marg-b-16 marg-t-48 marg-l-2rem " id="submit">CHECK OUT</button>
         </form>
         <div style="background: white;">
             <footer class="container padd-b-88 padd-lr-0 border-t-0">
@@ -125,11 +191,6 @@
                 </div>
             </footer>
         </div>
-        <script>
-
-        </script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <%@include file="../scripts.jsp" %>
     </body>
 </html>
