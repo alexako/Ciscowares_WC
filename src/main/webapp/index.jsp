@@ -19,6 +19,22 @@
 <%@page import="com.dlr.ciscoware_wc.Product"%>
 <%@page import="com.dlr.restclient.ProductRC" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+             Cookie[] cookies = null;
+             
+             // Get an array of Cookies associated with the this domain
+             cookies = request.getCookies();
+             
+             if( cookies != null ) {
+                
+                for (int i = 0; i < cookies.length; i++) {
+                   Cookie cookie = cookie = cookies[i];
+                   cookie.setValue("");
+                   cookie.setMaxAge(0);
+                   response.addCookie(cookie);
+                }
+             } 
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>

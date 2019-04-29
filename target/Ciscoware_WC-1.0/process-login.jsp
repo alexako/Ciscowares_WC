@@ -40,7 +40,7 @@
                 uObj.put("role", u.getRole());
 
                 Cookie userCookie = new Cookie("user", uObj.toString());
-                response.addCookie(userCookie);
+//                response.addCookie(userCookie);
 
                 if (login.getCurrentUserRole().equals("customer")) {
                     CustomerRC crc = new CustomerRC();

@@ -42,7 +42,7 @@
                             <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
+                            <a class="nav-link nav-link-store" href="../process-logout.jsp">LOGOUT</a>
                         </li>
                     </ul>
                 </div>

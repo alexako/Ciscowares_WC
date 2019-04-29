@@ -635,3 +635,65 @@ form {
 .product-price {
     white-space: nowrap;
 }
+
+.shopping-cart-item {
+    padding: 1em;
+    position: relative;
+}
+
+.shopping-cart-item:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+.shopping-cart-item > .remove-item {
+    position: absolute;
+    font-weight: 200;
+    font-size: 0.85em;
+    color: grey;
+    top: 0;
+    right: 10px;
+    cursor: pointer;
+}
+
+.shopping-cart-item > .remove-item:hover {
+    color: red;
+}
+
+.shopping-cart .item-price {
+    padding-top: 1.5em;
+    font-size: 1em;
+    color: grey;
+}
+
+.shopping-cart .sub-total {
+    font-size: 1.1em;
+}
+
+.shopping-cart .item-price,
+.shopping-cart .sub-total,
+.shopping-cart .item-quantity {
+    text-align: right;
+}
+
+.submit-button-container {
+    text-align: center;
+}
+
+#checkout-submit {
+    font-size: 1.4em;
+    width: 60%;
+}
+
+.or {
+    margin: 0.5em;
+}
+
+.total-cost-container {
+    text-align: right;
+    margin: 3.5em 0.5em;
+}
+
+.total-cost {
+    font-weight: 700;
+    font-size: 1.2em;
+}
