@@ -74,6 +74,9 @@
                 <p class="item-description">
                     <c:out value="${p.getDescription()}"/>
                 </p>
+                <p class="item-price">
+                   <c:out value="₱${p.getPrice()}"/>
+                </p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
                     <input id="<c:out value="${p.getName()}"/>"
@@ -83,9 +86,6 @@
                            oninput="addToCart('<c:out value="${p.getName()}"/>')"
                            name="<c:out value="${p.getName()}"/>"/>
                 </div>
-                <p class="item-price">
-                   <c:out value="${FormatMoney.getString(p.getPrice())}"/>
-                </p>
                 <button class="add-item-btn"
                         onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
             </div>
