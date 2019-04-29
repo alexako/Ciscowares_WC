@@ -1,5 +1,5 @@
 <%-- 
-    Document   : router-4000
+    Document   : router-900
     Created on : 04 20, 19, 2:11:04 AM
     Author     : Lawrence
 --%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Cables STP</title>
+        <title>Ciscoware Switch 3850</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -25,6 +25,9 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
@@ -36,63 +39,77 @@
         </nav>
     <center>
         <div class="shop-menu">
-            <button class="inactive-shop-btn" onclick="location.href = '../router-overhead.jsp';">Routers</button>
-            <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../router/router-overhead.jsp';">Routers</button>
+            <button class="active-shop-btn" onclick="location.href = 'switch-overhead.jsp';">Switches</button>
             <button class="inactive-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
-            <button class="active-shop-btn" onclick="location.href = 'cables-overhead.jsp';">Cables</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cables STP</p>
-        <img src="../img/shop/stp.jpg" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">Cisco Catalyst 3850 Series Switches</p>
+        <img src="../img/shop/switch-3850.png" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">STP Outdoor Cat6E</p>
+                <p class="item-title">3850-12X48U</p>
                 <p class="item-description">
-                    Category6 F/UTP cable </br>
-                    4pair shielded datatwist </br>
-                    Conductor Size 23 AWG </br>
-                    Conductor Material Solid Bare Copper </br>
-                    100m
+                    12 multitgigabit ports </br>
+                    48 UPOE ports </br>
+                    Supports Cisco StackPower </br>
+                    Supports 8x10G and 2x40G uplinks
                 </p>
-                <p class="item-price">Price: ₱15,000.00</p>
+                <p class="item-price">Price: ₱175,659.80</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="stpcat6e" placeholder="" />
+                    <input class="item-input" type="number" name="385012x48U" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">STP Outdoor Cat5E</p>
+                <p class="item-title">3850-48U</p>
                 <p class="item-description">
-                    Category6 F/UTP cable </br>
-                    4pair shielded datatwist </br>
-                    Conductor Size 26 AWG </br>
-                    Conductor Material Solid Bare Copper </br>
-                    100m
+                    48 10Mb/100Mb/1000M b ports </br>
+                    48 UPOE ports </br>
+                    Supports Cisco StackPower
                 </p>
-                <p class="item-price">Price: ₱14,000.00</p>
+                <p class="item-price">Price: ₱766,156.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="stpcat5e" placeholder="" />
+                    <input class="item-input" type="number" name="385048U" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">STP Outdoor Cat7</p>
+                <p class="item-title">3850-48XS</p>
                 <p class="item-description">
-                    Category7 F/UTP cable </br>
-                    4pair shielded datatwist </br>
-                    Conductor Size 26 AWG </br>
-                    Conductor Material Solid Bare Copper </br>
-                    100m
+                    48 10G SFP+ ports </br>
+                    4x40G QSFP+ uplinks (fixed) </br>
+                    Supports all power supplies
                 </p>
-                <p class="item-price">Price: ₱21,500.00</p>
+                <p class="item-price">Price: ₱24,289.60</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="stpcat7" placeholder="" />
+                    <input class="item-input" type="number" name="385048xs" placeholder="" />
+                </div>
+                <button class="add-item-btn">Add Item</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row marg-b-88">
+            <div class="col-md-4 col-sm-12">
+                <p class="item-title">3850-NM-8-10G</p>
+                <p class="item-description">
+                    Modular uplink </br>
+                    8X10 GE SFP+ ports </br>
+                    Supports many 1G and 10G optics
+                </p>
+                <p class="item-price">Price: ₱92,093.76</p>
+                <div class="row item-input-container">
+                    <p class="item-input-label">Quantity:</p>
+                    <input class="item-input" type="number" name="3850nm810g" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
@@ -107,6 +124,9 @@
             </div>
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
                     </li>
@@ -138,9 +158,11 @@
             </div>
         </div>
     </footer>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="../shoppingCart.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Router 900</title>
+        <title>Ciscoware Switch 9400</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -23,93 +23,76 @@
                     </span>
                 </button>
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto"> 
                         <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
-                    </li>
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     <center>
         <div class="shop-menu">
-            <button class="active-shop-btn" onclick="location.href = 'router-overhead.jsp';">Routers</button>
-            <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../router/router-overhead.jsp';">Routers</button>
+            <button class="active-shop-btn" onclick="location.href = 'switch-overhead.jsp';">Switches</button>
             <button class="inactive-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
             <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cisco 900 Series Integrated Services Routers</p>
-        <img src="../img/shop/router-900.png" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">Cisco Catalyst 9400 Series Switches</p>
+        <img src="../img/shop/switch-9400.png" class="shop-picture marg-b-80" alt="" style="width: 200px !important;"/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 921</p>
+                <p class="item-title">Catalyst 9400 10-slot</p>
                 <p class="item-description">
-                    4 LAN ports </br>
-                    Internal power supply </br>
-                    1 GB DRAM and 2 GB Flash </br>
-                    8 GB DRAM and 8 GB Flash </br>
-                    GET VPN, DMVPN, FlexVPN, firewall
+                    Unmatched 60W POE </br>
+                    384 ports and 480 Gbps per slot </br>
+                    Secure segmentation </br>
+                    State-of-the-art High Availability
                 </p>
-                <p class="item-price">Price: ₱43,690.72</p>
+                <p class="item-price">Price: ₱421,708.80</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr921" placeholder="" />
+                    <input class="item-input" type="number" name="cat940010" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 926</p>
+                <p class="item-title">Catalyst 9400 7-slot</p>
                 <p class="item-description">
-                    4 LAN ports </br>
-                    VDLS2, ADSL2/2+ </br>
-                    1 GB DRAM and 2 GB Flash </br>
-                    GET VPN, DMVPN, FlexVPN, firewall
+                    Unmatched 60W POE </br>
+                    240 ports and 480 Gbps per slot </br>
+                    Secure segmentation </br>
+                    State-of-the-art High Availability
                 </p>
-                <p class="item-price">Price: ₱48,861.22</p>
+                <p class="item-price">Price: ₱288,374.40</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr926" placeholder="" />
+                    <input class="item-input" type="number" name="cat94007" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 927</p>
+                <p class="item-title">Catalyst 9400 4-slot</p>
                 <p class="item-description">
-                    4 LAN ports </br>
-                    VDLS2, ADSL2/2+ </br>
-                    1 GB DRAM and 2 GB Flash </br>
-                    GET VPN, DMVPN, FlexVPN, firewall
+                    Unmatched 60W POE </br>
+                    96 ports and 480 Gbps per slot </br>
+                    Secure segmentation </br>
+                    State-of-the-art High Availability
                 </p>
-                <p class="item-price">Price: ₱48,861.22</p>
+                <p class="item-price">Price: ₱847,552.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr927" placeholder="" />
-                </div>
-                <button class="add-item-btn">Add Item</button>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row marg-b-88">
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 931</p>
-                <p class="item-description">
-                    4 LAN ports </br>
-                    Internal power supply </br>
-                    1 GB DRAM and 2 GB Flash </br>
-                    GET VPN, DMVPN, FlexVPN, firewall
-                </p>
-                <p class="item-price">Price: ₱31,953.17</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr931" placeholder="" />
+                    <input class="item-input" type="number" name="cat94004" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
@@ -125,10 +108,13 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="register.jsp">REGISTER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="login.jsp">LOGIN</a>
                     </li>
                 </ul>
             </div>

@@ -4,16 +4,12 @@
     Author     : Lawrence
 --%>
 
-<%@page import="java.util.List"%>
-<%@page import="com.dlr.ciscoware_wc.Product"%>
-<%@page import="com.dlr.restclient.ProductRC"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Integrated Switches and Routers</title>
+        <title>Ciscoware Cables STP</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -29,7 +25,10 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
@@ -42,95 +41,63 @@
         <div class="shop-menu">
             <button class="inactive-shop-btn" onclick="location.href = '../router-overhead.jsp';">Routers</button>
             <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
-            <button class="active-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
-            <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
+            <button class="active-shop-btn" onclick="location.href = 'cables-overhead.jsp';">Cables</button>
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Wireless Integrated Switches and Routers</p>
-        <img src="../img/shop/wireless-switch-router.png" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">Cables STP</p>
+        <img src="../img/shop/stp.jpg" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">890 Series</p>
+                <p class="item-title">STP Outdoor Cat6E</p>
                 <p class="item-description">
-                    Ready for Cisco Intelligent WAN </br>
-                    Switch and router in one device </br>
-                    802.11a/b/g/n and 4G LTE
+                    Category6 F/UTP cable </br>
+                    4pair shielded datatwist </br>
+                    Conductor Size 23 AWG </br>
+                    Conductor Material Solid Bare Copper </br>
+                    100m
                 </p>
-                <p class="item-price">Price: ₱25,219.84</p>
+                <p class="item-price">Price: ₱15,000.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input id="series890" class="item-input" type="number" name="series890" />
+                    <input class="item-input" type="number" name="stpcat6e" placeholder="" />
                 </div>
-                <button class="add-item-btn"
-                        onclick="addToCart('series890')">Add Item</button>
+                <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">880 Series</p>
+                <p class="item-title">STP Outdoor Cat5E</p>
                 <p class="item-description">
-                    Connectivity for up to 20 users </br>
-                    WAN redundancy with 3G and 4G 
+                    Category6 F/UTP cable </br>
+                    4pair shielded datatwist </br>
+                    Conductor Size 26 AWG </br>
+                    Conductor Material Solid Bare Copper </br>
+                    100m
                 </p>
-                <p class="item-price">Price: ₱17,571.20</p>
+                <p class="item-price">Price: ₱14,000.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input id="series880" class="item-input" type="number" name="series880" />
+                    <input class="item-input" type="number" name="stpcat5e" placeholder="" />
                 </div>
-                <button class="add-item-btn"
-                        onclick="addToCart('series880')">Add Item</button>
+                <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">860 Series</p>
+                <p class="item-title">STP Outdoor Cat7</p>
                 <p class="item-description">
-                    Connectivity for up to 10 users </br>
-                    WAN with VADSL or Ethernet </br>
-                    Wi-Fi for integrated WAN or Wi-Fi at home
+                    Category7 F/UTP cable </br>
+                    4pair shielded datatwist </br>
+                    Conductor Size 26 AWG </br>
+                    Conductor Material Solid Bare Copper </br>
+                    100m
                 </p>
-                <p class="item-price">Price: ₱6,717.88</p>
+                <p class="item-price">Price: ₱21,500.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input id="series860" class="item-input" type="number" name="series860" />
+                    <input class="item-input" type="number" name="stpcat7" placeholder="" />
                 </div>
-                <button class="add-item-btn"
-                        onclick="addToCart('series860')">Add Item</button>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row marg-b-88">
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">810 Series</p>
-                <p class="item-description">
-                    Hardened and nonhardened form </br>
-                    Lightweight, compact </br>
-                    low power consumption </br>
-                    Dual-SIM option </br>
-                    For machine-to-machine use cases
-                </p>
-                <p class="item-price">Price: ₱4,134.40</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p>
-                    <input id="series810" class="item-input" type="number" name="series810" placeholder="" />
-                </div>
-                <button class="add-item-btn"
-                        onclick="addToCart('series810')">Add Item</button>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">800M Series</p>
-                <p class="item-description">
-                    Integrated security and application services </br>
-                    WAN services and providers </br>
-                    High-availability multihoming and dual WAN ports
-                </p>
-                <p class="item-price">Price: ₱39,535.20</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p> 
-                    <input id="series800m" class="item-input" type="number" name="series800m" placeholder="" />
-                </div>
-                <button class="add-item-btn"
-                        onclick="addToCart('series800m')">Add Item</button>
+                <button class="add-item-btn">Add Item</button>
             </div>
         </div>
     </div>
@@ -144,10 +111,13 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>
                     </li>
                 </ul>
             </div>
@@ -174,6 +144,9 @@
             </div>
         </div>
     </footer>
-    <%@include file="../scripts.jsp" %>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : router-4000
+    Document   : router-900
     Created on : 04 20, 19, 2:11:04 AM
     Author     : Lawrence
 --%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Cables Coxial</title>
+        <title>Ciscoware Router 900</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -25,6 +25,9 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
@@ -36,60 +39,80 @@
         </nav>
     <center>
         <div class="shop-menu">
-            <button class="inactive-shop-btn" onclick="location.href = '../router-overhead.jsp';">Routers</button>
+            <button class="active-shop-btn" onclick="location.href = 'router-overhead.jsp';">Routers</button>
             <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
             <button class="inactive-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
-            <button class="active-shop-btn" onclick="location.href = 'cables-overhead.jsp';">Cables</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cables Coxial</p>
-        <img src="../img/shop/coxial.jpg" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">Cisco 900 Series Integrated Services Routers</p>
+        <img src="../img/shop/router-900.png" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Coaxial Cable 5M</p>
+                <p class="item-title">ISR 921</p>
                 <p class="item-description">
-                    F-type connectors
-                    For Analog Cable TV, VCRs and Televisions
-                    Multi-stranded shielding
-                    5M
+                    4 LAN ports </br>
+                    Internal power supply </br>
+                    1 GB DRAM and 2 GB Flash </br>
+                    8 GB DRAM and 8 GB Flash </br>
+                    GET VPN, DMVPN, FlexVPN, firewall
                 </p>
-                <p class="item-price">Price: ₱60.00</p>
+                <p class="item-price">Price: ₱43,690.72</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="coxial5m" placeholder="" />
+                    <input class="item-input" type="number" name="isr921" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Coaxial Cable 3M</p>
+                <p class="item-title">ISR 926</p>
                 <p class="item-description">
-                    F-type connectors
-                    For Analog Cable TV, VCRs and Televisions
-                    Multi-stranded shielding
-                    3M
+                    4 LAN ports </br>
+                    VDLS2, ADSL2/2+ </br>
+                    1 GB DRAM and 2 GB Flash </br>
+                    GET VPN, DMVPN, FlexVPN, firewall
                 </p>
-                <p class="item-price">Price: ₱50.00</p>
+                <p class="item-price">Price: ₱48,861.22</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="coxial3m" placeholder="" />
+                    <input class="item-input" type="number" name="isr926" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Coaxial Cable 2M</p>
+                <p class="item-title">ISR 927</p>
                 <p class="item-description">
-                    F-type connectors
-                    For Analog Cable TV, VCRs and Televisions
-                    Multi-stranded shielding
-                    2M
+                    4 LAN ports </br>
+                    VDLS2, ADSL2/2+ </br>
+                    1 GB DRAM and 2 GB Flash </br>
+                    GET VPN, DMVPN, FlexVPN, firewall
                 </p>
-                <p class="item-price">Price: ₱40.00</p>
+                <p class="item-price">Price: ₱48,861.22</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="coxial2m" placeholder="" />
+                    <input class="item-input" type="number" name="isr927" placeholder="" />
+                </div>
+                <button class="add-item-btn">Add Item</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row marg-b-88">
+            <div class="col-md-4 col-sm-12">
+                <p class="item-title">ISR 931</p>
+                <p class="item-description">
+                    4 LAN ports </br>
+                    Internal power supply </br>
+                    1 GB DRAM and 2 GB Flash </br>
+                    GET VPN, DMVPN, FlexVPN, firewall
+                </p>
+                <p class="item-price">Price: ₱31,953.17</p>
+                <div class="row item-input-container">
+                    <p class="item-input-label">Quantity:</p>
+                    <input class="item-input" type="number" name="isr931" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
@@ -105,10 +128,13 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>
+                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
                     </li>
                 </ul>
             </div>
@@ -136,6 +162,7 @@
         </div>
     </footer>
 
+    <script src="../shoppingCart.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

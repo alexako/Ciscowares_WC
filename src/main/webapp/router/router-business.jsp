@@ -1,5 +1,5 @@
 <%-- 
-    Document   : router-4000
+    Document   : router-900
     Created on : 04 20, 19, 2:11:04 AM
     Author     : Lawrence
 --%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Router 4000</title>
+        <title>Ciscoware Router Small Business</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -25,12 +25,14 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -44,56 +46,56 @@
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cisco 4000 Series Integrated Services Routers</p>
-        <img src="../img/shop/router-4000.png" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">Cisco Small Business RV Series Routers</p>
+        <img src="../img/shop/router-business.png" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4221</p>
+                <p class="item-title">RV 345</p>
                 <p class="item-description">
-                    GE/SFP integrated WAN ports </br>
-                    1.2-Gbps performance </br>
-                    75-Mbps encrypted throughput </br>
-                    Full IOS XE SD-WAN support </br>
-                    Cyberthreat protection through Trustworthy Systems framework
+                    2 WAN ports (RJ-45) </br>
+                    16 LAN ports </br>
+                    2 USB ports to support a 3G/4G </br>
+                    900 Mbps TCP throughput </br>
+                    VPN functionality
                 </p>
-                <p class="item-price">Price: ₱132,147.16</p>
+                <p class="item-price">Price: ₱34,407.10</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr4221" placeholder="" />
+                    <input class="item-input" type="number" name="rv345" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4321</p>
+                <p class="item-title">RV 340</p>
                 <p class="item-description">
-                    GE/SFP integrated WAN ports </br>
-                    2-Gbps performance </br>
-                    100-Mbps encrypted throughput </br>
-                    Full IOS XE SD-WAN support </br>
-                    Cyberthreat protection through Trustworthy Systems framework
+                    2 WAN ports  </br>
+                    4 LAN ports </br>
+                    2 USB ports to support a 3G/4G </br>
+                    900 Mbps TCP throughput </br>
+                    VPN functionality
                 </p>
-                <p class="item-price">Price: ₱115,960.72</p>
+                <p class="item-price">Price: ₱23,800.40</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr4321" placeholder="" />
+                    <input class="item-input" type="number" name="rv340" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4331</p>
+                <p class="item-title">RV 325</p>
                 <p class="item-description">
-                    GE/SFP integrated WAN ports </br>
-                    2-Gbps+ performance </br>
-                    500-Mbps encrypted throughput </br>
-                    Full IOS XE SD-WAN support </br>
-                    Cyberthreat protection through Trustworthy Systems framework
+                    Web filtering </br>
+                    Dual Gigabit Ethernet WAN ports </br>
+                    14-port Gigabit Ethernet switch </br>
+                    SPI firewall hardware encryption </br>
+                    IPsec VPN capabilities
                 </p>
-                <p class="item-price">Price: ₱316,100.84</p>
+                <p class="item-price">Price: ₱19,982.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr4331" placeholder="" />
+                    <input class="item-input" type="number" name="rv325" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
@@ -102,68 +104,36 @@
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4351</p>
+                <p class="item-title">RV 260</p>
                 <p class="item-description">
-                    PoE GE/SFP, GE/SFP integrated WAN ports </br>
-                    2-Gbps+ performance </br>
-                    500-Mbps encrypted throughput </br>
-                    Full IOS XE SD-WAN support </br>
-                    Cyberthreat protection through Trustworthy Systems framework
+                    SFP/Ethernet combination WAN </br>
+                    8-port switch </br>
+                    Dual-core CPU for fast performance </br>
+                    Business-grade firewall
                 </p>
-                <p class="item-price">Price: ₱132,147.16</p>
+                <p class="item-price">Price: ₱20,592.52</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr4351" placeholder="" />
+                    <input class="item-input" type="number" name="rv260" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
+
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4431</p>
+                <p class="item-title">RV 160</p>
                 <p class="item-description">
-                    PoE GE/SFP, GE/SFP integrated WAN ports </br>
-                    4-Gbps+ performance </br>
-                    900-Mbps encrypted throughput </br>
-                    Cyberthreat protection through Trustworthy Systems framework
+                    SFP/Ethernet combination WAN </br>
+                    4-port switch </br>
+                    Dual-core CPU for fast performance </br>
+                    Business-grade firewall
                 </p>
-                <p class="item-price">Price: ₱249,637.00</p>
+                <p class="item-price">Price: ₱6,201.60</p>
                 <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="isr4431" placeholder="" />
+                    <p class="item-input-label">Quantity:</p>
+                    <input class="item-input" type="number" name="rv160" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4451</p>
-                <p class="item-description">
-                    PoE GE/SFP, GE/SFP integrated WAN ports </br>
-                    4-Gbps+ performance </br>
-                    1.6-Gbps+ encrypted throughput </br>
-                    Cyberthreat protection through Trustworthy Systems framework
-                </p>
-                <p class="item-price">Price: ₱94,871.34</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="isr4451" placeholder="" />
-                </div>
-                <button class="add-item-btn">Add Item</button></div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row marg-b-88">
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4461</p>
-                <p class="item-description">
-                    10 GE SFP+, PoE GE/SFP, GE/SFP integrated WAN ports</br>
-                    10-Gbps+ performance </br>
-                    7-Gbps encrypted throughput </br>
-                    Cyberthreat protection through Trustworthy Systems framework
-                </p>
-                <p class="item-price">Price: ₱132,147.16</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="isr4461" placeholder="" />
-                </div>
-                <button class="add-item-btn">Add Item</button></div>
         </div>
     </div>
 </div>
@@ -176,10 +146,13 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="register.jsp">REGISTER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="login.jsp">LOGIN</a>
                     </li>
                 </ul>
             </div>

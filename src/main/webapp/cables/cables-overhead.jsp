@@ -39,6 +39,9 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
@@ -68,26 +71,26 @@
 
         <div class="row marg-b-88">
             <c:forEach items="${products}" var="p">
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title"><c:out value="${p.getTitle()}"/></p>
-                <p class="item-description">
-                    <c:out value="${p.getDescription()}"/>
-                </p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p>
-                    <input id="<c:out value="${p.getName()}"/>"
-                           class="item-input"
-                           type="number"
-                           min="0"
-                           oninput="addToCart('<c:out value="${p.getName()}"/>')"
-                           name="<c:out value="${p.getName()}"/>"/>
+                <div class="col-md-4 col-sm-12">
+                    <p class="item-title"><c:out value="${p.getTitle()}"/></p>
+                    <p class="item-description">
+                        <c:out value="${p.getDescription()}"/>
+                    </p>
+                    <div class="row item-input-container">
+                        <p class="item-input-label">Quantity:</p>
+                        <input id="<c:out value="${p.getName()}"/>"
+                               class="item-input"
+                               type="number"
+                               min="0"
+                               oninput="addToCart('<c:out value="${p.getName()}"/>')"
+                               name="<c:out value="${p.getName()}"/>"/>
+                    </div>
+                    <p class="item-price">
+                        <c:out value="${FormatMoney.getString(p.getPrice())}"/>
+                    </p>
+                    <button class="add-item-btn"
+                            onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
                 </div>
-                <p class="item-price">
-                   <c:out value="${FormatMoney.getString(p.getPrice())}"/>
-                </p>
-                <button class="add-item-btn"
-                        onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
-            </div>
             </c:forEach>
         </div>
     </div>
@@ -100,6 +103,9 @@
                 </div>
                 <div class="footer-nav-container col-md-6">
                     <ul class="footer-nav">
+                        <li class="nav-item">
+                            <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>

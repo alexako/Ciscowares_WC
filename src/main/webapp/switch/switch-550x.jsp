@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Switch 6800</title>
+        <title>Ciscoware Switch 550x</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -25,11 +25,15 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
                         </li>
+
                     </ul>
                 </div>
             </div>
@@ -43,54 +47,87 @@
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cisco Catalyst 6800 Series Switches</p>
-        <img src="../img/shop/switch-6800.png" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">550X Series Stackable Switches</p>
+        <img src="../img/shop/switch-3850.png" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Cisco Catalyst 6880-X/p>
+                <p class="item-title">SG550XG-24F</p>
                 <p class="item-description">
-                    4 module slots, 5 RU </br>
-                    80 x 10/1 G SFP </br>
-                    Slot capacity 80 – 240 Gb/s </br>
-                    Switching capacity up to 4 Tb/s
+                    L3 managed</br>
+                    22 x 10GE SFP+ + 2 x 10GE combo rack-mountable</br>
+                    22 10GE SFP+ slots + 2 10GE copper/SFP+ combo plus 1 GE OOB management
                 </p>
-                <p class="item-price">Price: ₱1,757,120.00</p>
+                <p class="item-price">Price: ₱103,907.81</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat6880x" placeholder="" />
+                    <input class="item-input" type="number" name="sg550xg24f" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Cisco Catalyst 6840-X</p>
+                <p class="item-title">SG550X-48</p>
                 <p class="item-description">
-                    4 slots, 2 RU </br>
-                    16, 32 x 10 SFP/SFP+ </br>
-                    24, 40 x 10 G SFP/SFP+  </br>
-                    2x40G QSFP </br>
-                    Slot capacity 80 – 240 Gb/s
+                    L3 managed </br>
+                    48 x 10/100/1000 + 2 x 10 GE combo </br>
+                    rack-mountable </br>
+                    48 x 10/100/1000 + 2 x 10GE copper/SFP+ combo + 2 x 10GE 
+                    SFP+
+                </p>
+                <p class="item-price">Price: ₱93,048.81</p>
+                <div class="row item-input-container">
+                    <p class="item-input-label">Quantity:</p>
+                    <input class="item-input" type="number" name="sg550x48" placeholder="" />
+                </div>
+                <button class="add-item-btn">Add Item</button>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <p class="item-title">SG550X-24</p>
+                <p class="item-description">
+                    L3 managed </br>
+                    24 x 10/100 + 2 x 10 GE combo </br>
+                    + 2 x 10GE SFP+ </br>
+                    rack-mountable
+                </p>
+                <p class="item-price">Price: ₱70,253.79</p>
+                <div class="row item-input-container">
+                    <p class="item-input-label">Quantity:</p>
+                    <input class="item-input" type="number" name="sg550x24" placeholder="" />
+                </div>
+                <button class="add-item-btn">Add Item</button>
+            </div>
+        </div>
+    </div>
 
+    <div class="container">
+        <div class="row marg-b-88">
+            <div class="col-md-4 col-sm-12">
+                <p class="item-title">SG550X-24MP</p>
+                <p class="item-description">
+                    L3 managed, 24 x 10/100 + 2 x </br>
+                    10 GE combo + 2 x 10GE SFP+ rack-mountable </br>
+                    Max PoE </br>
                 </p>
-                <p class="item-price">Price: ₱2,022,593.96</p>
+                <p class="item-price">Price: ₱48,837.60</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat6840x" placeholder="" />
+                    <input class="item-input" type="number" name="sg550x24mp" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
+
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Cisco Catalyst 6807-XL</p>
+                <p class="item-title">SG550X-24MPP</p>
                 <p class="item-description">
-                    5 module slots, 2 SUP slots 10 RU </br>
-                    Slot capacity of up to 880 Gb </br>
-                    Switching capacity up to 11.4 Tb/s
+                    L3 managed </br>
+                    24 x 10/100/1000 + 2 x 10 GE combo + 2 x 10GE SFP+ rack-mountable </br>
+                    Max PoE
                 </p>
-                <p class="item-price">Price: ₱775,200.00</p>
+                <p class="item-price">Price: ₱129,148.32</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat6807xl" placeholder="" />
+                    <input class="item-input" type="number" name="sg550x24mpp" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
@@ -105,6 +142,9 @@
             </div>
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
                     </li>

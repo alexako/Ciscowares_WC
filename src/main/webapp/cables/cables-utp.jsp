@@ -1,5 +1,5 @@
 <%-- 
-    Document   : router-900
+    Document   : router-4000
     Created on : 04 20, 19, 2:11:04 AM
     Author     : Lawrence
 --%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Switch 9300</title>
+        <title>Ciscoware Cables UTP</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -25,6 +25,9 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
@@ -36,76 +39,60 @@
         </nav>
     <center>
         <div class="shop-menu">
-            <button class="inactive-shop-btn" onclick="location.href = '../router/router-overhead.jsp';">Routers</button>
-            <button class="active-shop-btn" onclick="location.href = 'switch-overhead.jsp';">Switches</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../router-overhead.jsp';">Routers</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
             <button class="inactive-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
-            <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
+            <button class="active-shop-btn" onclick="location.href = 'cables-overhead.jsp';">Cables</button>
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cisco Catalyst 9300 Series Switches</p>
-        <img src="../img/shop/switch-9300.png" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">Cables UTP</p>
+        <img src="../img/shop/utp.jpg" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Multigigabit 48-port</p>
+                <p class="item-title">D-Link UTP-103</p>
                 <p class="item-description">
-                    48 ports of 1G/2.5G </br>
-                    (12 ports of 1G/2.5G/5G/10G)</br>
-                    Multigigabit Ethernet; 1G SFP, 10G SFP+, 40G QSFP uplinks </br>
-                    Up to 384 ports of PoE, PoE+, 60W Cisco UPOE
+                    4-pair unshielded twisted pair (UTP) cable </br>
+                    23 AWG solid copper conductor for superior conductivity </br>
+                    Frequency 250 MHz
                 </p>
-                <p class="item-price">Price: ₱198,872.91</p>
+                <p class="item-price">Price: ₱7,500.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="mult48port" placeholder="" />
+                    <input class="item-input" type="number" name="dlinkutp103" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Multigigabit 24-port</p>
+                <p class="item-title">CAT5E UTP</p>
                 <p class="item-description">
-                    24 ports of 1G/2.5G/5G/10G </br>
-                    Multigigabit Ethernet, 1G SFP, 10G SFP+ </br>
-                    Up to 192 ports of PoE, PoE+, 60W Cisco UPOE
+                    10 BASE-T </br>
+                    100 BASE-T – Fast Ethernet </br>
+                    1000 BASE-T – Gigabit Ethernet </br>
+                    Frequency 100 MHz
                 </p>
-                <p class="item-price">Price: ₱106,692.84</p>
+                <p class="item-price">Price: ₱2,300.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="mult24port" placeholder="" />
+                    <input class="item-input" type="number" name="cat5eutp" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">1G 48-port switches</p>
+                <p class="item-title">CAT6 UTP</p>
                 <p class="item-description">
-                    State-of-the-art High Availability </br>
-                    48 ports of 1G for data, PoE+, Cisco UPOE </br>
-                    Up to 384 ports of PoE, PoE+, 60W Cisco UPOE 
+                    10 BASE-T </br>
+                    100 BASE-T – Fast Ethernet </br>
+                    1000 BASE-T – Gigabit Ethernet </br>
+                    10G BASE-T – 10 Gigabit Ethernet </br>
+                    Frequency 250 MHz
                 </p>
-                <p class="item-price">Price: ₱46,999.00</p>
+                <p class="item-price">Price: ₱3,220.99</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="port48switch" placeholder="" />
-                </div>
-                <button class="add-item-btn">Add Item</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row marg-b-88">
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">1G 24-port switches</p>
-                <p class="item-description">
-                    24 ports of 1G for data, PoE+, Cisco UPOE </br>
-                    Up to 192 ports of PoE, PoE+, 60W Cisco UPOE
-                </p>
-                <p class="item-price">Price: ₱41,999.00</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="port24switch" placeholder="" />
+                    <input class="item-input" type="number" name="cat6utp" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
@@ -121,10 +108,13 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="register.jsp">REGISTER</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="login.jsp">LOGIN</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>
                     </li>
                 </ul>
             </div>
@@ -152,7 +142,6 @@
         </div>
     </footer>
 
-    <script src="../shoppingCart.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

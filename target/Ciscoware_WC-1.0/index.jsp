@@ -69,7 +69,7 @@
        
         <div class="home-banner">
             <div class="home-banner-content container">
-                <h1 class="home-banner-title"><strong>Reliable</strong> and <strong>Quality</strong></h1>
+                <h1 class="home-banner-title banner-first-row"><strong>Reliable</strong> and <strong>Quality</strong></h1>
                 <h1 class="home-banner-title" style="padding-left: 4rem;">Networking technologies</h1>
                 <h1 class="home-banner-title" style="padding-left: 2rem; margin-bottom: 48px;">delivered to your doorstep.</h1>
                 <button type="submit" class="register-btn" style="margin-bottom: 80px;">Register</button>

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : router-4000
+    Document   : router-900
     Created on : 04 20, 19, 2:11:04 AM
     Author     : Lawrence
 --%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Cables UTP</title>
+        <title>Ciscoware Switch 6800</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -25,6 +25,9 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
@@ -36,60 +39,61 @@
         </nav>
     <center>
         <div class="shop-menu">
-            <button class="inactive-shop-btn" onclick="location.href = '../router-overhead.jsp';">Routers</button>
-            <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../router/router-overhead.jsp';">Routers</button>
+            <button class="active-shop-btn" onclick="location.href = 'switch-overhead.jsp';">Switches</button>
             <button class="inactive-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
-            <button class="active-shop-btn" onclick="location.href = 'cables-overhead.jsp';">Cables</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cables UTP</p>
-        <img src="../img/shop/utp.jpg" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">Cisco Catalyst 6800 Series Switches</p>
+        <img src="../img/shop/switch-6800.png" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">D-Link UTP-103</p>
+                <p class="item-title">Cisco Catalyst 6880-X</p>
                 <p class="item-description">
-                    4-pair unshielded twisted pair (UTP) cable </br>
-                    23 AWG solid copper conductor for superior conductivity </br>
-                    Frequency 250 MHz
+                    4 module slots, 5 RU </br>
+                    80 x 10/1 G SFP </br>
+                    Slot capacity 80 – 240 Gb/s </br>
+                    Switching capacity up to 4 Tb/s
                 </p>
-                <p class="item-price">Price: ₱7,500.00</p>
+                <p class="item-price">Price: ₱1,757,120.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="dlinkutp103" placeholder="" />
+                    <input class="item-input" type="number" name="cat6880x" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">CAT5E UTP</p>
+                <p class="item-title">Cisco Catalyst 6840-X</p>
                 <p class="item-description">
-                    10 BASE-T </br>
-                    100 BASE-T – Fast Ethernet </br>
-                    1000 BASE-T – Gigabit Ethernet </br>
-                    Frequency 100 MHz
+                    4 slots, 2 RU </br>
+                    16, 32 x 10 SFP/SFP+ </br>
+                    24, 40 x 10 G SFP/SFP+  </br>
+                    2x40G QSFP </br>
+                    Slot capacity 80 – 240 Gb/s
+
                 </p>
-                <p class="item-price">Price: ₱2,300.00</p>
+                <p class="item-price">Price: ₱2,022,593.96</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat5eutp" placeholder="" />
+                    <input class="item-input" type="number" name="cat6840x" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">CAT6 UTP</p>
+                <p class="item-title">Cisco Catalyst 6807-XL</p>
                 <p class="item-description">
-                    10 BASE-T </br>
-                    100 BASE-T – Fast Ethernet </br>
-                    1000 BASE-T – Gigabit Ethernet </br>
-                    10G BASE-T – 10 Gigabit Ethernet </br>
-                    Frequency 250 MHz
+                    5 module slots, 2 SUP slots 10 RU </br>
+                    Slot capacity of up to 880 Gb </br>
+                    Switching capacity up to 11.4 Tb/s
                 </p>
-                <p class="item-price">Price: ₱3,220.99</p>
+                <p class="item-price">Price: ₱775,200.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat6utp" placeholder="" />
+                    <input class="item-input" type="number" name="cat6807xl" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
@@ -104,6 +108,9 @@
             </div>
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
                     </li>
@@ -136,6 +143,7 @@
         </div>
     </footer>
 
+    <script src="../shoppingCart.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

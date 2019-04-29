@@ -1,5 +1,5 @@
 <%-- 
-    Document   : router-overhead
+    Document   : wireless-overhead
     Created on : 04 20, 19, 2:11:04 AM
     Author     : Lawrence
 --%>
@@ -13,7 +13,7 @@
 
 <%
     ProductRC prc = new ProductRC();
-    List<Product> products = prc.getProductsByCategory("routers");
+    List<Product> products = prc.getProductsByCategory("wireless");
 
     request.setAttribute("products", products);
 
@@ -22,7 +22,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Router Overhead</title>
+        <title>Ciscoware Wireless Overhead</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
@@ -39,10 +39,13 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
+                            <a class="nav-link nav-link-store" href="../process-logout.jsp">LOGOUT</a>
                         </li>
                     </ul>
                 </div>
@@ -50,50 +53,48 @@
         </nav>
     <center>
         <div class="shop-menu">
-            <button class="active-shop-btn" onclick="location.href = 'router-overhead.jsp';">Routers</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../router/router-overhead.jsp';">Routers</button>
             <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
-            <button class="inactive-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
+            <button class="active-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
             <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Routers</p>
-        <img src="../img/shop/routers.png" class="shop-picture" alt=""/>
-        <a href="router-4000.jsp" class="shop-link">ISR 4000 Series</a>
-        <a href="router-1000.jsp" class="shop-link">ISR 1000 Series</a>
-        <a href="router-900.jsp" class="shop-link">ISR 900 Series</a>
-        <a href="router-meraki.jsp" class="shop-link">Meraki MX Security Appliances</a>
-        <a href="router-business.jsp" class="shop-link marg-b-88">Small Business RV Series</a>
+        <p class="shop-title">Wireless</p>
+        <img src="../img/shop/wireless.png" class="shop-picture" alt=""/>
+        <a href="wireless-accesspoints.jsp" class="shop-link">Access Points</a>
+        <a href="wireless-mobileservices.jsp" class="shop-link">Mobile Services</a>
+        <a href="wireless-switch-router.jsp" class="shop-link">Wireless Integrated Switches and Routers</a>
+        <a href="wireless-lan.jsp" class="shop-link marg-b-88">Wireless LAN Controller</a>
     </div>
 
     <div class="container">
 
         <div class="row marg-b-88">
             <c:forEach items="${products}" var="p">
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title"><c:out value="${p.getTitle()}"/></p>
-                <p class="item-description">
-                    <c:out value="${p.getDescription()}"/>
-                </p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p>
-                    <input id="<c:out value="${p.getName()}"/>"
-                           class="item-input"
-                           type="number"
-                           min="0"
-                           oninput="addToCart('<c:out value="${p.getName()}"/>')"
-                           name="<c:out value="${p.getName()}"/>"/>
+                <div class="col-md-4 col-sm-12">
+                    <p class="item-title"><c:out value="${p.getTitle()}"/></p>
+                    <p class="item-description">
+                        <c:out value="${p.getDescription()}"/>
+                    </p>
+                    <div class="row item-input-container">
+                        <p class="item-input-label">Quantity:</p>
+                        <input id="<c:out value="${p.getName()}"/>"
+                               class="item-input"
+                               type="number"
+                               min="0"
+                               oninput="addToCart('<c:out value="${p.getName()}"/>')"
+                               name="<c:out value="${p.getName()}"/>"/>
+                    </div>
+                    <p class="item-price">
+                        <c:out value="${FormatMoney.getString(p.getPrice())}"/>
+                    </p>
+                    <button class="add-item-btn"
+                            onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
                 </div>
-                <p class="item-price">
-                   <c:out value="${FormatMoney.getString(p.getPrice())}"/>
-                </p>
-                <button class="add-item-btn"
-                        onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
-            </div>
             </c:forEach>
         </div>
     </div>
-
 
     <div style="background: white;">
         <footer class="container padd-b-88 padd-lr-0">
@@ -103,6 +104,9 @@
                 </div>
                 <div class="footer-nav-container col-md-6">
                     <ul class="footer-nav">
+                        <li class="nav-item">
+                            <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link nav-inactive nav-seperator" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>
@@ -129,12 +133,11 @@
                         Ciscoware was created to help universities, companies and practitioners to get their networking hardware fast and conveniently delivered straight to their door. 
                     </p>
                     <p class="copyright-description">
-                        © 2019 Ciscoware All rights reserved
+                        Â© 2019 Ciscoware All rights reserved
                     </p>
                 </div>
             </div>
         </footer>
-
         <%@include file="../scripts.jsp" %>
     </body>
 </html>

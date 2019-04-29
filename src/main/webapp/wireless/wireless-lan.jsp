@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Mobile Services</title>
+        <title>Cisco Wireless LAN Controller</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
@@ -25,6 +25,9 @@
                 </button>
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>
@@ -44,90 +47,96 @@
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cisco Access Points</p>
-        <img src="../img/shop/mobile-services.png" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">Cisco Wireless LAN Controller</p>
+        <img src="../img/shop/wireless-lan.png" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Aironet 1562I</p>
+                <p class="item-title">Catalyst 9800-40</p>
                 <p class="item-description">
-                    802.11ac Wave 2 support </br>
-                    3x3 MU-MIMO, 3 spatial streams </br>
-                    Internal antenna
+                    For small to medium-sized campus </br>
+                    Up to 2,000 APs </br>
+                    32,000 clients </br>
+                    40-Gbps throughput
+
                 </p>
-                <p class="item-price">Price: ₱67,494.08</p>
+                <p class="item-price">Price: ₱1,506,250.81</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input id="aironet1562i" class="item-input" type="number" name="aironet1562i" placeholder="" />
+                    <input id="cat980040" class="item-input" type="number" name="cat980040" placeholder="" />
                 </div>
                 <button class="add-item-btn"
-                        onclick="addToCart('aironet1562i')">Add Item</button>
+                        onclick="addToCart('cat980040')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Aironet 1562E</p>
+                <p class="item-title">Catalyst 9800-80</p>
                 <p class="item-description">
-                    802.11ac Wave 2 support </br>
-                    2x2 MU-MIMO, 2 spatial streams </br>
-                    Flexible antenna ports </br>
-                    External antenna
+                    Connectivity for up to 20 users </br>
+                    WAN redundancy with 3G and 4G 
+                    For large campus and  
+                    service provider deployments
+                    Up to 6,000 APs </br>
+                    64,000 clients  </br>
+                    80-Gbps throughput
                 </p>
-                <p class="item-price">Price: ₱95,349.60</p>
+                <p class="item-price">Price: ₱2,819,702.14</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input id="aironet1562e" class="item-input" type="number" name="aironet1562e" />
+                    <input id="cat980080" class="item-input" type="number" name="cat980080" placeholder="" />
                 </div>
                 <button class="add-item-btn"
-                        onclick="addToCart('aironet1562e')">Add Item</button>
+                        onclick="addToCart('cat980080')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Aironet 1562D</p>
+                <p class="item-title">Catalyst 9800-CL</p>
                 <p class="item-description">
-                    802.11ac Wave 2 support </br>
-                    2x2 MU-MIMO, 2 spatial streams </br>
-                    Directional antenna
+                    Deploy in private or public (AWS)
+                    Up to 6,000 APs and 64,000 clients
                 </p>
-                <p class="item-price">Price: ₱42,119.20</p>
+                <p class="item-price">Price: ₱1,471,070.68</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input id="aironet1562d" class="item-input" type="number" name="aironet1562d" placeholder="" />
+                    <input id="cat9800cl" class="item-input" type="number" name="cat9800cl" placeholder="" />
                 </div>
                 <button class="add-item-btn"
-                        onclick="addToCart('aironet1562d')">Add Item</button>
+                        onclick="addToCart('cat9800cl')">Add Item</button>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Aironet 1542I</p>
+                <p class="item-title">8540 Wireless Controller</p>
                 <p class="item-description">
-                    Semi-omnidirectional antenna </br>
-                    802.11ac Wave 2 support </br>
-                    MU-MIMO 2x2, 2 spatial streams
+                    Up to 6,000 APs </br>
+                    64,000 clients </br>
+                    4 x 1-Gb or 10GB-ports
+
                 </p>
-                <p class="item-price">Price: ₱33,802.85</p>
+                <p class="item-price">Price: ₱2,113,712.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input id="aironet1542i" class="item-input" type="number" name="aironet1542i" placeholder="" />
+                    <input id="wirelesscontr8540" class="item-input" type="number" name="wirelesscontr8540" placeholder="" />
                 </div>
                 <button class="add-item-btn"
-                        onclick="addToCart('aironet1542i')">Add Item</button>
+                        onclick="addToCart('wirelesscontr8540')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Aironet 1542D</p>
+                <p class="item-title">5520 Wireless Controller</p>
                 <p class="item-description">
-                    Directional antenna </br>
-                    802.11ac Wave 2 support </br>
-                    MU-MIMO 2x2, 2 spatial streams
+                    Up to 1,500 APs </br>
+                    20,000 clients </br>
+                    Dual 1-Gb or 10-Gb ports </br>
+                    with Link Aggregation Group
                 </p>
-                <p class="item-price">Price: ₱30,747.02</p>
+                <p class="item-price">Price: ₱1,078,536.28</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p> 
-                    <input id="aironet1542d" class="item-input" type="number" name="aironet1542d" placeholder="" />
+                    <input id="wirelesscontr5520" class="item-input" type="number" name="wirelesscontr5520" placeholder="" />
                 </div>
                 <button class="add-item-btn"
-                        onclick="addToCart('aiornet1542d')">Add Item</button>
+                        onclick="addToCart('wirelesscontr5520')">Add Item</button>
             </div>
         </div>
     </div>
@@ -140,6 +149,9 @@
             </div>
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
                     </li>

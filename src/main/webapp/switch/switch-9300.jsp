@@ -1,5 +1,5 @@
 <%-- 
-    Document   : router-4000
+    Document   : router-900
     Created on : 04 20, 19, 2:11:04 AM
     Author     : Lawrence
 --%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Router 1000</title>
+        <title>Ciscoware Switch 9300</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -25,143 +25,93 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
-                    </li>
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     <center>
         <div class="shop-menu">
-            <button class="active-shop-btn" onclick="location.href = 'router-overhead.jsp';">Routers</button>
-            <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../router/router-overhead.jsp';">Routers</button>
+            <button class="active-shop-btn" onclick="location.href = 'switch-overhead.jsp';">Switches</button>
             <button class="inactive-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
             <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cisco 1000 Series Integrated Services Routers</p>
-        <img src="../img/shop/router-1000.png" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">Cisco Catalyst 9300 Series Switches</p>
+        <img src="../img/shop/switch-9300.png" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 1111X</p>
+                <p class="item-title">Multigigabit 48-port</p>
                 <p class="item-description">
-                    Cisco SD-WAN Security </br>
-                    Dual Ethernet WAN </br>
-                    8 LAN ports </br>
-                    8 GB DRAM and 8 GB Flash </br>
-                    PoE
+                    48 ports of 1G/2.5G </br>
+                    (12 ports of 1G/2.5G/5G/10G)</br>
+                    Multigigabit Ethernet; 1G SFP, 10G SFP+, 40G QSFP uplinks </br>
+                    Up to 384 ports of PoE, PoE+, 60W Cisco UPOE
                 </p>
-                <p class="item-price">Price: ₱33,349.72</p>
+                <p class="item-price">Price: ₱198,872.91</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr1111x" placeholder="" />
+                    <input class="item-input" type="number" name="mult48port" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 111x</p>
+                <p class="item-title">Multigigabit 24-port</p>
                 <p class="item-description">
-                    Cisco SD-WAN Security </br>
-                    Dual Ethernet WAN </br>
-                    4-8 LAN ports </br>
-                    4 GB DRAM and 4 GB Flash </br>
-                    PoE
+                    24 ports of 1G/2.5G/5G/10G </br>
+                    Multigigabit Ethernet, 1G SFP, 10G SFP+ </br>
+                    Up to 192 ports of PoE, PoE+, 60W Cisco UPOE
                 </p>
-                <p class="item-price">Price: ₱46,008.14</p>
+                <p class="item-price">Price: ₱106,692.84</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr111x" placeholder="" />
+                    <input class="item-input" type="number" name="mult24port" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 1101</p>
+                <p class="item-title">1G 48-port switches</p>
                 <p class="item-description">
-                    Compact form factor Ethernet WAN </br>
-                    4 LAN ports </br>
-                    4 GB DRAM and 4 GB Flash </br>
-                    Pluggable LTE option
+                    State-of-the-art High Availability </br>
+                    48 ports of 1G for data, PoE+, Cisco UPOE </br>
+                    Up to 384 ports of PoE, PoE+, 60W Cisco UPOE 
                 </p>
-                <p class="item-price">Price: ₱46,275.98</p>
+                <p class="item-price">Price: ₱46,999.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr1101" placeholder="" />
+                    <input class="item-input" type="number" name="port48switch" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
         </div>
     </div>
+
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 1109</p>
+                <p class="item-title">1G 24-port switches</p>
                 <p class="item-description">
-                    Extended temperature support </br>
-                    Ethernet WAN </br>
-                    2-4 LAN ports </br>
-                    4 GB DRAM and 4 GB Flash </br>
-                    Dual pluggable LTE option
+                    24 ports of 1G for data, PoE+, Cisco UPOE </br>
+                    Up to 192 ports of PoE, PoE+, 60W Cisco UPOE
                 </p>
-                <p class="item-price">Price: ₱77,298.97</p>
+                <p class="item-price">Price: ₱41,999.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="isr1109" placeholder="" />
+                    <input class="item-input" type="number" name="port24switch" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4431</p>
-                <p class="item-description">
-                    PoE GE/SFP, GE/SFP integrated WAN ports </br>
-                    4-Gbps+ performance </br>
-                    900-Mbps encrypted throughput </br>
-                    Cyberthreat protection through Trustworthy Systems framework
-                </p>
-                <p class="item-price">Price: ₱249,637.00</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="isr4431" placeholder="" />
-                </div>
-                <button class="add-item-btn">Add Item</button>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4451</p>
-                <p class="item-description">
-                    PoE GE/SFP, GE/SFP integrated WAN ports </br>
-                    4-Gbps+ performance </br>
-                    1.6-Gbps+ encrypted throughput </br>
-                    Cyberthreat protection through Trustworthy Systems framework
-                </p>
-                <p class="item-price">Price: ₱94,871.34</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="isr4451" placeholder="" />
-                </div>
-                <button class="add-item-btn">Add Item</button></div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row marg-b-88">
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4461</p>
-                <p class="item-description">
-                    10 GE SFP+, PoE GE/SFP, GE/SFP integrated WAN ports</br>
-                    10-Gbps+ performance </br>
-                    7-Gbps encrypted throughput </br>
-                    Cyberthreat protection through Trustworthy Systems framework
-                </p>
-                <p class="item-price">Price: ₱132,147.16</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="isr4461" placeholder="" />
-                </div>
-                <button class="add-item-btn">Add Item</button></div>
         </div>
     </div>
 </div>
@@ -174,10 +124,13 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="register.jsp">REGISTER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="login.jsp">LOGIN</a>
                     </li>
                 </ul>
             </div>

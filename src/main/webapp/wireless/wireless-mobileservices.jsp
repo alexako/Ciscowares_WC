@@ -1,5 +1,5 @@
 <%-- 
-    Document   : router-900
+    Document   : router-4000
     Created on : 04 20, 19, 2:11:04 AM
     Author     : Lawrence
 --%>
@@ -9,9 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Switch 3850</title>
+        <title>Ciscoware Mobile Services</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-light navbar-store">
@@ -25,7 +26,10 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
@@ -36,79 +40,97 @@
         </nav>
     <center>
         <div class="shop-menu">
-            <button class="inactive-shop-btn" onclick="location.href = '../router/router-overhead.jsp';">Routers</button>
-            <button class="active-shop-btn" onclick="location.href = 'switch-overhead.jsp';">Switches</button>
-            <button class="inactive-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../router-overhead.jsp';">Routers</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
+            <button class="active-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
             <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cisco Catalyst 3850 Series Switches</p>
-        <img src="../img/shop/switch-3850.png" class="shop-picture marg-b-80" alt=""/>
+        <p class="shop-title">Cisco Access Points</p>
+        <img src="../img/shop/mobile-services.png" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">3850-12X48U</p>
+                <p class="item-title">Aironet 1562I</p>
                 <p class="item-description">
-                    12 multitgigabit ports </br>
-                    48 UPOE ports </br>
-                    Supports Cisco StackPower </br>
-                    Supports 8x10G and 2x40G uplinks
+                    802.11ac Wave 2 support </br>
+                    3x3 MU-MIMO, 3 spatial streams </br>
+                    Internal antenna
                 </p>
-                <p class="item-price">Price: ₱175,659.80</p>
+                <p class="item-price">Price: ₱67,494.08</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="385012x48U" placeholder="" />
+                    <input id="aironet1562i" class="item-input" type="number" name="aironet1562i" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet1562i')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">3850-48U</p>
+                <p class="item-title">Aironet 1562E</p>
                 <p class="item-description">
-                    48 10Mb/100Mb/1000M b ports </br>
-                    48 UPOE ports </br>
-                    Supports Cisco StackPower
+                    802.11ac Wave 2 support </br>
+                    2x2 MU-MIMO, 2 spatial streams </br>
+                    Flexible antenna ports </br>
+                    External antenna
                 </p>
-                <p class="item-price">Price: ₱766,156.00</p>
+                <p class="item-price">Price: ₱95,349.60</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="385048U" placeholder="" />
+                    <input id="aironet1562e" class="item-input" type="number" name="aironet1562e" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet1562e')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">3850-48XS</p>
+                <p class="item-title">Aironet 1562D</p>
                 <p class="item-description">
-                    48 10G SFP+ ports </br>
-                    4x40G QSFP+ uplinks (fixed) </br>
-                    Supports all power supplies
+                    802.11ac Wave 2 support </br>
+                    2x2 MU-MIMO, 2 spatial streams </br>
+                    Directional antenna
                 </p>
-                <p class="item-price">Price: ₱24,289.60</p>
+                <p class="item-price">Price: ₱42,119.20</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="385048xs" placeholder="" />
+                    <input id="aironet1562d" class="item-input" type="number" name="aironet1562d" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet1562d')">Add Item</button>
             </div>
         </div>
     </div>
-
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">3850-NM-8-10G</p>
+                <p class="item-title">Aironet 1542I</p>
                 <p class="item-description">
-                    Modular uplink </br>
-                    8X10 GE SFP+ ports </br>
-                    Supports many 1G and 10G optics
+                    Semi-omnidirectional antenna </br>
+                    802.11ac Wave 2 support </br>
+                    MU-MIMO 2x2, 2 spatial streams
                 </p>
-                <p class="item-price">Price: ₱92,093.76</p>
+                <p class="item-price">Price: ₱33,802.85</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="3850nm810g" placeholder="" />
+                    <input id="aironet1542i" class="item-input" type="number" name="aironet1542i" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet1542i')">Add Item</button>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <p class="item-title">Aironet 1542D</p>
+                <p class="item-description">
+                    Directional antenna </br>
+                    802.11ac Wave 2 support </br>
+                    MU-MIMO 2x2, 2 spatial streams
+                </p>
+                <p class="item-price">Price: ₱30,747.02</p>
+                <div class="row item-input-container">
+                    <p class="item-input-label">Quantity:</p> 
+                    <input id="aironet1542d" class="item-input" type="number" name="aironet1542d" placeholder="" />
+                </div>
+                <button class="add-item-btn"
+                        onclick="addToCart('aiornet1542d')">Add Item</button>
             </div>
         </div>
     </div>
@@ -121,6 +143,9 @@
             </div>
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
                     </li>
@@ -152,11 +177,6 @@
             </div>
         </div>
     </footer>
-</div>
-
-    <script src="../shoppingCart.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <%@include file="../scripts.jsp" %>
 </body>
 </html>

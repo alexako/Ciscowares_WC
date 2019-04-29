@@ -1,5 +1,5 @@
 <%-- 
-    Document   : router-900
+    Document   : router-4000
     Created on : 04 20, 19, 2:11:04 AM
     Author     : Lawrence
 --%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ciscoware Switch 9400</title>
+        <title>Ciscoware Router 1000</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
@@ -23,7 +23,10 @@
                     </span>
                 </button>
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto"> 
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
                         </li>
@@ -36,60 +39,82 @@
         </nav>
     <center>
         <div class="shop-menu">
-            <button class="inactive-shop-btn" onclick="location.href = '../router/router-overhead.jsp';">Routers</button>
-            <button class="active-shop-btn" onclick="location.href = 'switch-overhead.jsp';">Switches</button>
+            <button class="active-shop-btn" onclick="location.href = 'router-overhead.jsp';">Routers</button>
+            <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
             <button class="inactive-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
             <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
     <div class="nav-shop-item">
-        <p class="shop-title">Cisco Catalyst 9400 Series Switches</p>
-        <img src="../img/shop/switch-9400.png" class="shop-picture marg-b-80" alt="" style="width: 200px !important;"/>
+        <p class="shop-title">Cisco 1000 Series Integrated Services Routers</p>
+        <img src="../img/shop/router-1000.png" class="shop-picture marg-b-80" alt=""/>
     </div>
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Catalyst 9400 10-slot</p>
+                <p class="item-title">ISR 1111X</p>
                 <p class="item-description">
-                    Unmatched 60W POE </br>
-                    384 ports and 480 Gbps per slot </br>
-                    Secure segmentation </br>
-                    State-of-the-art High Availability
+                    Cisco SD-WAN Security </br>
+                    Dual Ethernet WAN </br>
+                    8 LAN ports </br>
+                    8 GB DRAM and 8 GB Flash </br>
+                    PoE
                 </p>
-                <p class="item-price">Price: ₱421,708.80</p>
+                <p class="item-price">Price: ₱33,349.72</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat940010" placeholder="" />
+                    <input class="item-input" type="number" name="isr1111x" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Catalyst 9400 7-slot</p>
+                <p class="item-title">ISR 111x</p>
                 <p class="item-description">
-                    Unmatched 60W POE </br>
-                    240 ports and 480 Gbps per slot </br>
-                    Secure segmentation </br>
-                    State-of-the-art High Availability
+                    Cisco SD-WAN Security </br>
+                    Dual Ethernet WAN </br>
+                    4-8 LAN ports </br>
+                    4 GB DRAM and 4 GB Flash </br>
+                    PoE
                 </p>
-                <p class="item-price">Price: ₱288,374.40</p>
+                <p class="item-price">Price: ₱46,008.14</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat94007" placeholder="" />
+                    <input class="item-input" type="number" name="isr111x" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Catalyst 9400 4-slot</p>
+                <p class="item-title">ISR 1101</p>
                 <p class="item-description">
-                    Unmatched 60W POE </br>
-                    96 ports and 480 Gbps per slot </br>
-                    Secure segmentation </br>
-                    State-of-the-art High Availability
+                    Compact form factor Ethernet WAN </br>
+                    4 LAN ports </br>
+                    4 GB DRAM and 4 GB Flash </br>
+                    Pluggable LTE option
                 </p>
-                <p class="item-price">Price: ₱847,552.00</p>
+                <p class="item-price">Price: ₱46,275.98</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat94004" placeholder="" />
+                    <input class="item-input" type="number" name="isr1101" placeholder="" />
+                </div>
+                <button class="add-item-btn">Add Item</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row marg-b-88">
+            <div class="col-md-4 col-sm-12">
+                <p class="item-title">ISR 1109</p>
+                <p class="item-description">
+                    Extended temperature support </br>
+                    Ethernet WAN </br>
+                    2-4 LAN ports </br>
+                    4 GB DRAM and 4 GB Flash </br>
+                    Dual pluggable LTE option
+                </p>
+                <p class="item-price">Price: ₱77,298.97</p>
+                <div class="row item-input-container">
+                    <p class="item-input-label">Quantity:</p>
+                    <input class="item-input" type="number" name="isr1109" placeholder="" />
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
@@ -105,10 +130,13 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="register.jsp">REGISTER</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="login.jsp">LOGIN</a>
+                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
                     </li>
                 </ul>
             </div>
