@@ -4,6 +4,24 @@
     Author     : Lawrence
 --%>
 
+<%@page import="com.dlr.ciscoware_wc.ProductOrder"%>
+<%@page import="com.dlr.restclient.ProductOrderRC"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dlr.ciscoware_wc.Orders"%>
+<%@page import="com.dlr.restclient.OrderRC"%>
+<%
+    OrderRC orc = new OrderRC();
+    List<Orders> orders = orc.getOrdersByBranch(1);
+    out.println("orders: " + orders.size());
+
+    for (Orders order: orders) {
+        ProductOrderRC prc = new ProductOrderRC();
+        List<ProductOrder> productOrders = prc.getProductOrdersByOrder(order.getId());
+        order.setProductOrders(productOrders);
+    }
+
+    request.setAttribute("orders", orders);
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">

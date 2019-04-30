@@ -6,6 +6,7 @@
 package com.dlr.restclient;
 
 import com.dlr.ciscoware_wc.Admin;
+import com.dlr.ciscoware_wc.Branch;
 import com.dlr.ciscoware_wc.User;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -46,6 +47,11 @@ public class AdminRC {
             for (int i=0; i<prods.length(); i++) {
                 JSONObject o = prods.getJSONObject(i);
                 JSONObject uo = o.getJSONObject("userId");
+                JSONObject bo = o.getJSONObject("branchId");
+
+                Branch b = new Branch();
+                b.setId(bo.getInt("id"));
+                b.setName(bo.getString("name"));
 
                 User u = new User();
                 u.setId(uo.getInt("id"));
@@ -57,6 +63,7 @@ public class AdminRC {
                 Admin a = new Admin();
                 a.setId(o.getInt("id"));
                 a.setUserId(u);
+                a.setBranchId(b);
                 admins.add(a);
             }
 
@@ -123,6 +130,33 @@ public class AdminRC {
 
             WebResource webResource = client
                .resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/customers/");
+
+            ClientResponse response = webResource.type("application/json")
+               .post(ClientResponse.class, data);
+
+            if (response.getStatus() != 201) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                     + response.getStatus());
+            }
+
+            System.out.println("Output from Server .... \n");
+            String output = response.getEntity(String.class);
+            System.out.println(output);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
+    public String createAdmin(String data) {
+
+        try {
+            Client client = Client.create();
+
+            WebResource webResource = client
+               .resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/admins/");
 
             ClientResponse response = webResource.type("application/json")
                .post(ClientResponse.class, data);

@@ -179,6 +179,75 @@ public class OrderRC {
         return o;
     }
 
+    public List<Orders> getOrdersByBranch(int id) {
+        List<Orders> orders = new ArrayList<>();
+
+		try {
+
+			Client client = Client.create();
+
+			WebResource webResource = client
+					.resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/orders/branch/" + id);
+
+			ClientResponse response = webResource.accept("application/json")
+					.get(ClientResponse.class);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+			String resp = response.getEntity(String.class);
+            System.out.println("resp: " + resp);
+            JSONObject obj = new JSONObject(resp);
+            JSONArray oArr= obj.getJSONArray("orders");
+
+            for (int i=0; i<oArr.length(); i++) {
+                JSONObject oObj = oArr.getJSONObject(i);
+                JSONObject bObj = oObj.getJSONObject("branchId");
+                JSONObject cObj = oObj.getJSONObject("customerId");
+                JSONObject uObj = cObj.getJSONObject("userId");
+
+//                CustomerAddress a = new CustomerAddress();
+//                a.setStreet(aObj.getString("street"));
+//                a.setCity(aObj.getString("city"));
+//                a.setProvince(aObj.getString("province"));
+//                a.setCountry(aObj.getString("country"));
+//                a.setZipCode(aObj.getString("zipCode"));
+
+                Branch b = new Branch();
+                b.setId(bObj.getInt("id"));
+                b.setName(bObj.getString("name"));
+
+                User u = new User();
+                u.setId(uObj.getInt("id"));
+                u.setEmail(uObj.getString("email"));
+                u.setFirstName(uObj.getString("firstName"));
+                u.setLastName(uObj.getString("lastName"));
+
+                Customer c = new Customer();
+                c.setPhoneNumber(cObj.getString("phoneNumber"));
+                c.setUserId(u);
+//                c.setCustomerAddress(a);
+
+                Orders o = new Orders();
+                o.setId(oObj.getInt("id"));
+                o.setBranchId(b);
+                o.setCustomerId(c);
+                o.setStatus(oObj.getString("status"));
+                o.setTotalCost(oObj.getDouble("totalCost"));
+                o.setOrderDate(oObj.getString("orderDate"));
+                o.setDeliveryDate(oObj.getString("deliveryDate"));
+                orders.add(o);
+            }
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        return orders;
+    }
+
     public List<Orders> getOrdersByUser(int id) {
         List<Orders> orders = new ArrayList<>();
 
@@ -200,7 +269,15 @@ public class OrderRC {
 			String resp = response.getEntity(String.class);
             System.out.println("resp: " + resp);
             JSONObject obj = new JSONObject(resp);
-            JSONArray oArr= obj.getJSONArray("orders");
+            JSONArray isArray = obj.optJSONArray("orders");
+
+            JSONArray oArr = new JSONArray();
+            if (isArray == null) {
+                JSONObject o = obj.getJSONObject("orders");
+                oArr.put(o);
+            } else {
+                oArr = obj.getJSONArray("orders");
+            }
 
             for (int i=0; i<oArr.length(); i++) {
                 JSONObject oObj = oArr.getJSONObject(i);
