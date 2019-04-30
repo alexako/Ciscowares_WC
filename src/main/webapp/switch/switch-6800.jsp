@@ -25,6 +25,9 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
@@ -49,7 +52,7 @@
     <div class="container">
         <div class="row marg-b-88">
             <div class="col-md-4 col-sm-12">
-                <p class="item-title">Cisco Catalyst 6880-X/p>
+                <p class="item-title">Cisco Catalyst 6880-X</p>
                 <p class="item-description">
                     4 module slots, 5 RU </br>
                     80 x 10/1 G SFP </br>
@@ -105,6 +108,9 @@
             </div>
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
                     </li>
