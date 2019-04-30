@@ -73,26 +73,26 @@
 
         <div class="row">
             <c:forEach items="${products}" var="p">
-                <div class="col-md-4 col-sm-12">
-                    <p class="item-title"><c:out value="${p.getTitle()}"/></p>
-                    <p class="item-description">
-                        <c:out value="${p.getDescription()}"/>
-                    </p>
-                    <div class="row item-input-container">
-                        <p class="item-input-label">Quantity:</p>
-                        <input id="<c:out value="${p.getName()}"/>"
-                               class="item-input"
-                               type="number"
-                               min="0"
-                               oninput="addToCart('<c:out value="${p.getName()}"/>')"
-                               name="<c:out value="${p.getName()}"/>"/>
-                    </div>
-                    <p class="item-price">
-                        <c:out value="${FormatMoney.getString(p.getPrice())}"/>
-                    </p>
-                    <button class="add-item-btn"
-                            onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
+            <div class="col-md-4 col-sm-12 marg-b-88">
+                <p class="item-title"><c:out value="${p.getTitle()}"/></p>
+                <p class="item-description">
+                    <c:out value="${p.getDescription()}"/>
+                </p>
+                <p class="item-price">
+                   <c:out value="₱${p.getPrice()}"/>
+                </p>
+                <div class="row item-input-container">
+                    <p class="item-input-label">Quantity:</p>
+                    <input id="<c:out value="${p.getName()}"/>"
+                           class="item-input"
+                           type="number"
+                           min="0"
+                           oninput="addToCart('<c:out value="${p.getName()}"/>')"
+                           name="<c:out value="${p.getName()}"/>"/>
                 </div>
+                <button class="add-item-btn"
+                        onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
+            </div>
             </c:forEach>
         </div>
     </div>
