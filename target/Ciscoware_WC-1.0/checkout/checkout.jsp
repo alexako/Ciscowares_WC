@@ -87,7 +87,7 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-store" href="checkout.jsp">CHECKOUT</a>
+                            <a class="nav-link nav-link-store" href="../router/router-overhead.jsp">MENU</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
@@ -98,7 +98,7 @@
         </nav>
         <div class="form-banner"></div>
         <h1 class="form-title marg-t-88">Checkout</h1>
-        <form class="marg-b-80 col-md-10 checkout-box marg-l-2rem" action="process-checkout.jsp" method="POST" name="checkoutForm" id="checkoutForm">
+        <form class="marg-b-80 col-md-10 checkout-box" action="process-checkout.jsp" method="POST" name="checkoutForm" id="checkoutForm">
 
             <div id="shopping-cart" class="shopping-cart">
 
@@ -169,7 +169,7 @@
                     <div class="footer-nav-container col-md-6">
                         <ul class="footer-nav">
                             <li class="nav-item">
-                                <a class="nav-link nav-inactive nav-seperator" href="checkout.jsp">CHECKOUT</a>
+                                <a class="nav-link nav-inactive nav-seperator" href="../router/router-overhead.jsp">MENU</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>

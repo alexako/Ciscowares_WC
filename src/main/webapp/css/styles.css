@@ -281,6 +281,10 @@ footer {
     margin-bottom: 88px !important;
 }
 
+.marg-b-80 {
+    margin-bottom: 80px !important;
+}
+
 .marg-l-32 {
     margin-left: 32px !important;
 }
@@ -713,4 +717,27 @@ form {
 .total-cost {
     font-weight: 700;
     font-size: 1.2em;
+}
+
+.process-checkout-container {
+    margin-top: 80px;
+    margin-bottom: 88px;
+    padding: 64px 56px 48px;
+    margin: 0 auto;
+    background: #fff;
+    border: 2px solid #757575;
+    border-radius: 2px;
+    width: 80%;
+}
+
+.process-checkout-details {
+    font-size: 1.2em;
+    font-weight: 700;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+}
+
+.process-checkout-span {
+    font-size: 1em !important;
+    font-weight: 500 !important;
 }

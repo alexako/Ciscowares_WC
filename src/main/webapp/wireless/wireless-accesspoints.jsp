@@ -186,7 +186,7 @@
                         <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../checkout/checkout.jsp">CHECKOUT</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>

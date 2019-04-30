@@ -28,7 +28,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Process Checkout Page</title>
+
+        <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
         <%
@@ -43,12 +46,12 @@
                     if (cookie.getName().equals("customerId")) {
                         customerId = cookie.getValue();
                     }
-                   if (cookie.getName().equals("orderId")) {
-                       orderId = cookie.getValue();
-                   }
-                   if (cookie.getName().equals("cart")) {
-                       shoppingCart = new String(cookie.getValue());
-                   }
+                    if (cookie.getName().equals("orderId")) {
+                        orderId = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("cart")) {
+                        shoppingCart = new String(cookie.getValue());
+                    }
                 }
             }
 
@@ -96,22 +99,17 @@
 //                for (int i = 0; i < poList.length(); i++) {
 //                    JSONObject poObj = poList.getJSONObject(i);
 //                    JSONObject pObj = poObj.getJSONObject("productId");
-
 //                    Product p = new Product();
 //                    p.setId(pObj.getInt("id"));
 //                    p.setName(pObj.getString("name"));
 //                    p.setDescription(pObj.getString("description"));
 //                    p.setPrice(pObj.getDouble("price"));
-
 //                    ProductOrder po = new ProductOrder();
 //                    po.setId(poObj.getInt("id"));
 //                    po.setQuantity(poObj.getInt("quantity"));
 //                    po.setProductId(p);
-
 //                    productOrders.add(po);
 //                }
-
-
                 order.setId(orderObj.getInt("id"));
                 order.setBranchId(b);
                 order.setCustomerId(c);
@@ -158,85 +156,144 @@
                 request.setAttribute("productOrders", productOrders);
                 request.setAttribute("total", FormatMoney.getString(total));
             }
-            
+
         %>
-
+        <nav class="navbar navbar-expand-md navbar-light navbar-store">
+            <div class="container">
+                <a class="navbar-brand logo" href="../index.jsp">CISCOWARE</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon navbar-dark">
+                        <i class="fa fa-navicon"></i>
+                    </span>
+                </button>
+                <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../router/router-overhead.jsp">MENU</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div class="order">
-            Order has been placed!
-            <div class="customer">
-                <div class="customer-name">
-                    <% out.print(order.getCustomerId().getUserId().getLastName() +
-                        ", " + order.getCustomerId().getUserId().getFirstName()); %>
-                </div>
-                <div class="customer-email">
-                    <% out.print(order.getCustomerId().getUserId().getEmail()); %>
-                </div>
-                <div class="customer-phone">
-                    <% out.print(order.getCustomerId().getPhoneNumber()); %>
-                </div>
+            <h1 class="form-title marg-t-88">Order has been placed!</h1>
+            <div class="process-checkout-container">
+                <div class="customer">
+                    <div class="customer-name process-checkout-details">
+                            Name: <span class="process-checkout-span"><% out.print(order.getCustomerId().getUserId().getLastName()
+                                    + ", " + order.getCustomerId().getUserId().getFirstName()); %></span>
+                    </div>
+                    <div class="customer-email process-checkout-details">
+                        Email: <span class="process-checkout-span"><% out.print(order.getCustomerId().getUserId().getEmail()); %></span>
+                    </div>
+                    <div class="customer-phone process-checkout-details">
+                        Phone: <span class="process-checkout-span"><% out.print(order.getCustomerId().getPhoneNumber());%></span>
+                    </div>
 
-                <div class="customer-address">
-                    <div class="street">
-                        <c:out value="${address.getStreet()}"/>
-                    </div>
-                    <div class="city">
-                        <c:out value="${address.getCity()}"/>
-                    </div>
-                    <div class="province">
-                        <c:out value="${address.getProvince()}"/>
-                    </div>
-                    <div class="country">
-                        <c:out value="${address.getCountry()}"/>
-                    </div>
-                    <div class="zip-code">
-                        <c:out value="${address.getZipCode()}"/>
+                    <div class="customer-address">
+                        <div class="street process-checkout-details">
+                            Street: <span class="process-checkout-span"><c:out value="${address.getStreet()}"/></span>
+                        </div>
+                        <div class="city process-checkout-details">
+                            City: <span class="process-checkout-span"><c:out value="${address.getCity()}"/></span>
+                        </div>
+                        <div class="province process-checkout-details">
+                            Province: <span class="process-checkout-span"><c:out value="${address.getProvince()}"/></span>
+                        </div>
+                        <div class="country process-checkout-details">
+                            Country: <span class="process-checkout-span"><c:out value="${address.getCountry()}"/></span>
+                        </div>
+                        <div class="zip-code process-checkout-details">
+                            Zip Code: <span class="process-checkout-span"><c:out value="${address.getZipCode()}"/></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="order-delivery-date">
-                Status: <c:out value="${order.getDeliveryDate()}"/>
-            </div>
-            <div class="order-status">
-                Status: <c:out value="${order.getStatus()}"/>
-            </div>
-            <div class="details"></div>
-            <table class="table table-striped table-hover">
-                <thead>
+                <div class="order-delivery-date process-checkout-details">
+                    Status: <span class="process-checkout-span"><c:out value="${order.getDeliveryDate()}"/></span>
+                </div>
+                <div class="order-status process-checkout-details marg-b-32">
+                    Status: <span class="process-checkout-span"><c:out value="${order.getStatus()}"/></span>
+                </div>
+                <div class="details"></div>
+                <table class="table table-striped table-hover">
+                    <thead>
                     <th>Product</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                </thead>
-                <tbody>
-                <c:forEach items="${productOrders}" var="po">
-                    <tr>
-                        <td class="product-name">
-                            <c:out value="${po.getProductId().getName()}"/>
-                        </td>
-                        <td class="product-description">
-                            <c:out value="${po.getProductId().getDescription()}"/>
-                        </td>
-                        <td class="product-price">
-                            <c:out value="${po.getProductId().getPrice()}"/>
-                        </td>
-                        <td class="product-quantity">
-                            <c:out value="${po.getQuantity()}"/>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${productOrders}" var="po">
+                            <tr>
+                                <td class="product-name">
+                                    <c:out value="${po.getProductId().getName()}"/>
+                                </td>
+                                <td class="product-description">
+                                    <c:out value="${po.getProductId().getDescription()}"/>
+                                </td>
+                                <td class="product-price">
+                                    <c:out value="${po.getProductId().getPrice()}"/>
+                                </td>
+                                <td class="product-quantity">
+                                    <c:out value="${po.getQuantity()}"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
 
                 <div class="total-cost">
                     <span class="total-cost-label">Total: </span>
                     <c:out value="${total}"/>
                 </div>
-        </div>
-
                 <a href="../customer/order-history.jsp">
                     Go to dashboard
                 </a>
-
+            </div>
+        </div>
+        <div style="background: white;">
+            <footer class="container padd-b-88 padd-lr-0 border-t-0">
+                <div class="footer-container padd-t-64 col-md-12 row">
+                    <div class="footer-logo col-md-3 col-sm-12 padd-lr-0">
+                        <p class="logo footer-logo">CISCOWARE</p>
+                    </div>
+                    <div class="footer-nav-container col-md-6">
+                        <ul class="footer-nav">
+                            <li class="nav-item">
+                                <a class="nav-link nav-inactive nav-seperator" href="../router/router-overhead.jsp">MENU</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row social-icon-container col-md-3 col-sm-12 padd-lr-0">
+                        <ul class="ml-auto social-icon-group">
+                            <li class="social-item">
+                                <a href="#" class="social-icon"><img src="../img/facebook.png" /></a>
+                            </li>
+                            <li class="social-item">
+                                <a href="#" class="social-icon"><img src="../img/twitter.png" class="padd-l-8"/></a>
+                            </li>
+                            <li class="social-item">
+                                <a href="#" class="social-icon"><img src="../img/instagram.png" class="padd-l-8"/></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="padd-lr-0 col-md-3 col-sm-12">
+                        <p class="footer-description padd-b-32">
+                            Ciscoware was created to help universities, companies and practitioners to get their networking hardware fast and conveniently delivered straight to their door. 
+                        </p>
+                        <p class="copyright-description">
+                            © 2019 Ciscoware All rights reserved
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </body>
     <script src="../shoppingCart.js"></script>
     <script>
