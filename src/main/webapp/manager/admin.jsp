@@ -4,6 +4,8 @@
     Author     : Lawrence
 --%>
 
+<%@page import="com.dlr.ciscoware_wc.Branch"%>
+<%@page import="com.dlr.restclient.BranchRC"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.dlr.ciscoware_wc.ProductOrder"%>
 <%@page import="com.dlr.ciscoware_wc.Admin"%>
@@ -15,7 +17,6 @@
 <%
     OrderRC orc = new OrderRC();
     List<Orders> orders = orc.getOrders();
-    out.println("orders: " + orders.size());
 
     for (Orders order: orders) {
         ProductOrderRC prc = new ProductOrderRC();
@@ -25,8 +26,11 @@
 
     AdminRC arc = new AdminRC();
     List<Admin> admins = arc.getAdmins();
-    out.println("admins: " + admins.size());
 
+    BranchRC brc = new BranchRC();
+    List<Branch> branches = brc.getBranches();
+
+    request.setAttribute("branches", branches);
     request.setAttribute("admins", admins);
     request.setAttribute("orders", orders);
 %>
@@ -318,7 +322,6 @@
                     </div>
                     <div class="col-sm-6">
                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
                     </div>
                 </div>
             </div>
@@ -333,14 +336,12 @@
                         </th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone</th>
                         <th>Branch</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="admins" var="a">
+                    <c:forEach items="${admins}" var="a">
 
                     <tr>
                         <td>
@@ -350,92 +351,66 @@
                             </span>
                         </td>
                         <td>
-                            <c:out value="name"/>
+                            <c:out value="${a.getUserId().getLastName()}"/>, 
+                            <c:out value="${a.getUserId().getFirstName()}"/>
                         </td>
                         <td>
-                            <c:out value="email"/>
+                            <c:out value="${a.getUserId().getEmail()}"/>
                         </td>
                         <td>
-                            <c:out value="address"/>
+                            <c:out value="${a.getBranchId().getName()}"/>
                         </td>
                         <td>
-                            <c:out value="phone"/>
-                        </td>
-                        <td>
-                            <c:out value="branch"/>
-                        </td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a href="#editEmployeeModal" id=<c:out value="${a.getId()}"/> class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" id=<c:out value="${a.getId()}"/> class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
                     </c:forEach>
                 </tbody>
             </table>
             <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
+                <div class="hint-text">Showing <b><c:out value="${admins.size()}"/></b> admins</div>
             </div>
         </div>
-        <!-- Edit Modal HTML -->
+        <!-- Add Modal HTML -->
         <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form>
+                    <form action="add-admin.jsp">
                         <div class="modal-header">						
                             <h4 class="modal-title">Add Employee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">					
                             <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" required>
+                                <label>First Name</label>
+                                <input type="text" name="fName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" name="lName" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" required>
+                                <input type="email" name="email" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" required></textarea>
+                                <label>Password</label>
+                                <input type="password" name="password" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Item</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Quantity</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Date</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Status</label>
-                                <input type="text" class="form-control" required>
+                                <label>Confirm Password</label>
+                                <input type="password" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Branch</label>
-                                <input type="text" class="form-control" required>
+                                <select name="branchId" required>
+                                    <c:forEach items="${branches}" var="b"> 
+                                        <option value=<c:out value="${b.getId()}"/>>
+                                            <c:out value="${b.getName()}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -450,54 +425,34 @@
         <div id="editEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form>
+                    <form action="edit-admin.jsp">
                         <div class="modal-header">						
                             <h4 class="modal-title">Edit Employee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">					
                             <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" required>
+                                <label>First Name</label>
+                                <input type="text" name="fName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" name="lName" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Item</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Quantity</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Date</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Status</label>
-                                <input type="text" class="form-control" required>
+                                <input type="email" name="email" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Branch</label>
-                                <input type="text" class="form-control" required>
-                            </div>					
+                                <select name="branchId">
+                                    <c:forEach items="${branches}" var="b"> 
+                                        <option value=<c:out value="\"${b.getId()}\""/>>
+                                            <c:out value="${b.getName()}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -511,7 +466,7 @@
         <div id="deleteEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form>
+                    <form action="delete-admin.jsp">
                         <div class="modal-header">						
                             <h4 class="modal-title">Delete Employee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
