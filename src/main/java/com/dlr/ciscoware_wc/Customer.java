@@ -54,6 +54,7 @@ public class Customer implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
+    private CustomerAddress customerAddress;
 
     public Customer() {
     }
@@ -76,6 +77,14 @@ public class Customer implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public CustomerAddress getCustomerAddress() {
+        return this.customerAddress;
+    }
+
+    public void setCustomerAddress(CustomerAddress ca) {
+        this.customerAddress = ca;
     }
 
     @XmlTransient

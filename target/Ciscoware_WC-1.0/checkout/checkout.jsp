@@ -37,7 +37,8 @@
     }
 
     // Display shopping cart here
-    if (shoppingCart != "" && shoppingCart != null) {
+    if (shoppingCart != null
+            && !shoppingCart.isEmpty()) {
         JSONObject cart = new JSONObject(shoppingCart);
         JSONArray items = cart.getJSONArray("items");
 
@@ -59,6 +60,8 @@
 //        request.setAttribute("productOrders", productOrders);
 
         session.setAttribute("productOrders", productOrders);
+    } else {
+        response.sendRedirect("createCartCookie.jsp");
     }
 
 %>
