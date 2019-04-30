@@ -84,4 +84,10 @@
 
         <input type="hidden" name="login-error" value="<% out.println(loggedIn); %>"/>
     </body>
+    <script src="../shoppingCart.js"></script>
+    <script>
+        if (getCookie("checkpoint") !== "") {
+            window.location.replace(getCookie("checkpoint"));
+        }
+    </script>
 </html>

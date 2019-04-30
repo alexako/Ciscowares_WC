@@ -4,6 +4,46 @@
     Author     : Lawrence
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.dlr.restclient.CustomerRC"%>
+<%@page import="com.dlr.ciscoware_wc.ProductOrder"%>
+<%@page import="com.dlr.restclient.ProductOrderRC"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dlr.ciscoware_wc.Orders"%>
+<%@page import="com.dlr.restclient.OrderRC"%>
+<%
+    int customerId = 0;
+
+    Cookie[] cookies = null;
+    cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie cookie: cookies) {
+           if (cookie.getName().equals("customerId")) {
+               customerId = Integer.parseInt(cookie.getValue());
+           }
+        }
+    }
+
+    if (customerId == 0) {
+        Cookie checkpoint = new Cookie("checkpoint", "customer/order-history.jsp");
+        response.addCookie(checkpoint);
+        response.sendRedirect("../login.jsp");
+    }
+
+    OrderRC orc = new OrderRC();
+    List<Orders> orders = orc.getOrdersByUser(customerId);
+
+    for (Orders order: orders) {
+        ProductOrderRC prc = new ProductOrderRC();
+        List<ProductOrder> productOrders = prc.getProductOrdersByOrder(order.getId());
+        order.setProductOrders(productOrders);
+    }
+
+    request.setAttribute("orders", orders);
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -298,92 +338,42 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Date</th>
+                        <th>Order ID</th>
+                        <th>Date Placed</th>
+                        <th>Expected Delivery</th>
                         <th>Status</th>
                         <th>Branch</th>
+                        <th>Updated</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Thomas Hardy</td>
-                        <td>thomashardy@mail.com</td>
-                        <td>89 Chiaroscuro Rd, Portland, USA</td>
-                        <td>(171) 555-2222</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                    </tr>
-                    <tr>
-                        <td>Dominique Perrier</td>
-                        <td>dominiqueperrier@mail.com</td>
-                        <td>Obere Str. 57, Berlin, Germany</td>
-                        <td>(313) 555-5735</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                    </tr>
-                    <tr>
-                        <td>Maria Anders</td>
-                        <td>mariaanders@mail.com</td>
-                        <td>25, rue Lauriston, Paris, France</td>
-                        <td>(503) 555-9931</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                    </tr>
-                    <tr>
-                        <td>Fran Wilson</td>
-                        <td>franwilson@mail.com</td>
-                        <td>C/ Araquil, 67, Madrid, Spain</td>
-                        <td>(204) 619-5731</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                    </tr>					
-                    <tr>
-                        <td>Martin Blank</td>
-                        <td>martinblank@mail.com</td>
-                        <td>Via Monte Bianco 34, Turin, Italy</td>
-                        <td>(480) 631-2097</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                    </tr> 
+                    <c:forEach items="${orders}" var="o">
+                        <tr>
+                            <td>
+                                <c:out value="${o.getId()}"/>
+                            </td>
+                            <td>
+                                <c:out value="${o.getOrderDate()}"/>
+                            </td>
+                            <td>
+                                <c:out value="${o.getDeliveryDate()}"/>
+                            </td>
+                            <td>
+                                <c:out value="${o.getStatus()}"/>
+                            </td>
+                            <td>
+                                <c:out value="${o.getBranchId().getName()}"/>
+                            </td>
+                            <td>
+                                <c:out value="${o.getModifiedDate()}"/>
+                            </td>
+                        </tr>
+
+                    </c:forEach>
                 </tbody>
             </table>
             <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
+                <div class="hint-text">Showing <b><c:out value="${orders.size()}"/></b> entries</div>
             </div>
         </div>
         <div style="background: white;">
