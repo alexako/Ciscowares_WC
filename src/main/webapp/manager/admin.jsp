@@ -4,6 +4,32 @@
     Author     : Lawrence
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.dlr.ciscoware_wc.ProductOrder"%>
+<%@page import="com.dlr.ciscoware_wc.Admin"%>
+<%@page import="com.dlr.restclient.AdminRC"%>
+<%@page import="com.dlr.restclient.ProductOrderRC"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dlr.ciscoware_wc.Orders"%>
+<%@page import="com.dlr.restclient.OrderRC"%>
+<%
+    OrderRC orc = new OrderRC();
+    List<Orders> orders = orc.getOrders();
+    out.println("orders: " + orders.size());
+
+    for (Orders order: orders) {
+        ProductOrderRC prc = new ProductOrderRC();
+        List<ProductOrder> productOrders = prc.getProductOrdersByOrder(order.getId());
+        order.setProductOrders(productOrders);
+    }
+
+    AdminRC arc = new AdminRC();
+    List<Admin> admins = arc.getAdmins();
+    out.println("admins: " + admins.size());
+
+    request.setAttribute("admins", admins);
+    request.setAttribute("orders", orders);
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -309,16 +335,13 @@
                         <th>Email</th>
                         <th>Address</th>
                         <th>Phone</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Date</th>
-                        <th>Status</th>
                         <th>Branch</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <c:forEach items="admins" var="a">
+
                     <tr>
                         <td>
                             <span class="custom-checkbox">
@@ -326,109 +349,27 @@
                                 <label for="checkbox1"></label>
                             </span>
                         </td>
-                        <td>Thomas Hardy</td>
-                        <td>thomashardy@mail.com</td>
-                        <td>89 Chiaroscuro Rd, Portland, USA</td>
-                        <td>(171) 555-2222</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
+                        <td>
+                            <c:out value="name"/>
+                        </td>
+                        <td>
+                            <c:out value="email"/>
+                        </td>
+                        <td>
+                            <c:out value="address"/>
+                        </td>
+                        <td>
+                            <c:out value="phone"/>
+                        </td>
+                        <td>
+                            <c:out value="branch"/>
+                        </td>
                         <td>
                             <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                                <label for="checkbox2"></label>
-                            </span>
-                        </td>
-                        <td>Dominique Perrier</td>
-                        <td>dominiqueperrier@mail.com</td>
-                        <td>Obere Str. 57, Berlin, Germany</td>
-                        <td>(313) 555-5735</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox3" name="options[]" value="1">
-                                <label for="checkbox3"></label>
-                            </span>
-                        </td>
-                        <td>Maria Anders</td>
-                        <td>mariaanders@mail.com</td>
-                        <td>25, rue Lauriston, Paris, France</td>
-                        <td>(503) 555-9931</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox4" name="options[]" value="1">
-                                <label for="checkbox4"></label>
-                            </span>
-                        </td>
-                        <td>Fran Wilson</td>
-                        <td>franwilson@mail.com</td>
-                        <td>C/ Araquil, 67, Madrid, Spain</td>
-                        <td>(204) 619-5731</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>					
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox5" name="options[]" value="1">
-                                <label for="checkbox5"></label>
-                            </span>
-                        </td>
-                        <td>Martin Blank</td>
-                        <td>martinblank@mail.com</td>
-                        <td>Via Monte Bianco 34, Turin, Italy</td>
-                        <td>(480) 631-2097</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr> 
+                    </c:forEach>
                 </tbody>
             </table>
             <div class="clearfix">
