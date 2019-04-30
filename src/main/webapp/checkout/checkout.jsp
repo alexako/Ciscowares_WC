@@ -122,7 +122,9 @@
                     <div class="col-md-4 col-sm-12">
                         <div class="item-price">
                            <c:out value="${po.getQuantity()}"/> @
-                           <c:out value="₱${po.getProductId().getPrice()}"/>
+                           <span class="item-price-display">
+                               <c:out value="₱${po.getProductId().getPrice()}"/>
+                           </span>
                         </div>
                         <div id="sub-total" class="sub-total">
                            <c:out value="₱${po.getProductId().getPrice() * po.getQuantity()}"/>
@@ -196,5 +198,9 @@
             </footer>
         </div>
         <%@include file="../scripts.jsp" %>
+        <script>
+            formatItemPrices(document.getElementsByClassName("item-price-display"));
+            formatItemPrices(document.getElementsByClassName("sub-total"));
+        </script>
     </body>
 </html>

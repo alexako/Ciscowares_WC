@@ -134,5 +134,8 @@
         </footer>
 
         <%@include file="../scripts.jsp" %>
+        <script>
+            formatItemPrices(document.getElementsByClassName("item-price"));
+        </script>
     </body>
 </html>

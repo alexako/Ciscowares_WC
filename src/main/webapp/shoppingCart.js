@@ -54,7 +54,7 @@ function updateCart(cart) {
         total += subtotal;
     }
 
-    totalEl.innerText = "₱" + total;
+    totalEl.innerText = formatMoney(total);
 }
 
 function getQuantity(productName) {
@@ -84,4 +84,17 @@ function getCookie(cname) {
     }
   }
   return "";
+}
+
+function formatItemPrices(list) {
+    for (var i=0; i < list.length; i++) {
+        price = list[i];
+        price.innerHTML = formatMoney(price.innerText.substr(1));
+    }
+}
+
+function formatMoney(amount) {
+    return typeof amount === "string"
+        ? "₱" + parseFloat(amount).toFixed(2)
+        : "₱" + amount.toFixed(2);
 }
