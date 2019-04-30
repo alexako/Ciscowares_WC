@@ -269,7 +269,15 @@ public class OrderRC {
 			String resp = response.getEntity(String.class);
             System.out.println("resp: " + resp);
             JSONObject obj = new JSONObject(resp);
-            JSONArray oArr= obj.getJSONArray("orders");
+            JSONArray isArray = obj.optJSONArray("orders");
+
+            JSONArray oArr = new JSONArray();
+            if (isArray == null) {
+                JSONObject o = obj.getJSONObject("orders");
+                oArr.put(o);
+            } else {
+                oArr = obj.getJSONArray("orders");
+            }
 
             for (int i=0; i<oArr.length(); i++) {
                 JSONObject oObj = oArr.getJSONObject(i);

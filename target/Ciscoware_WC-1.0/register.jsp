@@ -83,7 +83,6 @@
             <input class="col-md-12 form-input marg-b-16" type="text" name="fname" placeholder="First Name" />
             <input class="col-md-12 form-input marg-b-16" type="text" name="lname" placeholder="Last Name" />
             <input class="col-md-12 form-input marg-b-16" type="text" name="street" placeholder="Street Address" />
-            <input class="col-md-12 form-input marg-b-16" type="text" name="unitno" placeholder="House/Unit No." />
             <div class="col-md-6 drop-down-container marg-b-16">
                 <select name="city">
                     <option value="Makati">Makati</option>

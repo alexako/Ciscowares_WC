@@ -1,17 +1,31 @@
 <%-- 
-    Document   : edit-admin
-    Created on : Apr 30, 2019, 10:15:23 PM
+    Document   : add-admin
+    Created on : Apr 30, 2019, 10:16:17 PM
     Author     : alex
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@page import="com.dlr.ciscoware_wc.Admin"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="com.dlr.restclient.AdminRC"%>
+<%
+    String firstName = request.getParameter("fName");
+    String lastName = request.getParameter("lName");
+    String email = request.getParameter("email");
+    String branchId = request.getParameter("branchId");
+    String password = request.getParameter("password");
+
+    JSONObject aObj = new JSONObject();
+    aObj.put("firstName", firstName);
+    aObj.put("lastName", lastName);
+    aObj.put("email", email);
+    aObj.put("role", "admin");
+    aObj.put("branchId", branchId);
+    aObj.put("password", password);
+
+    out.println(aObj.toString());
+
+    AdminRC arc = new AdminRC();
+    arc.createAdmin(aObj.toString());
+
+    response.sendRedirect("admin.jsp");
+%>
