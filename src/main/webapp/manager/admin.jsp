@@ -308,6 +308,15 @@
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
+                                    <a class="nav-link" href="makati.jsp">Main Branch</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="quezon.jsp">North Branch</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pasay.jsp">South Branch</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="../index.jsp">LOGOUT</a>
                                 </li>
                             </ul>

@@ -94,7 +94,16 @@ public class ProductOrderRC {
 
 			String resp = response.getEntity(String.class);
             JSONObject obj = new JSONObject(resp);
-            JSONArray prodOrds = obj.getJSONArray("productOrder");
+
+            JSONArray isArray = obj.optJSONArray("productOrder");
+
+            JSONArray prodOrds = new JSONArray();
+            if (isArray == null) {
+                JSONObject o = obj.getJSONObject("productOrder");
+                prodOrds.put(o);
+            } else {
+                prodOrds = obj.getJSONArray("productOrder");
+            }
 
             for (int i=0; i<prodOrds.length(); i++) {
                 JSONObject o = prodOrds.getJSONObject(i);

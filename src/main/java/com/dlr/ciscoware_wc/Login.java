@@ -32,7 +32,7 @@ public class Login {
         String resp = urc.login(obj.toString());
         System.out.println("login resp: " + resp);
         JSONObject respObj = new JSONObject(resp);
-        if (respObj.getString("code").equals("401"))  {
+        if (respObj == null || respObj.getString("code").equals("401"))  {
             this.setLoginState(false);
             return this.getLoginState();
         }

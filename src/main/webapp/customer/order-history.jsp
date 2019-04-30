@@ -375,7 +375,7 @@
                         <th>Expected Delivery</th>
                         <th>Status</th>
                         <th>Branch</th>
-                        <th>Updated</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -397,9 +397,12 @@
                                 <c:out value="${o.getBranchId().getName()}"/>
                             </td>
                             <td>
-                                <c:out value="${o.getModifiedDate()}"/>
+                                Details modal button
                             </td>
                         </tr>
+
+                        <!-- Order details modal GOES HERE (See end of file) -->
+
 
                     </c:forEach>
                 </tbody>
@@ -450,3 +453,31 @@
         </div>
     </body>
 </html>                                		                  
+
+                    <table class="table table-striped table-hover"
+                           style="display: none">
+                        <thead>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${o.getProductOrders()}" var="po">
+                                <tr>
+                                    <td class="product-name">
+                                        <c:out value="${po.getProductId().getName()}"/>
+                                    </td>
+                                    <td class="product-description">
+                                        <c:out value="${po.getProductId().getDescription()}"/>
+                                    </td>
+                                    <td class="product-price">
+                                        <c:out value="${po.getProductId().getPrice()}"/>
+                                    </td>
+                                    <td class="product-quantity">
+                                        <c:out value="${po.getQuantity()}"/>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
