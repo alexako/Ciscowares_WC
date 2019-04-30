@@ -71,7 +71,6 @@
 
         <div class="row marg-b-88">
             <c:forEach items="${products}" var="p">
-<<<<<<< HEAD
             <div class="col-md-4 col-sm-12">
                 <p class="item-title"><c:out value="${p.getTitle()}"/></p>
                 <p class="item-description">
@@ -92,28 +91,6 @@
                 <button class="add-item-btn"
                         onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
             </div>
-=======
-                <div class="col-md-4 col-sm-12">
-                    <p class="item-title"><c:out value="${p.getTitle()}"/></p>
-                    <p class="item-description">
-                        <c:out value="${p.getDescription()}"/>
-                    </p>
-                    <div class="row item-input-container">
-                        <p class="item-input-label">Quantity:</p>
-                        <input id="<c:out value="${p.getName()}"/>"
-                               class="item-input"
-                               type="number"
-                               min="0"
-                               oninput="addToCart('<c:out value="${p.getName()}"/>')"
-                               name="<c:out value="${p.getName()}"/>"/>
-                    </div>
-                    <p class="item-price">
-                        <c:out value="${FormatMoney.getString(p.getPrice())}"/>
-                    </p>
-                    <button class="add-item-btn"
-                            onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
-                </div>
->>>>>>> 00c2601e3c05a97220fa5f6489a0eab04e88b788
             </c:forEach>
         </div>
     </div>
