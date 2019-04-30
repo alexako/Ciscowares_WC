@@ -69,10 +69,9 @@
 
     <div class="container">
 
-        <div class="row marg-b-88">
+        <div class="row">
             <c:forEach items="${products}" var="p">
-<<<<<<< HEAD
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-4 col-sm-12 marg-b-88">
                 <p class="item-title"><c:out value="${p.getTitle()}"/></p>
                 <p class="item-description">
                     <c:out value="${p.getDescription()}"/>
@@ -92,7 +91,6 @@
                 <button class="add-item-btn"
                         onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
             </div>
-=======
                 <div class="col-md-4 col-sm-12">
                     <p class="item-title"><c:out value="${p.getTitle()}"/></p>
                     <p class="item-description">
@@ -113,7 +111,6 @@
                     <button class="add-item-btn"
                             onclick="addToCart('<c:out value="${p.getName()}"/>')">Add Item</button>
                 </div>
->>>>>>> 00c2601e3c05a97220fa5f6489a0eab04e88b788
             </c:forEach>
         </div>
     </div>
