@@ -741,3 +741,7 @@ form {
     font-size: 1em !important;
     font-weight: 500 !important;
 }
+
+.customer > .address {
+    float: right;
+}

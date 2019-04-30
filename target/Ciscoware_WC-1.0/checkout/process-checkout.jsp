@@ -212,7 +212,7 @@
                     </div>
                 </div>
                 <div class="order-delivery-date process-checkout-details">
-                    Status: <span class="process-checkout-span"><c:out value="${order.getDeliveryDate()}"/></span>
+                    Delivery date: <span class="process-checkout-span"><c:out value="${order.getDeliveryDate()}"/></span>
                 </div>
                 <div class="order-status process-checkout-details marg-b-32">
                     Status: <span class="process-checkout-span"><c:out value="${order.getStatus()}"/></span>

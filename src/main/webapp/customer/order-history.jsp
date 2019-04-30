@@ -41,6 +41,7 @@
         order.setProductOrders(productOrders);
     }
 
+    request.setAttribute("customer", new CustomerRC().getCustomerById(Integer.toString(customerId)));
     request.setAttribute("orders", orders);
 %>
 
@@ -332,6 +333,37 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <h2>Ciscoware Order History Customer</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="customer">
+                <div class="address">
+                    <div class="street">
+                        <c:out value="${customer.getCustomerAddress().getStreet()}"/>
+                    </div>
+                    <div class="city">
+                        <c:out value="${customer.getCustomerAddress().getCity()}"/>
+                    </div>
+                    <div class="province">
+                        <c:out value="${customer.getCustomerAddress().getProvince()}"/>
+                    </div>
+                    <div class="country">
+                        <c:out value="${customer.getCustomerAddress().getCountry()}"/>
+                    </div>
+                    <div class="zip-code">
+                        <c:out value="${customer.getCustomerAddress().getZipCode()}"/>
+                    </div>
+                </div>
+                <div class="details">
+                    <div class="name">
+                        <c:out value="${customer.getUserId().getLastName()}"/>, 
+                        <c:out value="${customer.getUserId().getFirstName()}"/>
+                    </div>
+                    <div class="email">
+                        <c:out value="${customer.getUserId().getEmail()}"/>
+                    </div>
+                    <div class="phone-number">
+                        <c:out value="${customer.getPhoneNumber()}"/>
                     </div>
                 </div>
             </div>
