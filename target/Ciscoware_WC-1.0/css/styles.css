@@ -588,6 +588,7 @@ form {
     font-family: "Lato";
     margin-bottom: 16px;
     color: #2b2b2b;
+    text-align: right;
 }
 
 .item-input-container {
