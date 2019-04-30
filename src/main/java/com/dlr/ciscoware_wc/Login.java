@@ -30,10 +30,15 @@ public class Login {
         obj.put("password", password);
         UserRC urc = new UserRC();
         String resp = urc.login(obj.toString());
-        if (resp != null)  {
-            this.setCurrentUser(resp);
-            this.setLoginState(true);
+        System.out.println("login resp: " + resp);
+        JSONObject respObj = new JSONObject(resp);
+        if (respObj.getString("code").equals("401"))  {
+            this.setLoginState(false);
+            return this.getLoginState();
         }
+        this.setCurrentUser(resp);
+        this.setLoginState(true);
+
         return this.getLoginState();
     }
 

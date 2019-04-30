@@ -4,6 +4,7 @@
     Author     : alex
 --%>
 
+<%@page import="com.dlr.restclient.CustomerRC"%>
 <%@page import="com.dlr.ciscoware_wc.User"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="com.dlr.ciscoware_wc.Customer"%>
@@ -66,7 +67,18 @@
                 Branch b = new Branch();
                 b.setId(orderObj.getJSONObject("branchId").getInt("id"));
 
-                JSONObject userObj = orderObj.getJSONObject("customerId").getJSONObject("userId");
+                CustomerRC crc = new CustomerRC();
+                JSONObject custObj = new JSONObject(crc.getCustomerById(customerId));
+                JSONObject userObj = custObj.getJSONObject("userId");
+                JSONObject addrObj = custObj.getJSONObject("customerAddress");
+
+                CustomerAddress ca = new CustomerAddress();
+                ca.setStreet(addrObj.getString("street"));
+                ca.setCity(addrObj.getString("city"));
+                ca.setProvince(addrObj.getString("province"));
+                ca.setCountry(addrObj.getString("country"));
+                ca.setZipCode(addrObj.getString("zipCode"));
+
                 User u = new User();
                 u.setId(userObj.getInt("id"));
                 u.setEmail(userObj.getString("email"));
@@ -74,9 +86,10 @@
                 u.setLastName(userObj.getString("lastName"));
 
                 Customer c = new Customer();
-                c.setId(orderObj.getJSONObject("customerId").getInt("id"));
-                c.setPhoneNumber(orderObj.getJSONObject("customerId").getString("phoneNumber"));
+                c.setId(custObj.getInt("id"));
+                c.setPhoneNumber(custObj.getString("phoneNumber"));
                 c.setUserId(u);
+                c.setCustomerAddress(ca);
 
 //                List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
 //                JSONArray poList = orderObj.getJSONArray("productOrders");
@@ -107,9 +120,6 @@
                 order.setStatus(orderObj.getString("status"));
                 order.setTotalCost(orderObj.getDouble("totalCost"));
 
-                orderId = orc.createOrder(oObj.toString());
-                orderId = new JSONObject(orderId).getString("id");
-
                 double total = 0.0;
                 List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
 
@@ -138,11 +148,15 @@
                         porc.createProductOrder(poObj.toString());
                     }
 
+                    order.setProductOrders(productOrders);
                     request.setAttribute("total", FormatMoney.getString(total));
                     request.setAttribute("productOrders", productOrders);
                 }
 
                 request.setAttribute("order", order);
+                request.setAttribute("address", order.getCustomerId().getCustomerAddress());
+                request.setAttribute("productOrders", productOrders);
+                request.setAttribute("total", FormatMoney.getString(total));
             }
             
         %>
@@ -162,31 +176,31 @@
                 </div>
 
                 <div class="customer-address">
-                    <%
-//                        if (order.getCustomerId() != null
-//                                && order.getCustomerId().getCustomerAddressCollection() != null) {
-//                            for (CustomerAddress ca: order.getCustomerId().getCustomerAddressCollection()) {
-//                                out.print(ca.getStreet());
-//                                out.print(ca.getCity());
-//                                out.print(ca.getProvince());
-//                                out.print(ca.getCountry());
-//                                out.print(ca.getZipCode());
-//                            }
-//                        }
-                    %>
-
+                    <div class="street">
+                        <c:out value="${address.getStreet()}"/>
+                    </div>
+                    <div class="city">
+                        <c:out value="${address.getCity()}"/>
+                    </div>
+                    <div class="province">
+                        <c:out value="${address.getProvince()}"/>
+                    </div>
+                    <div class="country">
+                        <c:out value="${address.getCountry()}"/>
+                    </div>
+                    <div class="zip-code">
+                        <c:out value="${address.getZipCode()}"/>
+                    </div>
                 </div>
             </div>
             <div class="order-delivery-date">
-                Status: 
-                <% out.print(order.getDeliveryDate()); %>
+                Status: <c:out value="${order.getDeliveryDate()}"/>
             </div>
             <div class="order-status">
-                Status: 
-                <% out.print(order.getStatus()); %>
+                Status: <c:out value="${order.getStatus()}"/>
             </div>
             <div class="details"></div>
-            <table class="order-table">
+            <table class="table table-striped table-hover">
                 <thead>
                     <th>Product</th>
                     <th>Description</th>
@@ -194,32 +208,38 @@
                     <th>Quantity</th>
                 </thead>
                 <tbody>
-                <%
-//                    List<ProductOrder> a = order.getProductOrders();
-//                        for (int i = 0; i < a.size(); i++) {
-//                            ProductOrder po = a.get(i);
-//                            Product p = po.getProductId();
-
-//                            out.println("<tr>");
-
-//                            out.println("<td>" + p.getName() + "</td>");
-//                            out.println("<td>" + p.getDescription() + "</td>");
-//                            out.println("<td>" + FormatMoney.getString(p.getPrice()) + "</td>");
-//                            out.println("<td>" + po.getQuantity() + "</td>");
-
-//                            out.println("</tr>");
-//                        }
-                %>
+                <c:forEach items="${productOrders}" var="po">
+                    <tr>
+                        <td class="product-name">
+                            <c:out value="${po.getProductId().getName()}"/>
+                        </td>
+                        <td class="product-description">
+                            <c:out value="${po.getProductId().getDescription()}"/>
+                        </td>
+                        <td class="product-price">
+                            <c:out value="${po.getProductId().getPrice()}"/>
+                        </td>
+                        <td class="product-quantity">
+                            <c:out value="${po.getQuantity()}"/>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
 
                 <div class="total-cost">
                     <span class="total-cost-label">Total: </span>
-                    <%
-                        FormatMoney.getString(order.getTotalCost());
-                    %>
+                    <c:out value="${total}"/>
                 </div>
         </div>
 
+                <a href="../customer/order-history.jsp">
+                    Go to dashboard
+                </a>
+
     </body>
+    <script src="../shoppingCart.js"></script>
+    <script>
+        deleteCookie("cart");
+    </script>
 </html>

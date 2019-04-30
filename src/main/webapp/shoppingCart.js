@@ -33,6 +33,36 @@ function removeFromCart(productName) {
     const cartDOM = document.getElementById("shopping-cart");
     const item = document.getElementById(productName);
     cartDOM.removeChild(item);
+
+    updateCart(cartDOM);
+
+    if (cartDOM.children.length === 0) {
+        const submitBtn = document.getElementById("checkout-submit");
+        submitBtn.disabled = true;
+    }
+}
+
+function updateCart(cart) {
+    cart = cart.children;
+    const totalEl = document.getElementById("total-cost");
+    let total = 0;
+    for (var i=0; i < cart.length; i++) {
+        item = cart[i];
+        subtotal = item.children[3].children[1].innerText;
+        subtotal = parseFloat(subtotal.substr(1));
+        console.log("subTotal: ", subtotal);
+        total += subtotal;
+    }
+
+    totalEl.innerText = formatMoney(total);
+}
+
+function initCart() {
+    const customerId = Cookies.get("customerId");
+    setCookie("cart", {
+        customerId: customerId,
+        items: []
+    });
 }
 
 function getQuantity(productName) {
@@ -62,4 +92,21 @@ function getCookie(cname) {
     }
   }
   return "";
+}
+
+function deleteCookie(cname) {
+  document.cookie = cname + "=" + "; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/";
+}
+
+function formatItemPrices(list) {
+    for (var i=0; i < list.length; i++) {
+        price = list[i];
+        price.innerHTML = formatMoney(price.innerText.substr(1));
+    }
+}
+
+function formatMoney(amount) {
+    return typeof amount === "string"
+        ? "₱" + parseFloat(amount).toFixed(2)
+        : "₱" + amount.toFixed(2);
 }
