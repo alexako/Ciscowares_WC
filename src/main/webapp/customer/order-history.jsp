@@ -332,7 +332,10 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Ciscoware Order History Customer</h2>
+                        <h2>Ciscoware Order History - 
+                            <c:out value="${customer.getUserId().getFirstName()}"/> 
+                            <c:out value="${customer.getUserId().getLastName()}"/>
+                        </h2>
                     </div>
                 </div>
             </div>

@@ -97,22 +97,23 @@ public class AdminRC {
 
 			String resp = response.getEntity(String.class);
             JSONObject obj = new JSONObject(resp);
-            JSONArray prods = obj.getJSONArray("customer");
 
-            for (int i=0; i<prods.length(); i++) {
-                JSONObject o = prods.getJSONObject(i);
-                JSONObject uo = o.getJSONObject("userId");
+            JSONObject uo = obj.getJSONObject("userId");
+            JSONObject bo = obj.getJSONObject("branchId");
 
-                User u = new User();
-                u.setId(uo.getInt("id"));
-                u.setFirstName(uo.getString("firstName"));
-                u.setLastName(uo.getString("lastName"));
-                u.setEmail(uo.getString("email"));
-                u.setRole(uo.getString("role"));
+            Branch b = new Branch();
+            b.setId(bo.getInt("id"));
 
-                a.setId(o.getInt("id"));
-                a.setUserId(u);
-            }
+            User u = new User();
+            u.setId(uo.getInt("id"));
+            u.setFirstName(uo.getString("firstName"));
+            u.setLastName(uo.getString("lastName"));
+            u.setEmail(uo.getString("email"));
+            u.setRole(uo.getString("role"));
+
+            a.setId(obj.getInt("id"));
+            a.setUserId(u);
+            a.setBranchId(b);
 
 		} catch (Exception e) {
 

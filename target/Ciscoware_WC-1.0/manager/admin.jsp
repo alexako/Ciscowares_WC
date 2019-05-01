@@ -15,6 +15,19 @@
 <%@page import="com.dlr.ciscoware_wc.Orders"%>
 <%@page import="com.dlr.restclient.OrderRC"%>
 <%
+    Cookie[] cookies = null;
+    String adminId = new String();
+     
+    cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie cookie: cookies) {
+           if (cookie.getName().equals("adminId")) {
+               adminId = cookie.getValue();
+           }
+        }
+    }
+
     OrderRC orc = new OrderRC();
     List<Orders> orders = orc.getOrders();
 
@@ -27,10 +40,13 @@
     AdminRC arc = new AdminRC();
     List<Admin> admins = arc.getAdmins();
 
+    Admin currentAdmin = arc.getAdminById(adminId);
+
     BranchRC brc = new BranchRC();
     List<Branch> branches = brc.getBranches();
 
     request.setAttribute("branches", branches);
+    request.setAttribute("admin", currentAdmin);
     request.setAttribute("admins", admins);
     request.setAttribute("orders", orders);
 %>
@@ -327,7 +343,10 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Ciscoware Admin Manage Customer</h2>
+                        <h2>Ciscoware Admin - 
+                            <c:out value="${admin.getUserId().getFirstName()}"/> 
+                            <c:out value="${admin.getUserId().getLastName()}"/>
+                        </h2>
                     </div>
                     <div class="col-sm-6">
                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
