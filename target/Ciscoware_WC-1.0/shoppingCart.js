@@ -27,7 +27,6 @@ function removeFromCart(productName) {
         let cart = JSON.parse(getCookie("cart"));
         cart.items = cart.items.filter(i => i.name !== productName);
         setCookie("cart", cart);
-        console.log("removed: ", getCookie("cart"));
     }
 
     const cartDOM = document.getElementById("shopping-cart");
@@ -40,6 +39,8 @@ function removeFromCart(productName) {
         const submitBtn = document.getElementById("checkout-submit");
         submitBtn.disabled = true;
     }
+
+    window.location.replace("checkout.jsp");
 }
 
 function updateCart(cart) {
