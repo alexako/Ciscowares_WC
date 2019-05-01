@@ -49,6 +49,7 @@ public class ProductRC {
                 p.setName(o.getString("name"));
                 p.setDescription(o.getString("description"));
                 p.setPrice(o.getDouble("price"));
+                p.setTitle(o.getString("title"));
                 products.add(p);
             }
 
@@ -86,6 +87,8 @@ public class ProductRC {
             p.setName(o.getString("name"));
             p.setDescription(o.getString("description"));
             p.setPrice(o.getDouble("price"));
+            p.setCategory(o.getString("category"));
+            p.setTitle(o.getString("title"));
 
 		} catch (Exception e) {
 
@@ -96,4 +99,47 @@ public class ProductRC {
         return p;
     }
     
+    public List<Product> getProductsByCategory(String category) {
+
+        List<Product> products = new ArrayList<>();
+
+		try {
+
+			Client client = Client.create();
+
+			WebResource webResource = client
+					.resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/products/category/" + category);
+
+			ClientResponse response = webResource.accept("application/json")
+					.get(ClientResponse.class);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+			String resp = response.getEntity(String.class);
+            JSONObject obj = new JSONObject(resp);
+            JSONArray prods = obj.getJSONArray("product");
+
+            for (int i=0; i<prods.length(); i++) {
+                JSONObject o = prods.getJSONObject(i);
+                Product p = new Product();
+                p.setId(o.getInt("id"));
+                p.setName(o.getString("name"));
+                p.setDescription(o.getString("description"));
+                p.setPrice(o.getDouble("price"));
+                p.setCategory(o.getString("category"));
+                p.setTitle(o.getString("title"));
+                products.add(p);
+            }
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+        return products;
+    }
 }

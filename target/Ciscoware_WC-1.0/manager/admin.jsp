@@ -4,6 +4,52 @@
     Author     : Lawrence
 --%>
 
+<%@page import="com.dlr.ciscoware_wc.Branch"%>
+<%@page import="com.dlr.restclient.BranchRC"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.dlr.ciscoware_wc.ProductOrder"%>
+<%@page import="com.dlr.ciscoware_wc.Admin"%>
+<%@page import="com.dlr.restclient.AdminRC"%>
+<%@page import="com.dlr.restclient.ProductOrderRC"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dlr.ciscoware_wc.Orders"%>
+<%@page import="com.dlr.restclient.OrderRC"%>
+<%
+    Cookie[] cookies = null;
+    String adminId = new String();
+     
+    cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie cookie: cookies) {
+           if (cookie.getName().equals("adminId")) {
+               adminId = cookie.getValue();
+           }
+        }
+    }
+
+    OrderRC orc = new OrderRC();
+    List<Orders> orders = orc.getOrders();
+
+    for (Orders order: orders) {
+        ProductOrderRC prc = new ProductOrderRC();
+        List<ProductOrder> productOrders = prc.getProductOrdersByOrder(order.getId());
+        order.setProductOrders(productOrders);
+    }
+
+    AdminRC arc = new AdminRC();
+    List<Admin> admins = arc.getAdmins();
+
+    Admin currentAdmin = arc.getAdminById(adminId);
+
+    BranchRC brc = new BranchRC();
+    List<Branch> branches = brc.getBranches();
+
+    request.setAttribute("branches", branches);
+    request.setAttribute("admin", currentAdmin);
+    request.setAttribute("admins", admins);
+    request.setAttribute("orders", orders);
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -278,6 +324,15 @@
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
+                                    <a class="nav-link" href="makati.jsp">Main Branch</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="quezon.jsp">North Branch</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pasay.jsp">South Branch</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="../index.jsp">LOGOUT</a>
                                 </li>
                             </ul>
@@ -288,11 +343,13 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Ciscoware Admin Manage Customer</h2>
+                        <h2>Ciscoware Admin - 
+                            <c:out value="${admin.getUserId().getFirstName()}"/> 
+                            <c:out value="${admin.getUserId().getLastName()}"/>
+                        </h2>
                     </div>
                     <div class="col-sm-6">
                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
                     </div>
                 </div>
             </div>
@@ -307,18 +364,13 @@
                         </th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Date</th>
-                        <th>Status</th>
                         <th>Branch</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <c:forEach items="${admins}" var="a">
+
                     <tr>
                         <td>
                             <span class="custom-checkbox">
@@ -326,175 +378,67 @@
                                 <label for="checkbox1"></label>
                             </span>
                         </td>
-                        <td>Thomas Hardy</td>
-                        <td>thomashardy@mail.com</td>
-                        <td>89 Chiaroscuro Rd, Portland, USA</td>
-                        <td>(171) 555-2222</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
                         <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <c:out value="${a.getUserId().getLastName()}"/>, 
+                            <c:out value="${a.getUserId().getFirstName()}"/>
+                        </td>
+                        <td>
+                            <c:out value="${a.getUserId().getEmail()}"/>
+                        </td>
+                        <td>
+                            <c:out value="${a.getBranchId().getName()}"/>
+                        </td>
+                        <td>
+                            <a href="#editEmployeeModal" id=<c:out value="${a.getId()}"/> class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" id=<c:out value="${a.getId()}"/> class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                                <label for="checkbox2"></label>
-                            </span>
-                        </td>
-                        <td>Dominique Perrier</td>
-                        <td>dominiqueperrier@mail.com</td>
-                        <td>Obere Str. 57, Berlin, Germany</td>
-                        <td>(313) 555-5735</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox3" name="options[]" value="1">
-                                <label for="checkbox3"></label>
-                            </span>
-                        </td>
-                        <td>Maria Anders</td>
-                        <td>mariaanders@mail.com</td>
-                        <td>25, rue Lauriston, Paris, France</td>
-                        <td>(503) 555-9931</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox4" name="options[]" value="1">
-                                <label for="checkbox4"></label>
-                            </span>
-                        </td>
-                        <td>Fran Wilson</td>
-                        <td>franwilson@mail.com</td>
-                        <td>C/ Araquil, 67, Madrid, Spain</td>
-                        <td>(204) 619-5731</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>					
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox5" name="options[]" value="1">
-                                <label for="checkbox5"></label>
-                            </span>
-                        </td>
-                        <td>Martin Blank</td>
-                        <td>martinblank@mail.com</td>
-                        <td>Via Monte Bianco 34, Turin, Italy</td>
-                        <td>(480) 631-2097</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>Makati</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr> 
+                    </c:forEach>
                 </tbody>
             </table>
             <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
+                <div class="hint-text">Showing <b><c:out value="${admins.size()}"/></b> admins</div>
             </div>
         </div>
-        <!-- Edit Modal HTML -->
+        <!-- Add Modal HTML -->
         <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form>
+                    <form action="add-admin.jsp">
                         <div class="modal-header">						
                             <h4 class="modal-title">Add Employee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">					
                             <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" required>
+                                <label>First Name</label>
+                                <input type="text" name="fName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" name="lName" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" required>
+                                <input type="email" name="email" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" required></textarea>
+                                <label>Password</label>
+                                <input type="password" name="password" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Item</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Quantity</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Date</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Status</label>
-                                <input type="text" class="form-control" required>
+                                <label>Confirm Password</label>
+                                <input type="password" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Branch</label>
-                                <input type="text" class="form-control" required>
+                                <select name="branchId" required>
+                                    <c:forEach items="${branches}" var="b"> 
+                                        <option value=<c:out value="${b.getId()}"/>>
+                                            <c:out value="${b.getName()}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -509,54 +453,34 @@
         <div id="editEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form>
+                    <form action="edit-admin.jsp">
                         <div class="modal-header">						
                             <h4 class="modal-title">Edit Employee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">					
                             <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" required>
+                                <label>First Name</label>
+                                <input type="text" name="fName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" name="lName" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Item</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Quantity</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Date</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Status</label>
-                                <input type="text" class="form-control" required>
+                                <input type="email" name="email" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Branch</label>
-                                <input type="text" class="form-control" required>
-                            </div>					
+                                <select name="branchId">
+                                    <c:forEach items="${branches}" var="b"> 
+                                        <option value=<c:out value="\"${b.getId()}\""/>>
+                                            <c:out value="${b.getName()}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -570,7 +494,7 @@
         <div id="deleteEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form>
+                    <form action="delete-admin.jsp">
                         <div class="modal-header">						
                             <h4 class="modal-title">Delete Employee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

@@ -25,11 +25,14 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
-                    </li>
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -125,7 +128,10 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>

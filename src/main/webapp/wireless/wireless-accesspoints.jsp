@@ -12,6 +12,7 @@
         <title>Ciscoware Access Points</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-light navbar-store">
@@ -25,7 +26,10 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
@@ -38,7 +42,7 @@
         <div class="shop-menu">
             <button class="inactive-shop-btn" onclick="location.href = '../router-overhead.jsp';">Routers</button>
             <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
-            <button class="active-shop-btn" onclick="location.href = 'wireless/wireless-overhead.jsp';">Wireless</button>
+            <button class="active-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
             <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
@@ -60,9 +64,10 @@
                 <p class="item-price">Price: ₱67,494.08</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="aironet4800" placeholder="" />
+                    <input id="aironet4800" class="item-input" type="number" name="aironet4800" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet4800')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">Aironet 3800i AP</p>
@@ -75,9 +80,10 @@
                 <p class="item-price">Price: ₱37,566.71</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="aironet3800iap" placeholder="" />
+                    <input id="aironet3800iap" class="item-input" type="number" name="aironet3800iap" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet3800iap')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">Aironet 3800p AP</p>
@@ -89,9 +95,10 @@
                 <p class="item-price">Price: ₱37,566.71</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="aironet3800pap" placeholder="" />
+                    <input id="aironet3800pap" class="item-input" type="number" name="aironet3800pap" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet3800pap')">Add Item</button>
             </div>
         </div>
     </div>
@@ -108,9 +115,10 @@
                 <p class="item-price">Price: ₱32,349.61</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="aironet2800iap" placeholder="" />
+                    <input id="aironet2800iap" class="item-input" type="number" name="aironet2800iap" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet2800iap')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">Aironet 2800e AP</p>
@@ -123,9 +131,10 @@
                 <p class="item-price">Price: ₱55,762.72</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="aironet2800eap" placeholder="" />
+                    <input id="aironet2800eap" class="item-input" type="number" name="aironet2800eap" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet2800eap')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">Aironet 1850i</p>
@@ -138,9 +147,10 @@
                 <p class="item-price">Price: ₱58,140.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="aironet1850i" placeholder="" />
+                    <input id="aironet1850i" class="item-input" type="number" name="aironet1850i" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button></div>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet1850i')">Add Item</button></div>
         </div>
     </div>
     <div class="container">
@@ -157,9 +167,10 @@
                 <p class="item-price">Price: ₱58,140.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="aironet1850e" placeholder="" />
+                    <input id="aironet1850e" class="item-input" type="number" name="aironet1850e" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button></div>
+                <button class="add-item-btn"
+                        onclick="addToCart('aironet1850e')">Add Item</button></div>
         </div>
     </div>
 </div>
@@ -172,7 +183,10 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="../checkout/checkout.jsp">CHECKOUT</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>
@@ -202,10 +216,6 @@
             </div>
         </div>
     </footer>
-
-    <script src="../shoppingCart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <%@include file="../scripts.jsp" %>
 </body>
 </html>

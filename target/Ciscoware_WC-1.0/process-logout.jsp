@@ -15,7 +15,6 @@
     </head>
     <body>
         <%
-             Cookie cookie = null;
              Cookie[] cookies = null;
              
              // Get an array of Cookies associated with the this domain
@@ -24,12 +23,11 @@
              if( cookies != null ) {
                 
                 for (int i = 0; i < cookies.length; i++) {
-                   cookie = cookies[i];
-                   
-                   if((cookie.getName( )).compareTo("loginState") == 0 ) {
-                      cookie.setMaxAge(0);
-                      response.addCookie(cookie);
-                   }
+                   Cookie cookie = cookies[i];
+                   cookie.setValue("");
+                   cookie.setDomain("/");
+                   cookie.setMaxAge(0);
+                   response.addCookie(cookie);
                 }
              } else {
                 out.println(

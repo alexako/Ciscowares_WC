@@ -25,11 +25,14 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
-                    </li>
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -115,53 +118,6 @@
                 </div>
                 <button class="add-item-btn">Add Item</button>
             </div>
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4431</p>
-                <p class="item-description">
-                    PoE GE/SFP, GE/SFP integrated WAN ports </br>
-                    4-Gbps+ performance </br>
-                    900-Mbps encrypted throughput </br>
-                    Cyberthreat protection through Trustworthy Systems framework
-                </p>
-                <p class="item-price">Price: ₱249,637.00</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="isr4431" placeholder="" />
-                </div>
-                <button class="add-item-btn">Add Item</button>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4451</p>
-                <p class="item-description">
-                    PoE GE/SFP, GE/SFP integrated WAN ports </br>
-                    4-Gbps+ performance </br>
-                    1.6-Gbps+ encrypted throughput </br>
-                    Cyberthreat protection through Trustworthy Systems framework
-                </p>
-                <p class="item-price">Price: ₱94,871.34</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="isr4451" placeholder="" />
-                </div>
-                <button class="add-item-btn">Add Item</button></div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row marg-b-88">
-            <div class="col-md-4 col-sm-12">
-                <p class="item-title">ISR 4461</p>
-                <p class="item-description">
-                    10 GE SFP+, PoE GE/SFP, GE/SFP integrated WAN ports</br>
-                    10-Gbps+ performance </br>
-                    7-Gbps encrypted throughput </br>
-                    Cyberthreat protection through Trustworthy Systems framework
-                </p>
-                <p class="item-price">Price: ₱132,147.16</p>
-                <div class="row item-input-container">
-                    <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="isr4461" placeholder="" />
-                </div>
-                <button class="add-item-btn">Add Item</button></div>
         </div>
     </div>
 </div>
@@ -174,7 +130,10 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>

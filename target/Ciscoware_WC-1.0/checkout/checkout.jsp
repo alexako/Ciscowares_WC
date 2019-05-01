@@ -4,6 +4,12 @@
     Author     : Lawrence
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.lang.reflect.Array"%>
+<%@page import="com.dlr.ciscoware_wc.HtmlEntity"%>
+<%@page import="org.json.JSONArray"%>
+<%@page import="java.util.Random"%>
+<%@page import="org.json.JSONObject"%>
 <%@page import="com.dlr.ciscoware_wc.FormatMoney"%>
 <%@page import="com.dlr.ciscoware_wc.ProductOrder"%>
 <%@page import="com.dlr.ciscoware_wc.Orders"%>
@@ -13,6 +19,54 @@
 <%@page import="com.dlr.restclient.ProductRC"%>
 <%@page import="com.dlr.ciscoware_wc.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+
+    // Get cookies to see if there is an existing order
+    Cookie[] cookies = null;
+    String shoppingCart = new String();
+     
+    cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (Cookie cookie: cookies) {
+           if (cookie.getName().equals("cart")) {
+               shoppingCart = cookie.getValue();
+           }
+        }
+    }
+
+    // Display shopping cart here
+    shoppingCart = shoppingCart.replaceAll("%22", "\"");
+
+    JSONObject cart = new JSONObject();
+    JSONArray items = new JSONArray();
+    double total = 0.0;
+    List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
+    try {
+        cart = new JSONObject(shoppingCart);
+        items = cart.getJSONArray("items");
+
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject item = items.getJSONObject(i);
+            ProductRC prc = new ProductRC();
+            ProductOrder po = new ProductOrder();
+            Product p = prc.getProductByName(item.getString("name"));
+            total += p.getPrice() * item.getInt("quantity");
+            po.setProductId(p);
+            po.setQuantity(item.getInt("quantity"));
+            productOrders.add(po);
+        }
+
+    } catch(Exception e) {
+    }
+
+    request.setAttribute("isEmpty", total == 0.00);
+    request.setAttribute("total", FormatMoney.getString(total));
+    request.setAttribute("productOrders", productOrders);
+
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,7 +88,7 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-store" href="checkout.jsp">CHECKOUT</a>
+                            <a class="nav-link nav-link-store" href="../router/router-overhead.jsp">MENU</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
@@ -45,53 +99,67 @@
         </nav>
         <div class="form-banner"></div>
         <h1 class="form-title marg-t-88">Checkout</h1>
-        <form class="marg-b-80 col-md-10 checkout-box marg-l-2rem" action="process-checkout.jsp" method="POST" name="checkoutForm" id="checkoutForm">
-            <div class="container col-md-12" style="padding-left: 2rem;">
-                <div class="row">
-                    <%
+        <form class="marg-b-80 col-md-10 checkout-box" action="process-checkout.jsp" method="POST" name="checkoutForm" id="checkoutForm">
 
-                        // Get cookies to see if there is an existing order
-                        Cookie[] cookies = null;
-                        String orderId = "";
-                         
-                        cookies = request.getCookies();
+            <div id="shopping-cart" class="shopping-cart">
 
-                        if (cookies != null) {
-                            for (Cookie cookie: cookies) {
-                               if (cookie.getName().equals("orderId")) {
-                                   orderId = cookie.getValue();
-                               }
-                            }
-                        }
+                <c:forEach items="${productOrders}" var="po">
+                <div id="${po.getProductId().getName()}" class="shopping-cart-item row">
 
-                        // Print Product Orders 
-                        OrderRC orc = new OrderRC();
-                        Orders order = orc.getOrderById(Integer.parseInt(orderId));
+                    <span class="remove-item"
+                          onclick="removeFromCart('${po.getProductId().getName()}')">
+                        Remove
+                    </span>
 
-                        if (order.getStatus() != null) {
-                            List<ProductOrder> a = order.getProductOrders();
+                    <div class="col-md-3 col-sm-12">
+                        <p class="item-title">
+                            <c:out value="${po.getProductId().getTitle()}"/>
+                        </p>
+                    </div>
 
-                            for (ProductOrder po: a) {
-                                Product p = po.getProductId();
+                    <div class="col-md-5 col-sm-12">
+                        <p class="item-description">
+                            <c:out value="${po.getProductId().getDescription()}"/>
+                        </p>
+                    </div>
 
-                                out.println("<div class=\"product-container\">");
-                                out.println("<div class=\"product-name\">");
-                                out.println(p.getName() + "</div>");
-                                out.println("<div class=\"product-description\">" + p.getDescription() + "</div>");
-                                out.println("<div class=\"product-price\">" +
-                                    FormatMoney.getString(p.getPrice())+ " </div>");
-                                out.println("<div class=\"product-quantity\">Quantity: " +
-                                    po.getQuantity() + "</div>");
-                                out.println("</div>");
-                            }
-                        } else {
-                            out.println("Cart is empty... probably");
-                        }
+                    <div class="col-md-4 col-sm-12">
+                        <div class="item-price">
+                           <c:out value="${po.getQuantity()}"/> @
+                           <span class="item-price-display">
+                               <c:out value="₱${po.getProductId().getPrice()}"/>
+                           </span>
+                        </div>
+                        <div id="sub-total" class="sub-total">
+                           <c:out value="₱${po.getProductId().getPrice() * po.getQuantity()}"/>
+                        </div>
+                    </div>
+                </div>
+                </c:forEach>
+            </div>
+            <div class="total-cost-container">
+                Total: 
+                <span id="total-cost" class="total-cost">
+                    <c:out value="${total}"/>
+                </span>
+            </div>
 
-                    %>
+            <div class="submit-button-container">
+                <button type="submit"
+                        <c:if test="${isEmpty}">
+                        disabled
+                        </c:if>
+                        class="submit-btn"
+                        id="checkout-submit">
+                    CHECK OUT
+                </button>
+                <div class="or">OR</div>
+                <div class="back-to-store-btn">
+                    <a href="../wireless/wireless-overhead.jsp">
+                        Continue shopping
+                    </a>
                 </div>
             </div>
-            <button type="submit" class="submit-btn marg-b-16 marg-t-48 marg-l-2rem " id="submit">CHECK OUT</button>
         </form>
         <div style="background: white;">
             <footer class="container padd-b-88 padd-lr-0 border-t-0">
@@ -102,7 +170,7 @@
                     <div class="footer-nav-container col-md-6">
                         <ul class="footer-nav">
                             <li class="nav-item">
-                                <a class="nav-link nav-inactive nav-seperator" href="checkout.jsp">CHECKOUT</a>
+                                <a class="nav-link nav-inactive nav-seperator" href="../router/router-overhead.jsp">MENU</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>
@@ -133,11 +201,13 @@
                 </div>
             </footer>
         </div>
+        <%@include file="../scripts.jsp" %>
         <script>
-
+            formatItemPrices(document.getElementsByClassName("item-price-display"));
+            formatItemPrices(document.getElementsByClassName("sub-total"));
+            if (getCookie("cart") === "") {
+                document.getElementById("checkout-submit").disabled = true;
+            }
         </script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>

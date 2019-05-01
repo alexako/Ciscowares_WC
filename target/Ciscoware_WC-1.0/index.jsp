@@ -19,6 +19,22 @@
 <%@page import="com.dlr.ciscoware_wc.Product"%>
 <%@page import="com.dlr.restclient.ProductRC" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+             Cookie[] cookies = null;
+             
+             // Get an array of Cookies associated with the this domain
+             cookies = request.getCookies();
+             
+             if( cookies != null ) {
+                
+                for (int i = 0; i < cookies.length; i++) {
+                   Cookie cookie = cookie = cookies[i];
+                   cookie.setValue("");
+                   cookie.setMaxAge(0);
+                   response.addCookie(cookie);
+                }
+             } 
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -53,7 +69,7 @@
        
         <div class="home-banner">
             <div class="home-banner-content container">
-                <h1 class="home-banner-title"><strong>Reliable</strong> and <strong>Quality</strong></h1>
+                <h1 class="home-banner-title banner-first-row"><strong>Reliable</strong> and <strong>Quality</strong></h1>
                 <h1 class="home-banner-title" style="padding-left: 4rem;">Networking technologies</h1>
                 <h1 class="home-banner-title" style="padding-left: 2rem; margin-bottom: 48px;">delivered to your doorstep.</h1>
                 <button type="submit" class="register-btn" style="margin-bottom: 80px;">Register</button>
@@ -162,8 +178,6 @@
                 </div>
             </div>
         </footer>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
+    <%@include file="scripts.jsp" %>
 </html>

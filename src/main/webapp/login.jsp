@@ -4,6 +4,7 @@
     Author     : Lawrence
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -52,7 +53,7 @@
                 <img src="img/profile_icon.png" class="ciscoware-logo" />
             </div>
             <div class="form-banner"></div>
-            
+
         <form class="marg-b-80" action="process-login.jsp" id="loginForm" name="loginForm" method="POST" onsubmit="return validateNullFields()">
             <h1 class="form-title">Sign In</h1>
             <input class="col-md-12 form-input marg-b-16" type="text" name="email" placeholder="Email"/>

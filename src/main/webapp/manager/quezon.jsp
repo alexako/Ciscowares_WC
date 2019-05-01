@@ -4,6 +4,39 @@
     Author     : Lawrence
 --%>
 
+<%@page import="com.dlr.ciscoware_wc.Branch"%>
+<%@page import="com.dlr.restclient.BranchRC"%>
+<%@page import="com.dlr.ciscoware_wc.Customer"%>
+<%@page import="com.dlr.restclient.CustomerRC"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.dlr.ciscoware_wc.ProductOrder"%>
+<%@page import="com.dlr.restclient.ProductOrderRC"%>
+<%@page import="java.util.List"%>
+<%@page import="com.dlr.ciscoware_wc.Orders"%>
+<%@page import="com.dlr.restclient.OrderRC"%>
+<%
+    BranchRC brc = new BranchRC();
+    List<Branch> branches = brc.getBranches();
+
+    CustomerRC crc = new CustomerRC();
+    List<Customer> customers = crc.getCustomers();
+
+    OrderRC orc = new OrderRC();
+    List<Orders> orders = orc.getOrdersByBranch(2);
+
+    for (Orders order: orders) {
+        order.setOrderDate(order.getOrderDate().split("T")[0]);
+        order.setDeliveryDate(order.getDeliveryDate().split("T")[0]);
+        ProductOrderRC prc = new ProductOrderRC();
+        List<ProductOrder> productOrders = prc.getProductOrdersByOrder(order.getId());
+        order.setProductOrders(productOrders);
+
+    }
+
+    request.setAttribute("branches", branches);
+    request.setAttribute("customers", customers);
+    request.setAttribute("orders", orders);
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +44,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Ciscoware Quezon City Branch Manage Customer</title>
+        <title>Ciscoware Quezon Branch Manage Orders</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -278,7 +311,19 @@
                         <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../login.jsp">LOGOUT</a>
+                                    <a class="nav-link" href="admin.jsp">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="makati.jsp">Main Branch</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="quezon.jsp">North Branch</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pasay.jsp">South Branch</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../index.jsp">LOGOUT</a>
                                 </li>
                             </ul>
                         </div>
@@ -288,290 +333,135 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Ciscoware Quezon City Branch Manage Customer</h2>
+                        <h2>Ciscoware Quezon Branch Manage Customer</h2>
                     </div>
                     <div class="col-sm-6">
-                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                        <a href="#addOrderModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Order</span></a>
                     </div>
                 </div>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="selectAll">
-                                <label for="selectAll"></label>
-                            </span>
-                        </th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Date</th>
+                        <th>Order ID</th>
+                        <th>Date Placed</th>
+                        <th>Expected Delivery</th>
+                        <th>Customer</th>
                         <th>Status</th>
-                        <th>Actions</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <c:forEach items="${orders}" var="o">
                     <tr>
                         <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                <label for="checkbox1"></label>
-                            </span>
+                            <c:out value="${o.getId()}"/>
                         </td>
-                        <td>Thomas Hardy</td>
-                        <td>thomashardy@mail.com</td>
-                        <td>89 Chiaroscuro Rd, Portland, USA</td>
-                        <td>(171) 555-2222</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
                         <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <c:out value="${o.getOrderDate()}"/>
+                        </td>
+                        <td>
+                            <c:out value="${o.getDeliveryDate()}"/>
+                        </td>
+                        <td>
+                            <c:out value="${o.getCustomerId().getUserId().getEmail()}"/>  - 
+                            <c:out value="${o.getCustomerId().getUserId().getLastName()}"/>, 
+                            <c:out value="${o.getCustomerId().getUserId().getFirstName()}"/>
+                        </td>
+                        <td>
+                            <c:out value="${o.getStatus()}"/>
+                        </td>
+                        <td>
+                            <a href=<c:out value="#editOrderModal-${o.getId()}"/> class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href=<c:out value="#deleteOrderModal-${o.getId()}"/> class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                                <label for="checkbox2"></label>
-                            </span>
-                        </td>
-                        <td>Dominique Perrier</td>
-                        <td>dominiqueperrier@mail.com</td>
-                        <td>Obere Str. 57, Berlin, Germany</td>
-                        <td>(313) 555-5735</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox3" name="options[]" value="1">
-                                <label for="checkbox3"></label>
-                            </span>
-                        </td>
-                        <td>Maria Anders</td>
-                        <td>mariaanders@mail.com</td>
-                        <td>25, rue Lauriston, Paris, France</td>
-                        <td>(503) 555-9931</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox4" name="options[]" value="1">
-                                <label for="checkbox4"></label>
-                            </span>
-                        </td>
-                        <td>Fran Wilson</td>
-                        <td>franwilson@mail.com</td>
-                        <td>C/ Araquil, 67, Madrid, Spain</td>
-                        <td>(204) 619-5731</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>					
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox5" name="options[]" value="1">
-                                <label for="checkbox5"></label>
-                            </span>
-                        </td>
-                        <td>Martin Blank</td>
-                        <td>martinblank@mail.com</td>
-                        <td>Via Monte Bianco 34, Turin, Italy</td>
-                        <td>(480) 631-2097</td>
-                        <td>D-Link UTP-103</td>
-                        <td>2</td>
-                        <td>15,000.00</td>
-                        <td>04/18/2019</td>
-                        <td>Complete</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr> 
+
+                <!-- Modals START -->
+
+                <!-- Edit Modal HTML -->
+                <div id=<c:out value="editOrderModal-${o.getId()}"/> class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="edit-order.jsp">
+                                <div class="modal-header">						
+                                    <h4 class="modal-title">Edit Order</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">					
+                                    <div class="form-group">
+                                        <label>Customer Order</label>
+                                        <select name="customerId">
+                                            <c:forEach items="${customers}" var="c">
+                                                <option value=<c:out value="${c.getId()}"/>
+                                                        <c:out value="${c.getUserId().getEmail() == o.getCustomerId().getUserId().getEmail() ? 'selected' : ''}"/>>
+                                                    <c:out value="${c.getUserId().getEmail()}"/>
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Delivery Date</label>
+                                        <input type="text"
+                                               name="deliveryDate"
+                                               value=<c:out value="${o.getDeliveryDate()}"/>
+                                               class="form-control"
+                                               required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Branch</label>
+                                        <select name="branchId">
+                                            <c:forEach items="${branches}" var="b">
+                                                <option value=<c:out value="${b.getId()}"/>
+                                                        <c:out value="${b.getId() == o.getBranchId().getId() ? 'selected' : ''}"/>>
+                                                    <c:out value="${b.getName()}"/>
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <input type="text"
+                                               name="status"
+                                               class="form-control"
+                                               value=<c:out value="${o.getStatus()}"/>
+                                               required>
+                                    </div>					
+                                    <input type="hidden" name="orderId" value=<c:out value="${o.getId()}"/>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                    <input type="submit" class="btn btn-info" value="Save">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delete Modal HTML -->
+                <div id=<c:out value="deleteOrderModal-${o.getId()}"/>  class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="delete-order.jsp">
+                                <div class="modal-header">						
+                                    <h4 class="modal-title">Cancel Order</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">					
+                                    <p>Are you sure you want to cancel this record?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Keep">
+                                    <input type="submit" class="btn btn-danger" value="Cancel">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- Modals END -->
+                    </c:forEach>
                 </tbody>
             </table>
-            <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- Edit Modal HTML -->
-        <div id="addEmployeeModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form>
-                        <div class="modal-header">						
-                            <h4 class="modal-title">Add Employee</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">					
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Item</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Quantity</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Date</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Status</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-success" value="Add">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Edit Modal HTML -->
-        <div id="editEmployeeModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form>
-                        <div class="modal-header">						
-                            <h4 class="modal-title">Edit Employee</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">					
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Item</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Quantity</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Date</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Status</label>
-                                <input type="text" class="form-control" required>
-                            </div>					
-                        </div>
-                        <div class="modal-footer">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-info" value="Save">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Delete Modal HTML -->
-        <div id="deleteEmployeeModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form>
-                        <div class="modal-header">						
-                            <h4 class="modal-title">Delete Employee</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">					
-                            <p>Are you sure you want to delete these Records?</p>
-                            <p class="text-warning"><small>This action cannot be undone.</small></p>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
         <div style="background: white;">
             <footer class="container padd-b-88 padd-lr-0">
@@ -609,6 +499,60 @@
                     </div>
                 </div>
             </footer>
+        </div>
+
+        <!-- Add Modal HTML -->
+        <div id="addOrderModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="add-order.jsp">
+                        <div class="modal-header">						
+                            <h4 class="modal-title">Add Order</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">					
+                            <div class="form-group">
+                                <label>Add Customer Order</label>
+                                <select name="customerId">
+                                    <c:forEach items="${customers}" var="c">
+                                        <option value=<c:out value="${c.getId()}"/>>
+                                            <c:out value="${c.getUserId().getEmail()}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Delivery Date</label>
+                                <input type="text"
+                                       name="deliveryDate"
+                                       class="form-control"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label>Branch</label>
+                                <select name="branchId">
+                                    <c:forEach items="${branches}" var="b">
+                                        <option value=<c:out value="${b.getId()}"/>>
+                                            <c:out value="${b.getName()}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <input type="text"
+                                       name="status"
+                                       class="form-control"
+                                       required>
+                            </div>					
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input type="submit" class="btn btn-info" value="Save">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 </html>                                		                  

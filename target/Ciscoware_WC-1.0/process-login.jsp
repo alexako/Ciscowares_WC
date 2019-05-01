@@ -39,34 +39,8 @@
                 uObj.put("lastName", u.getLastName());
                 uObj.put("role", u.getRole());
 
-                request.setAttribute("user", uObj);
-
-                Cookie[] cookies = null;
-                String orderId = "";
-                 
-                cookies = request.getCookies();
-
-                if (cookies != null) {
-                    for (Cookie cookie: cookies) {
-                       if (cookie.getName().equals("orderId")) {
-                           orderId = cookie.getValue();
-                       }
-                    }
-                }
-
-//                if (orderId.isEmpty() || orderId == null
-//                        || request.getParameter("orderid") == null) {
-//                    JSONObject oObj = new JSONObject();
-//                    oObj.put("customerId", customerId);
-//                    oObj.put("branchId", 1);
-//                    oObj.put("totalCost", 0.0);
-
-//                    OrderRC orc = new OrderRC();
-//                    orderId = orc.createOrder(oobj.toString());
-//                    orderId = new JSONObject(orderId).getString("id");
-//                    Cookie orderCookie = new Cookie("orderid", orderId);
-//                    response.addCookie(orderCookie);
-//                }
+                Cookie userCookie = new Cookie("user", uObj.toString());
+//                response.addCookie(userCookie);
 
                 if (login.getCurrentUserRole().equals("customer")) {
                     CustomerRC crc = new CustomerRC();
@@ -105,7 +79,15 @@
                 }
             }
 
-            else { response.sendRedirect("login.jsp"); }
+            else { response.sendRedirect("error-login.jsp"); }
         %>
+
+        <input type="hidden" name="login-error" value="<% out.println(loggedIn); %>"/>
     </body>
+    <script src="../shoppingCart.js"></script>
+    <script>
+        if (getCookie("checkpoint") !== "") {
+            window.location.replace(getCookie("checkpoint"));
+        }
+    </script>
 </html>

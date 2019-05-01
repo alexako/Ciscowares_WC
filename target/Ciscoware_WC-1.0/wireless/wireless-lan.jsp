@@ -12,6 +12,7 @@
         <title>Cisco Wireless LAN Controller</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-light navbar-store">
@@ -25,7 +26,10 @@
                 <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-store" href="../checkout.jsp">CHECKOUT</a>
+                            <a class="nav-link nav-link-store" href="../customer/order-history.jsp">HISTORY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-store" href="../checkout/checkout.jsp">CHECKOUT</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-store" href="../index.jsp">LOGOUT</a>
@@ -38,7 +42,7 @@
         <div class="shop-menu">
             <button class="inactive-shop-btn" onclick="location.href = '../router-overhead.jsp';">Routers</button>
             <button class="inactive-shop-btn" onclick="location.href = '../switch/switch-overhead.jsp';">Switches</button>
-            <button class="active-shop-btn" onclick="location.href = 'wireless/wireless-overhead.jsp';">Wireless</button>
+            <button class="active-shop-btn" onclick="location.href = '../wireless/wireless-overhead.jsp';">Wireless</button>
             <button class="inactive-shop-btn" onclick="location.href = '../cables/cables-overhead.jsp';">Cables</button>
         </div>
     </center>
@@ -60,9 +64,10 @@
                 <p class="item-price">Price: ₱1,506,250.81</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat980040" placeholder="" />
+                    <input id="cat980040" class="item-input" type="number" name="cat980040" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('cat980040')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">Catalyst 9800-80</p>
@@ -78,9 +83,10 @@
                 <p class="item-price">Price: ₱2,819,702.14</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat980080" placeholder="" />
+                    <input id="cat980080" class="item-input" type="number" name="cat980080" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('cat980080')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">Catalyst 9800-CL</p>
@@ -91,9 +97,10 @@
                 <p class="item-price">Price: ₱1,471,070.68</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="cat9800cl" placeholder="" />
+                    <input id="cat9800cl" class="item-input" type="number" name="cat9800cl" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('cat9800cl')">Add Item</button>
             </div>
         </div>
     </div>
@@ -110,9 +117,10 @@
                 <p class="item-price">Price: ₱2,113,712.00</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p>
-                    <input class="item-input" type="number" name="wirelesscontr8540" placeholder="" />
+                    <input id="wirelesscontr8540" class="item-input" type="number" name="wirelesscontr8540" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('wirelesscontr8540')">Add Item</button>
             </div>
             <div class="col-md-4 col-sm-12">
                 <p class="item-title">5520 Wireless Controller</p>
@@ -125,9 +133,10 @@
                 <p class="item-price">Price: ₱1,078,536.28</p>
                 <div class="row item-input-container">
                     <p class="item-input-label">Quantity:</p> 
-                    <input class="item-input" type="number" name="wirelesscontr5520" placeholder="" />
+                    <input id="wirelesscontr5520" class="item-input" type="number" name="wirelesscontr5520" placeholder="" />
                 </div>
-                <button class="add-item-btn">Add Item</button>
+                <button class="add-item-btn"
+                        onclick="addToCart('wirelesscontr5520')">Add Item</button>
             </div>
         </div>
     </div>
@@ -141,7 +150,10 @@
             <div class="footer-nav-container col-md-6">
                 <ul class="footer-nav">
                     <li class="nav-item">
-                        <a class="nav-link nav-inactive nav-seperator" href="../checkout.jsp">CHECKOUT</a>
+                        <a class="nav-link nav-inactive nav-seperator" href="../customer/order-history.jsp">HISTORY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-inactive nav-seperator" href="../checkout/checkout.jsp">CHECKOUT</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-inactive nav-seperator" href="../index.jsp">LOGOUT</a>
@@ -171,10 +183,6 @@
             </div>
         </div>
     </footer>
-
-    <script src="../shoppingCart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <%@include file="../scripts.jsp" %>
 </body>
 </html>

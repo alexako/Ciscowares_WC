@@ -74,6 +74,68 @@ public class ProductOrderRC {
         return productOrders;
     }
 
+    public List<ProductOrder> getProductOrdersByOrder(int id) {
+        List<ProductOrder> productOrders = new ArrayList<>();
+
+		try {
+
+			Client client = Client.create();
+
+			WebResource webResource = client
+					.resource("http://web-service.alexjreyes.com:8080/Ciscoware_WS-1.0/product-orders/order/" + id);
+
+			ClientResponse response = webResource.accept("application/json")
+					.get(ClientResponse.class);
+
+			if (response.getStatus() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
+			}
+
+			String resp = response.getEntity(String.class);
+            JSONObject obj = new JSONObject(resp);
+
+            JSONArray isArray = obj.optJSONArray("productOrder");
+
+            JSONArray prodOrds = new JSONArray();
+            if (isArray == null) {
+                JSONObject o = obj.getJSONObject("productOrder");
+                prodOrds.put(o);
+            } else {
+                prodOrds = obj.getJSONArray("productOrder");
+            }
+
+            for (int i=0; i<prodOrds.length(); i++) {
+                JSONObject o = prodOrds.getJSONObject(i);
+                JSONObject ordObj = o.getJSONObject("orderId");
+                JSONObject prodObj = o.getJSONObject("productId");
+                Orders order = new Orders();
+                order.setId(ordObj.getInt("id"));
+
+                Product p = new Product();
+                p.setId(prodObj.getInt("id"));
+                p.setName(prodObj.getString("name"));
+                p.setDescription(prodObj.getString("description"));
+                p.setPrice(prodObj.getDouble("price"));
+
+                ProductOrder po = new ProductOrder();
+                po.setOrderId(order);
+                po.setProductId(p);
+                po.setQuantity(o.getInt("quantity"));
+
+                productOrders.add(po);
+            }
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+        return productOrders;
+    }
+
+
     public String createProductOrder(String data) {
 
         String output = "";

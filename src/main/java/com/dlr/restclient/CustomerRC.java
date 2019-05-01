@@ -6,6 +6,7 @@
 package com.dlr.restclient;
 
 import com.dlr.ciscoware_wc.Customer;
+import com.dlr.ciscoware_wc.CustomerAddress;
 import com.dlr.ciscoware_wc.User;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -91,23 +92,28 @@ public class CustomerRC {
 
 			String resp = response.getEntity(String.class);
             JSONObject obj = new JSONObject(resp);
-            JSONArray prods = obj.getJSONArray("customer");
 
-            for (int i=0; i<prods.length(); i++) {
-                JSONObject o = prods.getJSONObject(i);
-                JSONObject uo = o.getJSONObject("userId");
+            JSONObject uo = obj.getJSONObject("userId");
+            JSONObject addrObj = obj.getJSONObject("customerAddress");
 
-                User u = new User();
-                u.setId(uo.getInt("id"));
-                u.setFirstName(uo.getString("firstName"));
-                u.setLastName(uo.getString("lastName"));
-                u.setEmail(uo.getString("email"));
-                u.setRole(uo.getString("role"));
+            CustomerAddress ca = new CustomerAddress();
+            ca.setStreet(addrObj.getString("street"));
+            ca.setCity(addrObj.getString("city"));
+            ca.setProvince(addrObj.getString("province"));
+            ca.setCountry(addrObj.getString("country"));
+            ca.setZipCode(addrObj.getString("zipCode"));
 
-                c.setId(o.getInt("id"));
-                c.setPhoneNumber(o.getString("phoneNumber"));
-                c.setUserId(u);
-            }
+            User u = new User();
+            u.setId(uo.getInt("id"));
+            u.setFirstName(uo.getString("firstName"));
+            u.setLastName(uo.getString("lastName"));
+            u.setEmail(uo.getString("email"));
+            u.setRole(uo.getString("role"));
+
+            c.setId(obj.getInt("id"));
+            c.setPhoneNumber(obj.getString("phoneNumber"));
+            c.setUserId(u);
+            c.setCustomerAddress(ca);
 
 		} catch (Exception e) {
 
@@ -129,7 +135,7 @@ public class CustomerRC {
             ClientResponse response = webResource.type("application/json")
                .post(ClientResponse.class, data);
 
-            if (response.getStatus() != 201) {
+            if (response.getStatus() != 200) {
                 throw new RuntimeException("Failed : HTTP error code : "
                      + response.getStatus());
             }

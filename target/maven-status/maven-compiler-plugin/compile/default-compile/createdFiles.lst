@@ -14,6 +14,7 @@ com/dlr/ciscoware_wc/Password_.class
 com/dlr/ciscoware_wc/Admin.class
 com/dlr/restclient/BranchRC.class
 com/dlr/ciscoware_wc/FormatMoney.class
+com/dlr/ciscoware_wc/HtmlEntity.class
 com/dlr/restclient/UserRC.class
 com/dlr/ciscoware_wc/ProductOrder_.class
 com/dlr/restclient/OrderRC.class
