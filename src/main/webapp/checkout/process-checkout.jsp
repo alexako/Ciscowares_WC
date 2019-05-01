@@ -46,11 +46,8 @@
                     if (cookie.getName().equals("customerId")) {
                         customerId = cookie.getValue();
                     }
-                    if (cookie.getName().equals("orderId")) {
-                        orderId = cookie.getValue();
-                    }
-                    if (cookie.getName().equals("cart")) {
-                        shoppingCart = new String(cookie.getValue());
+                    if (cookie.getName().equals("shoppingCart")) {
+                        shoppingCart = cookie.getValue();
                     }
                 }
             }
@@ -122,7 +119,7 @@
                 List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
 
                 // Create product orders here from shoppingCart
-                if (shoppingCart != "" && shoppingCart != null) {
+                try {
                     JSONObject cart = new JSONObject(shoppingCart);
                     JSONArray items = cart.getJSONArray("items");
 
@@ -149,6 +146,16 @@
                     order.setProductOrders(productOrders);
                     request.setAttribute("total", FormatMoney.getString(total));
                     request.setAttribute("productOrders", productOrders);
+                } catch (Exception ex) {
+                    out.println("shoppingCart: " + shoppingCart);
+                    out.println(ex);
+                    Cookie[] cs = request.getCookies();
+                    if (cookies != null) {
+                        for (Cookie cookie : cs) {
+                            out.println(cookie.getName());
+                            out.println(cookie.getValue());
+                        }
+                    }
                 }
 
                 request.setAttribute("order", order);
@@ -298,5 +305,6 @@
     <script src="../shoppingCart.js"></script>
     <script>
         deleteCookie("cart");
+        deleteCookie("shoppingCart");
     </script>
 </html>
