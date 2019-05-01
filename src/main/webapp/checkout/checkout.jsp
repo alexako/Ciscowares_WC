@@ -31,19 +31,22 @@
     if (cookies != null) {
         for (Cookie cookie: cookies) {
            if (cookie.getName().equals("cart")) {
-               shoppingCart = new String(cookie.getValue());
+               shoppingCart = cookie.getValue();
            }
         }
     }
 
     // Display shopping cart here
-    if (shoppingCart != null
-            && !shoppingCart.isEmpty()) {
-        JSONObject cart = new JSONObject(shoppingCart);
-        JSONArray items = cart.getJSONArray("items");
+    shoppingCart = shoppingCart.replaceAll("%22", "\"");
 
-        double total = 0.0;
-        List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
+    JSONObject cart = new JSONObject();
+    JSONArray items = new JSONArray();
+    double total = 0.0;
+    List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
+    try {
+        cart = new JSONObject(shoppingCart);
+        items = cart.getJSONArray("items");
+
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
             ProductRC prc = new ProductRC();
@@ -55,14 +58,12 @@
             productOrders.add(po);
         }
 
-        request.setAttribute("isEmpty", total == 0.00);
-        request.setAttribute("total", FormatMoney.getString(total));
-//        request.setAttribute("productOrders", productOrders);
-
-        session.setAttribute("productOrders", productOrders);
-    } else {
-        response.sendRedirect("createCartCookie.jsp");
+    } catch(Exception e) {
     }
+
+    request.setAttribute("isEmpty", total == 0.00);
+    request.setAttribute("total", FormatMoney.getString(total));
+    request.setAttribute("productOrders", productOrders);
 
 %>
 
@@ -204,6 +205,9 @@
         <script>
             formatItemPrices(document.getElementsByClassName("item-price-display"));
             formatItemPrices(document.getElementsByClassName("sub-total"));
+            if (getCookie("cart") === "") {
+                document.getElementById("checkout-submit").disabled = true;
+            }
         </script>
     </body>
 </html>

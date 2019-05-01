@@ -30,6 +30,7 @@
         ProductOrderRC prc = new ProductOrderRC();
         List<ProductOrder> productOrders = prc.getProductOrdersByOrder(order.getId());
         order.setProductOrders(productOrders);
+
     }
 
     request.setAttribute("branches", branches);
@@ -43,7 +44,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Ciscoware Quezon Branch Manage Orders</title>
+        <title>Ciscoware Pasay Branch Manage Orders</title>
         <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -342,12 +343,6 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="selectAll">
-                                <label for="selectAll"></label>
-                            </span>
-                        </th>
                         <th>Order ID</th>
                         <th>Date Placed</th>
                         <th>Expected Delivery</th>
@@ -359,12 +354,6 @@
                 <tbody>
                     <c:forEach items="${orders}" var="o">
                     <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                <label for="checkbox1"></label>
-                            </span>
-                        </td>
                         <td>
                             <c:out value="${o.getId()}"/>
                         </td>
@@ -394,18 +383,18 @@
                 <div id=<c:out value="editOrderModal-${o.getId()}"/> class="modal fade">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form>
+                            <form action="edit-order.jsp">
                                 <div class="modal-header">						
                                     <h4 class="modal-title">Edit Order</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                 <div class="modal-body">					
                                     <div class="form-group">
-                                        <label>Customer</label>
+                                        <label>Customer Order</label>
                                         <select name="customerId">
                                             <c:forEach items="${customers}" var="c">
                                                 <option value=<c:out value="${c.getId()}"/>
-                                                        <c:out value="${c.getId() == o.getCustomerId().getId() ? 'selected' : ''}"/>>
+                                                        <c:out value="${c.getUserId().getEmail() == o.getCustomerId().getUserId().getEmail() ? 'selected' : ''}"/>>
                                                     <c:out value="${c.getUserId().getEmail()}"/>
                                                 </option>
                                             </c:forEach>
@@ -413,7 +402,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Delivery Date</label>
-                                        <input type="text" class="form-control" required>
+                                        <input type="text"
+                                               name="deliveryDate"
+                                               value=<c:out value="${o.getDeliveryDate()}"/>
+                                               class="form-control"
+                                               required>
                                     </div>
                                     <div class="form-group">
                                         <label>Branch</label>
@@ -428,8 +421,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Status</label>
-                                        <input type="text" class="form-control" required>
+                                        <input type="text"
+                                               name="status"
+                                               class="form-control"
+                                               value=<c:out value="${o.getStatus()}"/>
+                                               required>
                                     </div>					
+                                    <input type="hidden" name="orderId" value=<c:out value="${o.getId()}"/>
                                 </div>
                                 <div class="modal-footer">
                                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -443,23 +441,22 @@
                 <div id=<c:out value="deleteOrderModal-${o.getId()}"/>  class="modal fade">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form>
+                            <form action="delete-order.jsp">
                                 <div class="modal-header">						
-                                    <h4 class="modal-title">Delete Order</h4>
+                                    <h4 class="modal-title">Cancel Order</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                 <div class="modal-body">					
-                                    <p>Are you sure you want to delete this record?</p>
-                                    <p class="text-warning"><small>This action cannot be undone.</small></p>
+                                    <p>Are you sure you want to cancel this record?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                    <input type="submit" class="btn btn-danger" value="Delete">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Keep">
+                                    <input type="submit" class="btn btn-danger" value="Cancel">
                                 </div>
                             </form>
                         </div>
+                    </div>
                 </div>
-            </div>
 
                     <!-- Modals END -->
                     </c:forEach>
@@ -508,54 +505,50 @@
         <div id="addOrderModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form>
+                    <form action="add-order.jsp">
                         <div class="modal-header">						
                             <h4 class="modal-title">Add Order</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">					
                             <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" required>
+                                <label>Add Customer Order</label>
+                                <select name="customerId">
+                                    <c:forEach items="${customers}" var="c">
+                                        <option value=<c:out value="${c.getId()}"/>>
+                                            <c:out value="${c.getUserId().getEmail()}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" required>
+                                <label>Delivery Date</label>
+                                <input type="text"
+                                       name="deliveryDate"
+                                       class="form-control"
+                                       required>
                             </div>
                             <div class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" required></textarea>
+                                <label>Branch</label>
+                                <select name="branchId">
+                                    <c:forEach items="${branches}" var="b">
+                                        <option value=<c:out value="${b.getId()}"/>>
+                                            <c:out value="${b.getName()}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Item</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Quantity</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Date</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
                             <div class="form-group">
                                 <label>Status</label>
-                                <input type="text" class="form-control" required>
-                            </div>
+                                <input type="text"
+                                       name="status"
+                                       class="form-control"
+                                       required>
+                            </div>					
                         </div>
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-success" value="Add">
+                            <input type="submit" class="btn btn-info" value="Save">
                         </div>
                     </form>
                 </div>
